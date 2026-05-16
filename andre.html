@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Quiz Online</title>
+
+        <style>
+
+            body{
+                    background:#800080;
+                        font-family:Arial;
+                            color:white;
+            }
+
+            main{
+                    width:90%;
+                        margin:auto;
+                            padding:20px;
+            }
+
+            .questoes{
+                    background:#7a378b;
+                        padding:20px;
+                            border-radius:10px;
+            }
+
+            ol li{
+                    margin:10px 0;
+                        padding:10px;
+                            background:#ffffff22;
+                                border-radius:8px;
+                                    cursor:pointer;
+                                        transition:0.3s;
+            }
+
+            ol li:hover{
+                    background:#6495ED;
+            }
+
+            #instrucoes{
+                    background:gold;
+                        color:purple;
+                            padding:10px;
+                                border-radius:10px;
+                                    margin-bottom:20px;
+                                        text-align:center;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <main>
+
+            <h1>Quiz Online</h1>
+
+            <div id="instrucoes">
+                Leia as perguntas e ganhe pontos.
+            </div>
+
+            <div class="questoes">
+
+                <h2>
+                    <span id="numQuestao"></span>
+                    -
+                    <span id="pergunta"></span>
+                </h2>
+
+                <ol type="A">
+                    <li id="a"></li>
+                    <li id="b"></li>
+                    <li id="c"></li>
+                    <li id="d"></li>
+                    <li id="e"></li>
+                    <li id="f"></li>
+                </ol>
+
+            </div>
+
+            <p>
+                Questão <span id="numero"></span>
+                de <span id="total"></span>
+            </p>
+
+        </main>
+
+        <script>
+
+            const questoes = [
+            
+            {
+                numQuestao:1,
+                pergunta:"Quem venceu a Copa do Mundo 1982?",
+                alternativas:[
+                "Alemanha",
+                "Brasil",
+                "Espanha",
+                "Itália",
+                "Argentina",
+                "Uruguai"
+                ],
+                correta:"Itália"
+            },
+
+            {
+                numQuestao:2,
+                pergunta:"Quem venceu a UEFA Champions League 2002/03?",
+                alternativas:[
+                "FC Porto",
+                "Juventus",
+                "Real Madrid",
+                "Bayern Munich",
+                "SL Benfica",
+                "AC Milan"
+                ],
+                correta:"AC Milan"
+            },
+
+            {
+                numQuestao:3,
+                pergunta:"Quantos títulos da Liga Francesa tem o Marselha?",
+                alternativas:[
+                "10",
+                "9",
+                "8",
+                "7",
+                "14",
+                "19"
+                ],
+                correta:"9"
+            },
+
+            {
+                numQuestao:4,
+                pergunta:"Quem foi o melhor jogador da Liga Portuguesa na temporada 2012/13?",
+                alternativas:[
+                "Pablo Aimar",
+                "Jackson Martinez",
+                "Enzo Perez",
+                "Radamel Falcao",
+                "Bas Dost",
+                "Nemanja Matic"
+                ],
+                correta:"Nemanja Matic"
+            },
+
+            {
+                numQuestao:5,
+                pergunta:"Quem foi o melhor jogador da Copa América 2011?",
+                alternativas:[
+                "Luis Suarez",
+                "Robinho",
+                "Sebastian Coates",
+                "Lionel Messi",
+                "Paolo Guerrero",
+                "Fred"
+                ],
+                correta:"Luis Suarez"
+            },
+
+            {
+                numQuestao:6,
+                pergunta:"De que clube germânico é o Max-Morlok-Stadion?",
+                alternativas:[
+                "Hoffenheim",
+                "Schalke 04",
+                "Nuremberga",
+                "Hansa Rostock",
+                "Hertha Berlim",
+                "Hannover 96"
+                ],
+                correta:"Nuremberga"
+            },
+
+            {
+                numQuestao:7,
+                pergunta:"Quem usou o dorsal 10 da Espanha na Copa do Mundo 2022?",
+                alternativas:[
+                "Marco Asensio",
+                "Dani Olmo",
+                "Isco",
+                "Thiago Alcântara",
+                "Pablo Sarabia",
+                "Ansu Fati"
+                ],
+                correta:"Marco Asensio"
+            },
+
+            {
+                numQuestao:8,
+                pergunta:"Em que ano o Chile sediou a Copa do Mundo?",
+                alternativas:[
+                "1970",
+                "1974",
+                "1978",
+                "1982",
+                "1962",
+                "1958"
+                ],
+                correta:"1962"
+            },
+
+            {
+                numQuestao:9,
+                pergunta:"Quem foi o artilheiro da Série A Itália 2003/04?",
+                alternativas:[
+                "Antonio Di Natale",
+                "Christian Vieri",
+                "Zlatan Ibrahimovic",
+                "Andriy Shevchenko",
+                "Francesco Totti",
+                "Luca Toni"
+                ],
+                correta:"Andriy Shevchenko"
+            },
+
+            {
+                numQuestao:10,
+                pergunta:"Em que clube Blaise Matuidi jogou antes do PSG?",
+                alternativas:[
+                "Lorient",
+                "Saint Etienne",
+                "Troyes",
+                "Amiens",
+                "Marseille",
+                "Montpellier"
+                ],
+                correta:"Saint Etienne"
+            },
+
+            {
+                numQuestao:11,
+                pergunta:"Quem é o treinador com mais conquistas da história da UEFA Europa League?",
+                alternativas:[
+                "Unai Emery",
+                "Juande Ramos",
+                "Quique Sánchez Flores",
+                "José Mourinho",
+                "Oliver Glasner",
+                "Ottmar Hitzfeld"
+                ],
+                correta:"Unai Emery"
+            },
+
+            {
+                numQuestao:12,
+                pergunta:"Que seleção foi derrotada pela Inglaterra nos quartos de final da Euro 2024?",
+                alternativas:[
+                "Romênia",
+                "Áustria",
+                "Bélgica",
+                "Itália",
+                "Suíça",
+                "Turquia"
+                ],
+                correta:"Suíça"
+            },
+
+            {
+                numQuestao:13,
+                pergunta:"Quem foi o melhor jogador do AFCON 2019?",
+                alternativas:[
+                "Riyad Mahrez",
+                "Sadio Mané",
+                "Mohamed Salah",
+                "Idrissa Gueye",
+                "Ismael Bennacer",
+                "Odion Ighalo"
+                ],
+                correta:"Ismael Bennacer"
+            },
+
+            {
+                numQuestao:14,
+                pergunta:"Quem foi o melhor jogador jovem da Copa do Mundo 2014?",
+                alternativas:[
+                "Mario Gotze",
+                "Neymar Jr",
+                "Toni Kroos",
+                "Memphis Depay",
+                "James Rodríguez",
+                "Paul Pogba"
+                ],
+                correta:"Paul Pogba"
+            },
+
+            {
+                numQuestao:15,
+                pergunta:"Qual foi o agregado da eliminatória PSG x Manchester United nos oitavos da UEFA Champions League 2018/19?",
+                alternativas:[
+                "3-2",
+                "2-3",
+                "4-6",
+                "3-3",
+                "4-5",
+                "5-3"
+                ],
+                correta:"3-3"
+            },
+
+            {
+            numQuestao:16,
+            pergunta:"Quem foi o melhor jogador da Série A 2020/21?",
+            alternativas:[
+            "Lautaro Martinez",
+            "Nicolo Barela",
+            "Marcelo Brozovic",
+            "Romelu Lukaku",
+            "Rafael Leão",
+            "Cristiano Ronaldo"
+            ],
+            correta:"Romelu Lukaku"
+            },
+
+            {
+            numQuestao:17,
+            pergunta:"Em que ano a seleção de Angola participou na sua primeira edição da Copa Africana das Nações?",
+            alternativas:[
+            "1973",
+            "1984",
+            "1990",
+            "1992",
+            "1994",
+            "1996"
+            ],
+            correta:"1996"
+            },
+
+            {
+            numQuestao:18,
+            pergunta:"Quem foi o lider em Assistências do Mundial de Clubes 2025?",
+            alternativas:[
+            "Enzo Fernandez",
+            "Lamine Yamal",
+            "Vitinha",
+            "Vinícius jr",
+            "Trent-Alexander Arnold",
+            "Jhon Arias"
+            ],
+            correta:"Enzo Fernandez"
+            },
+
+            {
+            numQuestao:19,
+            pergunta:"Que Seleção venceu a Copa das Confederações 2013",
+            alternativas:[
+            "Espanha",
+            "México",
+            "Alemanha",
+            "Brasil",
+            "Argentina",
+            "Chile"
+            ],
+            correta:"Brasil"
+            },
+
+            {
+            numQuestao:20,
+            pergunta:"Quantos títulos da CAF Champions league tem o Al Ahly do Egipto?",
+            alternativas:[
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "11"
+            ],
+            correta:"7"
+            }
+
+            ];
+
+            let perguntaAtual = 0;
+            let pontos = 0;
+
+            const numQuestao = document.querySelector("#numQuestao");
+            const pergunta = document.querySelector("#pergunta");
+
+            const a = document.querySelector("#a");
+            const b = document.querySelector("#b");
+            const c = document.querySelector("#c");
+            const d = document.querySelector("#d");
+            const e = document.querySelector("#e");
+            const f = document.querySelector("#f");
+
+            const numero = document.querySelector("#numero");
+            const total = document.querySelector("#total");
+
+            total.textContent = questoes.length;
+
+            function carregarQuestao(){
+
+                let q = questoes[perguntaAtual];
+
+                numero.textContent = perguntaAtual + 1;
+
+                numQuestao.textContent = q.numQuestao;
+
+                pergunta.textContent = q.pergunta;
+
+                a.textContent = q.alternativas[0];
+                b.textContent = q.alternativas[1];
+                c.textContent = q.alternativas[2];
+                d.textContent = q.alternativas[3];
+                e.textContent = q.alternativas[4];
+                f.textContent = q.alternativas[5];
+
+            }
+
+            function verificarResposta(respostaElemento){
+
+                let q = questoes[perguntaAtual];
+
+                let resposta = respostaElemento.textContent;
+
+                const alternativas = [a,b,c,d,e,f];
+
+                alternativas.forEach(item => {
+
+                        item.style.pointerEvents = "none";
+
+                            if(item.textContent === q.correta){
+
+                                        item.style.background = "green";
+
+                            }
+
+                        });
+
+                        if(resposta !== q.correta){
+
+                                respostaElemento.style.background = "red";
+
+                        }else{
+
+                                pontos += 10;
+
+                        }
+
+                        setTimeout(() => {
+
+                                alternativas.forEach(item => {
+
+                                            item.style.background = "#ffffff22";
+                                                    item.style.pointerEvents = "auto";
+
+                                });
+
+                                    perguntaAtual++;
+
+                                        if(perguntaAtual < questoes.length){
+
+                                                    carregarQuestao();
+
+                                        }else{
+
+                                                    document.querySelector(".questoes").innerHTML = `
+                                                            <h2>Fim do Quiz</h2>
+                                                                    <p>Pontuação: ${pontos}</p>
+                                                                            `;
+
+                                        }
+
+                                    },1500);
+
+                                }
+
+                                a.onclick = () => verificarResposta(a);
+                                b.onclick = () => verificarResposta(b);
+                                c.onclick = () => verificarResposta(c);
+                                d.onclick = () => verificarResposta(d);
+                                e.onclick = () => verificarResposta(e);
+                                f.onclick = () => verificarResposta(f);
+
+                                carregarQuestao();
+
+                            </script>
+
+                        </body>
+                        </html>

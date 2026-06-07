@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quiz Online</title>
+
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&display=swap');
+    
+
+
+*{
+        margin:0;
+            padding:0;
+                box-sizing:border-box;
+}
+
+body{
+        background; #19144A;
+            font-family:Arial, sans-serif;
+                color:white;
+                    transition:0.5s;
+}
+
+main{
+    background-color: darkblue
+        width:90%;
+        max-width:800px;
+        margin:auto;
+        padding:20px;
+}
+
+h1{
+        font-family: roboto slab;
+        text-align:center;
+            margin-bottom:20px;
+}
+
+#instrucoes{
+        background:gold;
+        color:purple;
+        padding:15px;
+        border-radius:10px;
+        margin-bottom:20px;
+        text-align:center;
+        font-family: oswald;
+        font-weight:bold;
+}
+
+.questoes{
+        background:#7a378b;
+            padding:20px;
+                border-radius:10px;
+}
+
+h2{
+        margin-bottom:20px;
+}
+
+ol{
+        list-style-type:upper-alpha;
+            padding-left:25px;
+}
+
+ol li{
+        margin:10px 0;
+            padding:12px;
+                background:#ffffff22;
+                    border-radius:8px;
+                        cursor:pointer;
+                            transition:0.3s;
+}
+
+ol li:hover{
+        background:#6495ED;
+}
+
+#progresso{
+        margin-top:20px;
+            text-align:center;
+                font-size:18px;
+}
+
+#pontuacao{
+        margin-top:10px;
+            text-align:center;
+                font-size:18px;
+                    color:gold;
+}
+
+#nivel{
+        margin-top:10px;
+            text-align:center;
+                font-size:18px;
+                    color:#00ffcc;
+}
+
+#resultado{
+        text-align:center;
+            margin-top:20px;
+                font-size:22px;
+}
+
+</style>
+</head>
+
+<body>
+
+<main>
+
+<h1>QUIZ ONLINE</h1>
+
+<div id="instrucoes">
+Responda corretamente e consiga pelo menos 150 pontos para avançar de nível.
+</div>
+
+<div class="questoes">
+
+<h2>
+<span id="numQuestao"></span>
+ -
+ <span id="pergunta"></span>
+ </h2>
+
+ <ol>
+ <li id="a"></li>
+ <li id="b"></li>
+ <li id="c"></li>
+ <li id="d"></li>
+ <li id="e"></li>
+ <li id="f"></li>
+ </ol>
+
+ </div>
+
+ <div id="progresso">
+ Questão <span id="numero"></span> de <span id="total"></span>
+ </div>
+
+ <div id="pontuacao">
+ Pontos: <span id="pontos">0</span>
+ </div>
+
+ <div id="nivel">
+ Nível: <span id="nivelAtual">1</span>
+ </div>
+
+ <div id="resultado"></div>
+
+ </main>
+
+ <script>
+
+const nivel1 = [
+
+    {
+        numQuestao:1,
+        pergunta:"Que Equipa eliminou o Real Madrid e a Juventus na UEFA Champions League 2018/19?",
+        alternativas:["Ajax","Tottenham","Roma","Liverpool","BVB Dortmund","FC Porto"],
+        correta:"Ajax"
+    },
+
+    {
+        numQuestao:2,
+        pergunta:"Quantos títulos mundiais possui o Brasil?",
+        alternativas:["3","4","5","6","7","8"],
+        correta:"5"
+    },
+
+    {
+        numQuestao:3,
+        pergunta:"Em que Clube Sterling jogou antes do Manchester City?",
+        alternativas:["Aston Villa","Arsenal","Everton","Blackburn","Liverpool","West Browich"],
+        correta:"Liverpool"
+    },
+
+    {
+        numQuestao:4,
+        pergunta:"Qual clube venceu a UEFA Champions League 2009/10",
+        alternativas:["PSG","Arsenal","Inter de Milan","Real Madrid","Bayern","FC Barcelona"],
+        correta:"Inter de Milan"
+    },
+
+    {
+        numQuestao:5,
+        pergunta:"Que seleção venceu a Copa América 2016(Centenário)",
+        alternativas:["Brasil","Uruguai","Argentina","Colômbia","Peru","Chile"],
+        correta:"Chile"
+    },
+
+    {
+        numQuestao:6,
+        pergunta:"Quem é o maior artilheiro da história da Copa Del Rey?",
+        alternativas:["Messi","David Villa","Cristiano Ronaldo","Raúl","Telmo Zarra","Hugo Sanchez"],
+        correta:"Telmo Zarra"
+    },
+
+    {
+        numQuestao:7,
+        pergunta:"Qual é o club com mais títulos da Copa libertadores da América?",
+        alternativas:["Palmeiras","Boca Juniors","Estudientes","CA Independiente","Penarol","Flamengo"],
+        correta:"CA Independiente"
+    },
+
+    {
+        numQuestao:8,
+        pergunta:"Quem marcou o gol do título da Espanha na Copa do Mundo 2010?",
+        alternativas:["Villa","Iniesta","Torres","Xavi","Pedro","David Silva"],
+        correta:"Iniesta"
+    },
+
+    {
+        numQuestao:9,
+        pergunta:"Quem é o treinador com mais títulos da história da UEFA Champions league?",
+        alternativas:["Pep Guardiola","Carlo Ancellotti","Alex Feguson","Fabio Capello","Zinedine Zidane","Jose Mourinho"],
+        correta:"Carlo Ancellotti"
+    },
+
+    {
+        numQuestao:10,
+        pergunta:"Em que ano Cristiano Ronaldo foi ao Real Madrid",
+        alternativas:["2007","2008","2009","2010","2011","2012"],
+        correta:"2009"
+    },
+
+    {
+        numQuestao:11,
+        pergunta:"Qual clube revelou Lionel Messi?",
+        alternativas:["River Plate","Rosario","Newell's","Boca","Barcelona","Sevilla"],
+        correta:"Newell's"
+    },
+
+    {
+        numQuestao:12,
+        pergunta:"Qual país venceu a Copa do Mundo 2006?",
+        alternativas:["Alemanha","Brasil","Itália","França","Portugal","Argentina"],
+        correta:"Itália"
+    },
+
+    {
+        numQuestao:13,
+        pergunta:"Quem venceu a Libertadores 2023?",
+        alternativas:["River","Boca","Flamengo","Palmeiras","Fluminense","Grêmio"],
+        correta:"Fluminense"
+    },
+
+    {
+        numQuestao:14,
+        pergunta:"Quem é o único jogador a vencer a Triplice Coroa por clubes diferentes?",
+        alternativas:["Clarence Seedorf","Samuel Eto'o","Mateo Kovacic","Kevin Keegan","Jamie Carragher","Lucas Hernandez"],
+        correta:"Samuel Eto'o"
+    },
+
+    {
+        numQuestao:15,
+        pergunta:"Quem foi o melhor jogador da Copa do Mundo 2018?",
+        alternativas:["Lionel Messi","Kylian Mbappé","Giroud","Luka Modric","Antoine Griezmann","Poul Pogba"],
+        correta:"Luka Modric"
+    },
+
+    {
+        numQuestao:16,
+        pergunta:"Que jogador usou o dorsal 7 da Argentina na Copa do mundo 2022",
+        alternativas:["Paulo Dybala","Angel Di Maria","Julian Alvarez","Rodrigo De Paul","Alejandro Garnacho","Carlos Tevez"],
+        correta:"Rodrigo De Paul"
+    },
+
+    {
+        numQuestao:17,
+        pergunta:"Como se chama o maior Estádio da Inglaterra?",
+        alternativas:["Wembley","Old Traford","Emirates Stadium","Anfield Road","Stamford Bridge","London Stadium"],
+        correta:"Wembley"
+    },
+
+    {
+        numQuestao:18,
+        pergunta:"Quem venceu o CAN 2019",
+        alternativas:["Argelia","Camarões","Egipto","Senegal","Marrocos","Nigéria"],
+        correta:"Argelia"
+    },
+
+    {
+        numQuestao:19,
+        pergunta:"Quantos Títulos da Série A Itália tem a Juventus?",
+        alternativas:["25","27","19","32","34","36"],
+        correta:"36"
+    },
+
+    {
+        numQuestao:20,
+        pergunta:"Quem venceu a Bola de Ouro em 2007?",
+        alternativas:["Ronaldinho Gaucho","Schevchenko","Kaka","Ruud Gullit","Cannavaro","Baggio"],
+        correta:"Kaka"
+    }
+
+];
+
+const nivel2 = [
+
+    {
+        numQuestao:1,
+        pergunta:"Quem foi o primeiro clube a vence a Liga Europa/Taça UEFA?",
+        alternativas:["Borrussia Monchengladbach","Sevilla","Frankfurt","Feyenoord","Tottenham","Liverpool"],
+        correta:"Tottenham"
+    },
+
+    {
+        numQuestao:2,
+        pergunta:"Quem venceu a Bola de Ouro 2003",
+        alternativas:["Baggio","Schevchenko","Ronaldo Fenômeno","Pavel Nedved","Ronaldinho Gaúcho","Michel Owen"],
+        correta:"Pavel Nedved"
+    },
+
+    {
+        numQuestao:3,
+        pergunta:"Quem venceu a Serie A Italiana 2022/23?",
+        alternativas:["Milan","Inter","Napoli","Roma","Lazio","Juventus"],
+        correta:"Napoli"
+    },
+
+    {
+        numQuestao:4,
+        pergunta:"Qual foi o clube europeu de Juninho Pernambucano?",
+        alternativas:["PSG","Marseille","Lyon","AS Roma","Arsenal","Liverpool"],
+        correta:"Lyon"
+    },
+
+    {
+        numQuestao:5,
+        pergunta:"Quem venceu a FA Cup 2023/24?",
+        alternativas:["City","Liverpool","United","Chelsea","Arsenal","Newcastle"],
+        correta:"Manchester United"
+    },
+
+    {
+        numQuestao:6,
+        pergunta:"Quem foi o lider em Assistência da Premier League 2020/21?",
+        alternativas:["Salah","Kane","Phil Foden","Arnold","Kevin De Bruynne","Bruno Fernandes"],
+        correta:"Kane"
+    },
+
+    {
+        numQuestao:7,
+        pergunta:"Qual clube revelou Cristiano Ronaldo?",
+        alternativas:["Porto","Benfica","Sporting","Braga","Boavista","Nacional"],
+        correta:"Sporting"
+    },
+
+    {
+        numQuestao:8,
+        pergunta:"Quem Venceu a Copa do Mundo em 1990",
+        alternativas:["Brasil","Alemanha","Argentina","Holanda","França","Espanha"],
+        correta:"Alemanha"
+    },
+
+    {
+        numQuestao:9,
+        pergunta:"Em que club Alemão Edin Dzeko Jogou na Temporada 2008/09",
+        alternativas:["Dortmund","Wolfsburg","Bayern","Leipzig","Frankfurt","Stuttgart"],
+        correta:"Wolfsburg"
+    },
+
+    {
+        numQuestao:10,
+        pergunta:"Quem foi o Artilheiro do Inter da Conquista da UEFA Champions League 2009/10",
+        alternativas:["Samuel Eto'o","Adriano Imperador","Zlatan Ibrahimovic","Diego Milito","Wesley Sneidjer","Mario Balotelli"],
+        correta:"Diego Milito"
+    },
+
+    {
+        numQuestao:11,
+        pergunta:"Qual é o jogador Nigeriano com mais golos na história da Copa do Mundo",
+        alternativas:["Odion Ighalo","Ahmed Musa","Vitor Moses","Emmanuel Amunike","Rashid Yekini","John Obi Mikel"],
+        correta:"Ahmed Musa"
+    },
+
+    {
+        numQuestao:12,
+        pergunta:"Quem venceu a Copa do Mundo 1998?",
+        alternativas:["Brasil","França","Itália","Alemanha","Croácia","Holanda"],
+        correta:"França"
+    },
+
+    {
+        numQuestao:13,
+        pergunta:"Quem foi o melhor jogador da Copa Africana 2017?",
+        alternativas:["Vicent Aboubakar","Mohammed Salah","Christian Atsu","Christian Bassagog","Benjamin Moukandjo","Aubameyang"],
+        correta:"Christian Bassagog"
+    },
+
+    {
+        numQuestao:14,
+        pergunta:"Quem venceu a Copa do Mundo 1986?",
+        alternativas:["Brasil","Argentina","Alemanha","França","Itália","Uruguai"],
+        correta:"Argentina"
+    },
+
+    {
+        numQuestao:15,
+        pergunta:"Quem venceu o Euro 2004?",
+        alternativas:["Portugal","Grécia","Alemanha","França","Espanha","Itália"],
+        correta:"Grécia"
+    },
+
+    {
+        numQuestao:16,
+        pergunta:"Que jogador venceu a Chuteira de Ouro 2019/20",
+        alternativas:["Cristiano Ronaldo","Lewandowski","Harry Kane","Kylian Mbappé","Lionel Messi","Ciro Immobile"],
+        correta:"Ciro Immobile"
+    },
+
+    {
+        numQuestao:17,
+        pergunta:"Quem foi o melhor Guarda Redes da La Liga 2013/14?",
+        alternativas:["Vitor Valdes","Casillas","Thibiut Courtois","K.Navas","Claudio Bravo","Dudo Aouate"],
+        correta:"K.Navas"
+    },
+
+    {
+        numQuestao:18,
+        pergunta:"Quem venceu a Libertadores 2022?",
+        alternativas:["Flamengo","Palmeiras","River","Boca","Athletico","Corinthians"],
+        correta:"Flamengo"
+    },
+
+    {
+        numQuestao:19,
+        pergunta:"Quantos títulos da FA Cup tem Manchester United?",
+        alternativas:["11","12","13","14","20","7"],
+        correta:"13"
+    },
+
+    {
+        numQuestao:20,
+        pergunta:"Quem foi o Capitão da Alemanha na Copa do Mundo 2014?",
+        alternativas:["Manuel Nouer","Bastian Schweinsteiger","Thomas Muller","Philip Lham","Miroslav Klose","Sami Khedira"],
+        correta:"Philip Lham"
+    }
+
+];
+
+ const nivel3 = [
+
+    {
+        numQuestao:1,
+        pergunta:"Quem usou o dorsal 5 do FC Bayern 2015/16?",
+        alternativas:["Tolisso","Javi Martinez","Joshua Kimmich","Sebastian Rode","Benjamin Pavard","Medih Benatia"],
+        correta:"Benjamin Pavard"
+    },
+
+    {
+        numQuestao:2,
+        pergunta:"Quem usou o dorsal 9 da Inglaterra na Copa do Mundo 2014?",
+        alternativas:["Frank Lampard","Sturridge","Harry Kane","Sterling","Peter Crouch","Andy Carroll"],
+        correta:"Sturridge"
+    },
+
+    {
+        numQuestao:3,
+        pergunta:"Quem foi o Artilheiro da Copa do Mundo 1986?",
+        alternativas:["Alessandro Altobelli","Gary Lineker","Maradona","Oleg Salenko","Salvatore Schilaci","Zico"],
+        correta:"Gary Lineker"
+    },
+
+    {
+        numQuestao:4,
+        pergunta:"Em que clube o Português Nani jogou na Temporada 2016/17",
+        alternativas:["Lazio","Sporting CP","Valencia","Braga","Melbourne City","Manchester United"],
+        correta:"Valencia"
+    },
+
+    {
+        numQuestao:5,
+        pergunta:"Qual pais sediou a Copa Africana 2015?",
+        alternativas:["África do Sul","Egito","Guiné Equatorial","Gabão","Camarões","Sudão"],
+        correta:"Guiné Equatorial"
+    },
+
+    {
+        numQuestao:6,
+        pergunta:"Quem foi o melhor jogador da Copa América 2024?",
+        alternativas:["Messi","Valverde","James Rodríguez","Suárez","Lautaro","Di María"],
+        correta:"James Rodríguez"
+    },
+
+    {
+        numQuestao:7,
+        pergunta:"Quem foi o artilheiro da Bundesliga 2014/15?",
+        alternativas:["Lewandowski","Thomas Müller","Alex Meier","Mandzukic","Bas Dost","Kießling"],
+        correta:"Alex Meier"
+    },
+
+    {
+        numQuestao:8,
+        pergunta:"Quem venceu a DFB Pokal 2010/11?",
+        alternativas:["Bayern","Dortmund","Leverkusen","Schalke 04","Werder Bremen","Wolfsburg"],
+        correta:"Schalke 04"
+    },
+
+    {
+        numQuestao:9,
+        pergunta:"Quem é o da História do Brasileirão Serie A?",
+        alternativas:["Gabigol","Fred","Roberto Dinamite","Pelé","Zico","Juninho Pernambucano"],
+        correta:"Roberto Dinamite"
+    },
+
+    {
+        numQuestao:10,
+        pergunta:"Quem foi o melhor jovem da Copa do Mundo 2006?",
+        alternativas:["Cristiano Ronaldo","Podolski","Torres","Robben","Messi","Donovan"],
+        correta:"Podolski"
+    },
+
+    {
+        numQuestao:11,
+        pergunta:"Quem venceu a Serie A Italiana 2010/11?",
+        alternativas:["Inter","Juventus","Roma","Milan","Napoli","Lazio"],
+        correta:"Milan"
+    },
+
+    {
+        numQuestao:12,
+        pergunta:"Qual clube venceu a Taça de Portugal 2017/18?",
+        alternativas:["Benfica","Sporting","Braga","Boavista","Desportivo das Aves","Vitória SC"],
+        correta:"Desportivo das Aves"
+    },
+
+    {
+        numQuestao:13,
+        pergunta:"Quem venceu a Bota de Ouro Europeia 2008/09?",
+        alternativas:["Messi","Cristiano Ronaldo","Eto'o","Forlán","Henry","Totti"],
+        correta:"Forlán"
+    },
+
+    {
+        numQuestao:14,
+        pergunta:"Quem foi o líder de assistências da Champions League 2017/18?",
+        alternativas:["Messi","Firmino","Milner","Neymar","De Bruyne","Coman"],
+        correta:"Milner"
+    },
+
+    {
+        numQuestao:15,
+        pergunta:"Em que clube Andrea Pirlo terminou a carreira?",
+        alternativas:["LA Galaxy","NY Red Bulls","Orlando City","New York City FC","Inter Miami","Columbus Crew"],
+        correta:"New York City FC"
+    },
+
+    {
+        numQuestao:16,
+        pergunta:"Quem venceu a Copa UEFA 1995/96?",
+        alternativas:["Ipswich","Inter de Milan","Liverpool","Bayern Munich","Sevilla","Real Madrid"],
+        correta:"Bayern Munich"
+    },
+
+    {
+        numQuestao:17,
+        pergunta:"Qual foi o único clube espanhol de Maniche?",
+        alternativas:["Barcelona","Valencia","Atlético Madrid","Bilbao","Real Madrid","La Coruña"],
+        correta:"Atlético Madrid"
+    },
+
+    {
+        numQuestao:18,
+        pergunta:"Quem venceu a Ballon d'Or 2003?",
+        alternativas:["Owen","Nedved","Ronaldo","Zidane","Shevchenko","Kaká"],
+        correta:"Nedved"
+    },
+
+    {
+        numQuestao:19,
+        pergunta:"Qual foi a primeira temporada de Lewandowski no Bayern?",
+        alternativas:["2012/13","2013/14","2014/15","2015/16","2016/17","2017/18"],
+        correta:"2014/15"
+    },
+
+    {
+        numQuestao:20,
+        pergunta:"Quem foi o artilheiro da Eredivisie 2024/25?",
+        alternativas:["Brobbey","Tilman","Steijn","Ueda","Weghorst","Berghuis"],
+        correta:"Steijn"
+    }
+
+ ];
+
+ const nivel4 = [
+
+    {
+        numQuestao:1,
+        pergunta:"Quem foi o campeão da La Liga 1999/2000?",
+        alternativas:["Real Madrid","Barcelona","Athletic Bilbao","Valencia","Deportivo La Coruña","Real Zaragoza"],
+        correta:"Deportivo La Coruña"
+    },
+
+    {
+        numQuestao:2,
+        pergunta:"Quem foi o capitão da Alemanha campeã da Euro 1996?",
+        alternativas:["Klinsmann","Sammer","Kohler","Völler","Kahn","Matthäus"],
+        correta:"Klinsmann"
+    },
+
+    {
+        numQuestao:3,
+        pergunta:"Quem foi o melhor treinador da Serie A 2021/22?",
+        alternativas:["Conte","Pioli","Inzaghi","Allegri","Conceição","Gasperini"],
+        correta:"Pioli"
+    },
+
+    {
+        numQuestao:4,
+        pergunta:"Qual clube joga no Portman Road?",
+        alternativas:["Burnley","Ipswich Town","Leeds","Southampton","Coventry","Sheffield Utd"],
+        correta:"Ipswich Town"
+    },
+
+    {
+        numQuestao:5,
+        pergunta:"Quem foi o melhor jogador da Champions League 2001/02?",
+        alternativas:["Raúl","Ballack","Roberto Carlos","Zidane","Totti","Del Piero"],
+        correta:"Zidane"
+    },
+
+    {
+        numQuestao:6,
+        pergunta:"Quem foi o segundo artilheiro da Champions 2011/12 atrás de Messi?",
+        alternativas:["Cristiano Ronaldo","Mário Gómez","Müller","Drogba","Ibrahimovic","Altintop"],
+        correta:"Mário Gómez"
+    },
+
+    {
+        numQuestao:7,
+        pergunta:"Quem é o jogador com mais golos marcados em uma edição da Copa Africana?",
+        alternativas:["Vicent Aboubakar","Aboutrika","Odion Ighalo","Ndaye Mulamba","Samuel Eto'o","Yaya Toure"],
+        correta:"Ndaye Mulamba"
+    },
+
+    {
+        numQuestao:8,
+        pergunta:"Quem foi o melhor guarda-redes da La Liga 2021/22?",
+        alternativas:["Courtois","Oblak","Ter Stegen","Unai Simón","Bounou","Mamardashvili"],
+        correta:"Bounou"
+    },
+
+    {
+        numQuestao:9,
+        pergunta:"Quem marcou o golo mais rápido da Euro 2020?",
+        alternativas:["Morata","Mertens","Moore","Demiral","Vrsaljko","Schick"],
+        correta:"Mertens"
+    },
+
+    {
+        numQuestao:10,
+        pergunta:"Quem treinou o Dortmund em 2017/18?",
+        alternativas:["Lucien Favre","Marco Rose","Peter Bosz","Terzić","Sammer","Kohler"],
+        correta:"Peter Bosz"
+    },
+
+    {
+        numQuestao:11,
+        pergunta:"Quem venceu a Libertadores 2012?",
+        alternativas:["Boca Juniors","Corinthians","Santos","Olímpia","Atlético Mineiro","River Plate"],
+        correta:"Corinthians"
+    },
+
+    {
+        numQuestao:12,
+        pergunta:"Quem foi o melhor treinador da Premier League 2013/14?",
+        alternativas:["Wenger","Mourinho","Mancini","Tony Pulis","Conte","Dalglish"],
+        correta:"Tony Pulis"
+    },
+
+    {
+        numQuestao:13,
+        pergunta:"Qual é o maior artilheiro da história da Serie A Italiana?",
+        alternativas:["Silvio Piola","Totti","Immobile","Rossi","Meazza","Lautaro"],
+        correta:"Silvio Piola"
+    },
+
+    {
+        numQuestao:14,
+        pergunta:"Antes do Dortmund, Marco Reus jogava em qual clube?",
+        alternativas:["Hertha","Schalke","Wolfsburg","Mainz","Borussia Mönchengladbach","Frankfurt"],
+        correta:"Borussia Mönchengladbach"
+    },
+
+    {
+        numQuestao:15,
+        pergunta:"Em que cidade se passou a final da UEFA Europa League 2022/23?",
+        alternativas:["Sevilla(Ramon Sanchez Pizjuan)","Dublin(Aviva Stadium)","Budapeste(Arena Puskas)","Koln(Rhein Energie Arena)","Gdansk(Gdansk Arena)","Estocolmo (Friends Arena)"],
+        correta:"Budapeste(Puskas Arena)"
+    },
+
+    {
+        numQuestao:16,
+        pergunta:"Quantos Títulos da Copa América tem o Brasil?",
+        alternativas:["8","9","10","12","13","14"],
+        correta:"9"
+    },
+
+    {
+        numQuestao:17,
+        pergunta:"Quem foi o terceiro colocado da Copa América Centenário 2016?",
+        alternativas:["México","Brasil","Uruguai","Colômbia","Estados Unidos","Japão"],
+        correta:"Colômbia"
+    },
+
+    {
+        numQuestao:18,
+        pergunta:"Em que clube Jamie Carragher jogava em 2007/08?",
+        alternativas:["Liverpool","Chelsea","Tottenham","United","City","Aston Villa"],
+        correta:"Liverpool"
+    },
+
+    {
+        numQuestao:19,
+        pergunta:"Qual clube português Sérgio Conceição treinava em 2014/15?",
+        alternativas:["Porto","Braga","Sporting","Chaves","Vitória SC","Desportivo das Aves"],
+        correta:"Braga"
+    },
+
+    {
+        numQuestao:20,
+        pergunta:"Qual seleção africana participou pela primeira vez numa Copa do Mundo em 2006?",
+        alternativas:["Angola","Gana","Togo","Tunísia","Marrocos","Nigéria"],
+        correta:"Angola"
+    }
+
+ ];
+
+ const nivel5 = [
+
+   {
+    numQuestao:1,
+    pergunta:"Qual é a Nação com mais títulos da Copa do Mundo feminino?",
+    alternativas:["França","Brasil","Holanda","Estados Unidos","Espanha","Inglaterra"],
+    correta:"Estados Unidos"
+   },
+
+   {
+   numQuestao:2,
+   pergunta:"Quem foi o Melhor jogador da Liga Francesa 2009/10?",
+   alternativas:["Benzema","Lisandro Lopes","Moussa Sow","Nene","Kevin Gameiro","Dimitri Payet"],
+   correta:"Lisandro Lopes"
+   },
+
+   {
+   numQuestao:3,
+   pergunta:"Quem treinou a Itália no Euro 2012?",
+   alternativas:["Cesare Prandelli","Mancini","Marcello Lippi","Claudio Ranieri","Luciano Spaletti","Antonio Conte"],
+   correta:"Cesare Prandelli"
+   },
+
+   {
+   numQuestao:4,
+   pergunta:"Que club venceu a Copa Sullub ricana 2024?",
+   alternativas:["Cruzeiro","Racing","Penarol","Barcelona SC","Velez Sarsfield","Desportivo Cali"],
+   correta:"Racing"
+   },
+
+   {
+   numQuestao:5,
+   pergunta:"Quem foi o melhor treinador da La Liga 2007/08?",
+   alternativas:["Juande Ramos","Frank Rijkaad","Pelegrini","Gregorio Manzano","Javier Irureta","Fabio Capello"],
+   correta:"Gregorio Manzano"
+   },
+
+   {
+   numQuestao:6,
+   pergunta:"Quantos Títulos da Copa América Argentina?",
+   alternativas:["9","12","13","14","15","16"],
+   correta:"16"
+   },
+
+   {
+   numQuestao:7,
+   pergunta:"Quem foi a melhor jogadora da Europa (UEFA) em 2019?",
+   alternativas:["Alexia Putellas","Lieke Mertens","Lucy Bronze","Ada Hegerberg","Pernile Harder","Amandine Henry"],
+   correta:"Lucy Bronze"
+   },
+
+   {
+   numQuestao:8,
+   pergunta:"Quem foi o artilheiro da Cop do Mundo 1974?",
+   alternativas:["Gerd Muller","Grzegorz Lato","Johan Cruyff","Rob Rosenbrink","Karl-Heinz Rummeniggue","Johan Neeskens"],
+   correta:"Grzegorz Lato"
+   },
+   
+   {
+   numQuestao:9,
+   pergunta:"Qual foi o primeiro club profissional de Ivan Rakitic?",
+   alternativas:["Dinamo Zagreb","Basel","Schalke 04","Sevilla","Augsburg","Partizan"],
+   correta:"Basel"
+   },
+
+   {
+   numQuestao:10,
+   pergunta:"Quem foi o melhor jogador da Premier League 2020/21?",
+   alternativas:["Kane","Bruno Fernandes","Kevin de Bruynne","Ruben Dias","Mohammed Salah","Kante"],
+   correta:"Ruben Dias"
+   },
+
+   {
+   numQuestao:11,
+   pergunta:"Que seleção venceu a Copa do Mundo feminino 2011",
+   alternativas:["Brasil","Japão","Estados Unidos","Suecia","México","Alemanha"],
+   correta:"Japão"
+   },
+
+   {
+   numQuestao:12,
+   pergunta:"Quem é o jogador com mais partidas da História do FC Porto?",
+   alternativas:["Radamel Falcão","João Pinto","Vitor Bahia","Darlei","Fernando Gomes","Pepe"],
+   correta:"João Pinto"
+   },
+
+   {
+   numQuestao:13,
+   pergunta:"Quem é o jogador com mais partidas da história do Brasileirão Série A?",
+   alternativas:["Roberto Dinamite","Zico","De Arrascaeta","Fred","Fabio","Rogerio Cerni"],
+   correta:"Fabio"
+   },
+
+   {
+   numQuestao:14,
+   pergunta:"Quem foi o jogador espanhol com mais golos na La Liga 2012/13",
+   alternativas:["Alvaro Negredo","Roberto Soldado","Ruben Castro","Iago Aspas","David Villa","Aritz Aduriz"],
+   correta:"Alvaro Negredo"
+   },
+
+   {
+   numQuestao:15,
+   pergunta:"Quem venceu a Ballon D'or 1969?",
+   alternativas:["Dennis Law","Masopust","Eusebio","Gianni Rivera","Gerd Muller","Luis Suarez Miramontes"],
+   correta:"Gianni Rivera"
+   },
+
+   {
+   numQuestao:16,
+   pergunta:"Qual é o club alemão com mais títulos da Champions feminino",
+   alternativas:["Bayern Munich","Frankfurt","Wolfsburg","BVB Dortmund","Turbine Potsdam","TSG Hoffenhein"],
+   correta:"Frankfurt"
+   },
+
+   {
+   numQuestao:17,
+   pergunta:"Em que ano o Celtic venceu o seu único título da UEFA Champions league/Taça dos Campeões?",
+   alternativas:["1966","1967","1968","1969","1970","1975"],
+   correta:"1967"
+   },
+
+   {
+   numQuestao:18,
+   pergunta:"Quem foi o melhor jovem da Copa do Mundo 1990",
+   alternativas:["Hristo Stoikov","Lothar Matthaus","Enzo Scifo","Robert Prosineck","Marc Overmars","Ronaldo Nazário"],
+   correta:"Robert Prosineck"
+   },
+
+   {
+   numQuestao:19,
+   pergunta:"Que Club o Chelsea eliminou nos 8º de Final da UEFA Champions League 2021/2022?",
+   alternativas:["Real Madrid","Rennes","Salzburg","Sporting","Lille","Ajax"],
+   correta:"Lille"
+   },
+
+   {
+   numQuestao:20,
+   pergunta:"Que Jogador usou o dorsal 18 da França no Euro2020?",
+   alternativas:["Bredley Barcola","William Saliba","Zaire-Emery","Marcus Thuram","Theo Hernandez","Youssouf Fofana"],
+   correta:"Zaire-Emery"
+   }
+   
+ ];
+
+
+let nivel = 1;
+let perguntaAtual = 0;
+let pontos = 0;
+
+let questoes = nivel1;
+
+const numQuestao = document.getElementById("numQuestao");
+const pergunta = document.getElementById("pergunta");
+
+const a = document.getElementById("a");
+const b = document.getElementById("b");
+const c = document.getElementById("c");
+const d = document.getElementById("d");
+const e = document.getElementById("e");
+const f = document.getElementById("f");
+
+const numero = document.getElementById("numero");
+const total = document.getElementById("total");
+
+const pontosTela = document.getElementById("pontos");
+const nivelAtual = document.getElementById("nivelAtual");
+
+const resultado = document.getElementById("resultado");
+
+const alternativas = [a,b,c,d,e,f];
+
+function atualizarTema(){
+
+        if(nivel === 1){
+                    document.body.style.background = "#8A2BE2";
+        }
+
+        if(nivel === 2){
+                     document.body.style.background = "#2F4F4F";
+        }
+
+            if(nivel === 3){
+                        document.body.style.background = "#4B0082";
+            }
+
+                if(nivel === 4){
+                            document.body.style.background = "#483D8B";
+                }
+
+                if(nivel === 5){
+                             document.body.style.background = "#1C1C1C";
+                }
+
+                    nivelAtual.textContent = nivel;
+}
+
+function carregarQuestao(){
+
+        let q = questoes[perguntaAtual];
+
+            numQuestao.textContent = q.numQuestao;
+                pergunta.textContent = q.pergunta;
+
+                    a.textContent = q.alternativas[0];
+                        b.textContent = q.alternativas[1];
+                            c.textContent = q.alternativas[2];
+                                d.textContent = q.alternativas[3];
+                                    e.textContent = q.alternativas[4];
+                                        f.textContent = q.alternativas[5];
+
+                                            numero.textContent = perguntaAtual + 1;
+                                                total.textContent = questoes.length;
+
+                                                    alternativas.forEach(item => {
+                                                                item.style.background = "#ffffff22";
+                                                                        item.style.pointerEvents = "auto";
+                                                    });
+}
+
+function mudarNivel(){
+
+        nivel++;
+
+            if(nivel === 2){
+                        questoes = nivel2;
+            }
+
+                else if(nivel === 3){
+                            questoes = nivel3;
+                }
+
+                    else if(nivel === 4){
+                                questoes = nivel4;
+                    }
+
+            
+                    else if(nivel === 5){
+                                questoes = nivel5;
+                    }
+
+                        perguntaAtual = 0;
+                            pontos = 0;
+
+                                pontosTela.textContent = pontos;
+
+                                    atualizarTema();
+                                        carregarQuestao();
+}
+
+function terminarQuiz(mensagem){
+
+        document.querySelector(".questoes").innerHTML = `
+                <h2>${mensagem}</h2>
+                        <br>
+                                <h3>Pontuação Final: ${pontos}</h3>
+                                <a href="index.html">Voltar para a página inicial</a>
+                                    `;
+}
+
+function verificarResposta(elemento){
+
+        let q = questoes[perguntaAtual];
+            let resposta = elemento.textContent;
+
+                alternativas.forEach(item => {
+
+                            item.style.pointerEvents = "none";
+
+                                    if(item.textContent === q.correta){
+                                                    item.style.background = "green";
+                                    }
+
+                });
+
+                    if(resposta === q.correta){
+
+                                pontos += 10;
+                                        pontosTela.textContent = pontos;
+
+                    }else{
+
+                                elemento.style.background = "red";
+
+                    }
+
+                        setTimeout(() => {
+
+                                    perguntaAtual++;
+
+                                            if(perguntaAtual < questoes.length){
+
+                                                            carregarQuestao();
+
+                                            }else{
+
+                                                            if(pontos >= 150){
+
+                                                                                if(nivel < 5){
+
+                                                                                                        alert("Parabéns! Avançaste para o próximo nível.");
+
+                                                                                                                            mudarNivel();
+
+                                                                                }else{
+
+                                                                                                        terminarQuiz("Parabéns! Concluíste todos os níveis!");
+
+                                                                                }
+
+                                                            }else{
+
+                                                                                terminarQuiz("Não atingiste os 150 pontos necessários.");
+
+                                                            }
+
+                                            }
+
+                        }, 1500);
+}
+
+a.addEventListener("click", () => verificarResposta(a));
+b.addEventListener("click", () => verificarResposta(b));
+c.addEventListener("click", () => verificarResposta(c));
+d.addEventListener("click", () => verificarResposta(d));
+e.addEventListener("click", () => verificarResposta(e));
+f.addEventListener("click", () => verificarResposta(f));
+
+atualizarTema();
+carregarQuestao();
+
+ </script>
+
+ </body>
+ </html>

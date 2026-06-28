@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Notícias do Quiz</title>
+
+        <style>
+
+            *{
+                    margin:0;
+                        padding:0;
+                            box-sizing:border-box;
+                                font-family:Arial,sans-serif;
+            }
+
+            body{
+                    background:#f2f2f2;
+            }
+
+            header{
+                    background: #191539;
+                        color:white;
+                            padding:15px;
+                                display:flex;
+                                    justify-content:space-between;
+                                        align-items:center;
+            }
+
+            .logo{
+                    font-size:28px;
+                        font-weight:bold;
+                        display: flex;
+            }
+
+            .logo img {
+                  height:65px;
+                  width: auto;
+                  display: block;
+            }
+
+            
+
+            #menu{
+                    display:flex;
+                    overflow-x: auto;
+                        gap:20px;
+            }
+
+            #menu a{
+                    color:white;
+                        text-decoration:none;
+            }
+
+            .hero{
+                    width:100%;
+                        height:420px;
+                            overflow:hidden;
+            }
+
+            .hero img{
+                    width:100%;
+                        height:100%;
+                            object-fit:cover;
+            }
+
+            .section-title{
+                    margin:20px;
+                        font-size:28px;
+                            color: #191539;
+            }
+
+            .news-grid{
+                    display:grid;
+                        grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+                            gap:20px;
+                                padding:20px;
+            }
+
+            .card{
+                    background:white;
+                    color:#191539;
+                        border-radius:10px;
+                            overflow:hidden;
+                                cursor:pointer;
+                                    transition:0.3s;
+            }
+
+            .card:hover{
+                    transform:translateY(-5px);
+            }
+
+            .card img{
+                    width:100%;
+                        height:200px;
+                            object-fit:cover;
+            }
+
+            .card h3{
+                    padding:15px;
+            }
+
+            #articlePage{
+                    display:none;
+                        padding:20px;
+                            max-width:1000px;
+                                margin:auto;
+            }
+
+            #articlePage img{
+                    width:100%;
+                        border-radius:10px;
+            }
+
+            #articlePage h1{
+                    margin:20px 0;
+            }
+
+            .back{
+                    background:#191539;
+                        color:white;
+                            border:none;
+                                padding:10px 20px;
+                                    margin-bottom:20px;
+                                        cursor:pointer;
+            }
+
+            footer{
+                    background:#191539;
+                        color:white;
+                            text-align:center;
+                                padding:20px;
+                                    margin-top:30px;
+            }
+
+            .slide{
+            position:absolute;
+            width: auto;
+            height: 350px;
+            background-size: cover;
+            background-position:center;
+            opacity:0;
+            transition:1s;
+            }
+
+            .slide.active{
+            opacity:1;
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+
+        <header>
+
+            <div class="logo">
+                <img src="https://image.cdn2.seaart.me/2026-06-27/d9034dde878c7383j5og/0a30fd4a-e1ac-444c-9f11-812c3b2f9438.png" alt="Logo da UFV">
+                SPORT NEWS</div>
+
+            <nav id="menu">
+                <a href="index.html">Inicio</a>
+                <a href="jogos.html">Jogos</a>
+                <a href="torneios html">Torneios</a>
+                <a href="passatempos.html">Passatempos</a>
+            </nav>
+
+        </header>
+
+        <div id="homePage">
+
+            <div class="hero">
+                <img src="content://media/external/downloads/10990" alt="Notícias da UFV" class="slide active" style="height: 420px;">
+                <img src="content://media/external/downloads/10991" alt="Conselho de cards informações" class="slide" style="height: 420px;">
+                <img src="content://media/external/downloads/10992" alt="Notícias com Joélcio" class="slide" style="height: 420px;">
+                <img src="content://media/external/downloads/10993" alt="Notícias com André Miguel" class="slide" style="height: 420px;">
+                <img src="content://media/external/downloads/10994" alt="Notícias com Azael" class="slide" style="height: 420px;">
+            </div>
+
+            <h2 class="section-title">Últimas Notícias</h2>
+
+            <div class="news-grid" id="newsGrid"></div>
+
+        </div>
+
+        <div id="articlePage">
+
+            <button class="back" onclick="goHome()">
+                ← Voltar
+            </button>
+
+            <h1 id="title"></h1>
+
+            <img id="image">
+
+            <div id="content"></div>
+
+        </div>
+
+        <footer>
+
+            © 2026 UFV Sport News 
+
+        </footer>
+
+        <script>
+
+            const noticias = [
+            
+            {
+                id:1,
+                titulo:"André Miguel deve dar um campeonato muito em breve",
+                imagem:"https://image.cdn2.seaart.me/upload/static/20260628/9723025ff1039a5515aca378a6b5d733_high.webp",
+                conteudo:`
+                <p>Foi recentemente no sábado que chegoubem questão da possibilidade de termos um evento novamente liderado por André Miguel. Depois de ter estado com o Joélcio durante a Elite Season André deveria estar pronto para dirigir um torneio a solo isso porque Joélcio disse que só estaria disponível apenas em Agosto.</p><br>
+               <img src="https://image.cdn2.seaart.me/upload/static/20260628/69281b7696fd73fa9ee3b72941df7739_high.webp">
+               <p>A informação foi dada por Joélcio quando disse que o seu colega André Miguel daria um campeonato na elite no mais recente possivel.Porem André não declarou nada mas se espera que ele de um passo seguinte nos próximos dias a anunciar um novo torneio na elite, chat este que já está parado há 2 meses<br>
+                <br>A DM Elite League normalmente realiza ir feita por 8 clubes em uma temporada intensa,mas não deve regressar nesse mês de Julho, é provável então que André Miguel crie seu próprio mini torneio a solos</p>
+            
+               `
+            },
+
+            {
+                id:2,
+                titulo:"Evandro faz um Hat Trick e da a primeira vitória de sua equipa",
+                imagem:"https://image.cdn2.seaart.me/upload/static/20260628/0bbb2eefa04729a310288cf9f395f50d_high.webp",
+                conteudo:`
+                <p>Na Noite de Sábado vimos Evandro Soller em uma forma incrível jogando no DC United GV , ele fez hat trick contra o Paviterra de Erik e Epifânio fazendo 3 golos na vitória de sua equipa por 3-2,sendo obviamente crucial ao lad de seu colega Ulices</p>
+                <img src="content://media/external/downloads/11037">
+                <p>Ele foi o protagonista da noite apesar das várias polémicas no final do jogo tendo um golo atribuído ja depois do fim e uma série de acusações por parte dos jogadores do Paviterra criticando fortemente o juíz do jogo deixando um clima de deduções por um longo tempo</p>
+                <br><br>O Cenário foi crucial para ele já que com essa vitória a sua equipa consegue a primeira vitória da temporada após 2 derrotas nas jornadas iniciais deixando a equipa em destaque nas esperanças do resto da temporada.Evandro porém com essa exibição notável se junt a uma lista restrita de pessoas que estão no top 5 da artilharia da Football World Games da edição atual</p>
+                `
+            
+            },
+
+            {
+                id:3,
+                titulo:"Troféu Jules Rimet retorna no final de Junho",
+                imagem:"https://image.cdn2.seaart.me/upload/static/20260628/a70738fbcbe741c0038dd2bc6b221b6f_high.webp",
+                conteudo:` 
+                <p>Analdo  Nsamba o A.F.C.N. Anunciou nos dias recentes que ira retornar um dos palcos mais atrativos do mundo do quiz,sei muitos detalhes diz ele que terá lugar aos 25 dd julho,recorde-se que este evento ficou parado por 2 ano</p>
+               <br><br><h4>Foram estas as Palavras dele:</p><br><br>
+                <p>"WE ARE BACK!!!!!! ⚠️⚠️⚠️⚠️
+                    O Troféu Jules Rimet é como a minha Suzana: ama-se uma única vez e, depois disso, nunca mais se conhece a saudade.
+                    -
+                    Esta competição é tão apaixonante quanto as memórias que permanecem gravadas nas nossas mentes. 
+                    -
+                    Uma disputa que nos acompanha como o primeiro amor da infância: pura, intensa e despreocupada.
+                    -
+                    Um amor à primeira vista que te conduzirá por uma jornada épica, repleta de glória, lágrimas, heróis e lendas.
+                    -
+                    Alguns torneios são jogados
+                    Outros são lembrados.
+                    O Troféu Jules Rimet é eternizado.
+                    
+                    🗓️ Marca na agenda: 25 de julho de 2026.
+                    🏆 O Troféu Jules Rimet está de volta.
+                    A história espera pelos seus próximos heróis.</p>
+                `
+            },
+
+            {
+                id:4,
+                titulo:"Os Cards da UFV podem ser Lançados nessa semana",
+                imagem:"content://media/external/downloads/11041",
+                conteudo:`
+                <p>O Maior suspense deve chegar ao fim nessa semande pois depois de quase 1 mês a tratar assunto das avaliações individuais já foi dito que isto deve ser lançado na semana seguinte, isto dito claro na semana anterior a essa. O Anúncio deve ser feito dentro de dias pois para uma confirmação oficial</p>
+                <br><br><p>Deste Modo irão revelar o valor do GER que cada um Mandou tendo em conta que todos os envolvidos fizeram a entrega de suas fotografias</p>
+                        `
+            },
+
+            {
+                id:5,
+                titulo:"Zeizi Polo em breve dará a nova época da TBSL",
+                imagem:"content://media/external/downloads/11043",
+                conteudo:`
+                <p>Depois de Realizar a Nations Tour Soccer um mini torneio no mais recente mês Polo estaria para iniciar a nova época da TBSL, campeonato que ficou parado por um longo período. De lembrar que ele ficou ausente quase 1 ano e antes da Nations informou que daria uma nova edição da TBSL"
+                <img src="content://media/external/downloads/11045"
+                <p>Porem ele decidiu também renovar a nova TBSL e remover todas as edições anteriores,a princípio o objetivo é uma nova edição que visa a levar em conta todos os dados e estatísticas e levar em cada número.Ele esta no momento sem tempo devido as privas mas é de esperar que arranque o torneio assim que terminar isso no fina de jilh ou início de Agosto</p>
+                <br><br><p>A TBSL como uma das ligas da UFV agora seguirá um novo rumo,o objetivo é ser mais interessante e ter uma história marcante com foco em destaques dos mais notados</p>
+                `
+            },
+
+            {
+                id:6,
+                titulo:"Ery e Joélcio perto de grande conquista na TBSL",
+                imagem:"content://media/external/downloads/11016",
+                conteudo:"Erelcio é o nome da dupla que esta perto de conquistar a liga de GigiColina de Epifânio Manuel,juntos eles consolidaram o primeiro lugar levanto a melhor até em uma dupla que era favorita de Ânderson e Zeizi conseguindo 1 vitória e um empate. Nesse momento eles precisam apenas de uma vitória no seu próximo jogo para vencer o torneio,o juíz Epifânio ja confirmou o valor do prêmio que é de 10mil,no entanto ainda há a final da Taça da liga que será acirrada eles irão enfrentar Anderzeizi a dupla mais perigosa no momento"
+            },
+
+            {
+                id:7,
+                titulo:"Pedro Chitata teria solicitado uma saida do Team United,sua permanecia nos Black Team cada vez mais improvável",
+                imagem:"https://image.cdn2.seaart.me/upload/static/20260628/b6a131539154725b5b442775071edd96_high.webp",
+                conteudo: `
+                <p>Recentemente Pedro Chitata teria solicitado ao juiz da FWG uma saida dos Team United para outra oque gerou grande repercussão e fúria por parte do capitão de equipa Zeizi Polo que não teria gostado do facto de Chitata menosprezar a sua equipa dado que é uma equipa de uma vasta dimensão no torneio. No entanto nada avançou e não sei sabe se Chitata ainda deixara o club, talvez o faça nessa ou na época seguinte dado ao desentendimento com o capitão</p>
+                <br><br><p>Entretanto Chitata também tem um enorme assunto a levar em alta na Elite League, depois de uma péssima temporada ao serviço dos Black Team onde fez 5 golos apenas e saiu em penúltimo na liga,ele teria dito que estaria deixando o club na próxima edição,mas até agora também não a nada avançado e não se sabe se k jogador ainda deseja sair mas é esperado que ele não esteja mais nessa equipa na próxima edição</p>
+                `
+            },
+
+            {
+                id:8,
+                titulo:"Gala da Elite Season é esperada a inicar no próximo sábado",
+                imagem:"https://image.cdn2.seaart.me/upload/static/20260628/69281b7696fd73fa9ee3b72941df7739_high.webp",
+                conteudo:"Joélcio AN confirmou a Hosten de que a Gala de nomeações da temporada de Élite será o mais breve possível. A questão foi feita quando perguntado sobre a data da próxima edição da Elite e ele teria dito que estaria apto em agosto e realçou que lançaram as nomeações o mais breve possível, isso como tal é esperado que ele esteja a preparar isso assim que lançar os Cards, assunto esse que sera lançado nessa semana"
+            },
+
+            {
+                id:9,
+                titulo:"Zeizi Polo no Topo de tudo em campeonato s",
+                imagem:"https://image.cdn2.seaart.me/upload/static/20260628/580101ae1c09e2d849463f83d835989f_high.webp",
+                conteudo:`
+                <p>Zeizi Polo continua em destaque não só na FWG mas como também no torneio de GigiColina. Ele lidera as 2 artilharias sendo com 6 com o Team United tendo o sobrinho dos golos que o segundo classificado e deixando a sua equipa na liderança isolada da Liga com 9pts</p><br>
+                <br><p>Atualmente ele também é lider da liga de Epifânio que ainda não está perdido apesar das grandes dificuldades enfrentadas em superar o brilhantismo de Eryve Joélcio, ele e Anderson ainda tem grandes chances de vencer o campeonato estando a depende r do adversário. No entanto na final da Taça da lig o factor é totalmente diferente porque eleve Anderson vêem sendo a Melhor equipa ao decorrer da competição e são is favoritos a vencer a final contra Erelcio</p>
+                `
+            },
+
+            {
+                id:10,
+                titulo:"Pedro Chitata prepara sua nova competição",
+                imagem:"content://media/external/downloads/11113",
+                conteudo:`
+                <p>Pedro Chitata recentemente criou uma liga a Chitata Ultimate Championship,com o objetivo devse instalar no Quiz da UFV,a principio o torneio trás até uma liga com descrições de Angola (usando nomes de clubes nacionais), que deve iniciar nessa semana.No dia que criou deu um Quiz de aberto e específicou o funcionamento da sua nova liga.No entanto a mesma ainda não está 100% regulada como competição da UFV</p>
+                <br><br><p>No entanto essas foram as suas declarações sobre a sua nova competição:<br>
+                    "<strong>🎉 SEJA BEM-VINDO À CHITATA ULTIMATE CHAMPIONS</strong>🏆🔥  
+                    A casa do futebol + quiz mais brava do GV!
+                    
+                    Chegou a tua hora, campeão! A <i>CHITATA ULTIMATE CHAMPIONS</i>abriu as portas e tu não podes ficar de fora 👇
+                    "
+
+                <img src="content://media/external/downloads/11052">
+                <p>O QUE TE ESPERA LÁ DENTRO? ⚽🧠
+                    <i><ol>
+
+                    <li>Chitata Ultimate Quiz - Duelos 5v5 entre os 16 maiores clubes  
+                    <li>Mercado da Bola - Transferências, polêmicas e bombas diárias  
+                    <li>Tabela & Stats - Classificação atualizada jornada a jornada 
+                     <li>VAR Humano - Com Pedro Chitata no apito e juíz novo a chegar  
+                   </ol></i>
+                    JUIZ: Pedro Chitata 
+                    REPORTER: Z11 
+
+                    REGRA É SIMPLES: Respeito, conhecimento e sangue nos olhos! 😤</p>
+                `
+            }
+
+            ];
+
+            const grid = document.getElementById("newsGrid");
+
+            noticias.forEach(noticia=>{
+
+                grid.innerHTML += `
+
+                <div class="card" onclick="abrirNoticia(${noticia.id})">
+
+                    <img src="${noticia.imagem}">
+
+                    <h3>${noticia.titulo}</h3>
+
+                </div>
+
+                `;
+
+            });
+
+            function abrirNoticia(id){
+
+                const noticia = noticias.find(n=>n.id===id);
+
+                document.getElementById("homePage").style.display="none";
+
+                document.getElementById("articlePage").style.display="block";
+
+                document.getElementById("title").textContent = noticia.titulo;
+
+                document.getElementById("image").src = noticia.imagem;
+
+                document.getElementById("content").innerHTML = noticia.conteudo;
+
+                window.scrollTo(0,0);
+
+            }
+
+            function goHome(){
+
+                document.getElementById("articlePage").style.display="none";
+
+                document.getElementById("homePage").style.display="block";
+
+                window.scrollTo(0,0);
+
+            }
+
+            const slides=document.querySelectorAll('.slide');
+            let atual=0;
+
+            setInterval(()=>{
+
+            slides[atual].classList.remove('active');
+
+            atual=(atual+1)%slides.length;
+
+            slides[atual].classList.add('active');
+
+            },3000);
+
+        </script>
+
+    </body>
+    </html>
+            

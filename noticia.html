@@ -407,6 +407,16 @@
 
             },3000);
 
+            const params = new URLSearchParams(window.location.search);
+
+            const id = params.get("id");
+
+            if(id){
+
+                abrirNoticia(Number(id));
+
+                }
+
         </script>
 
     </body>

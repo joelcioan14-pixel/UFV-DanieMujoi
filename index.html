@@ -13,20 +13,29 @@
 
         header {
             background: #191539;
-            color: yellow;
+            color: #ffbd1f;
             padding: 15px 5px;
             flex-wrap: nowrap;
             align-items: center;
             gap: 20px;
-            border-botton: 3px solid black;
+            border-bottom: 3px solid black;
+            white-space: nowrap;
+            justify-content:space-between;
         }
 
-        nav {
-            display: flex;
-            overflow-x: auto;
-            color: white;
-            font-family: verdana, Helvetica, sans-serif;
-            font-size: 0.90em;
+        #menu{
+               display:flex;
+               overflow-x: auto;
+               gap:20px;
+         }
+
+        #menu a{
+            color:white;
+             text-decoration:none;
+        }
+
+        #menu a:hover {
+            color: #ffbd1f;
         }
 
         a {
@@ -143,9 +152,14 @@
             align-content: center:
         }
 
+        .card img {
+            height: 220px;
+            width: auto;
+        }
+
         .cards {
             margin: 100px auto;
-            boder: 2px solid #00bfff;
+            border: 2px solid #00bfff;
             padding: 1em;
             width: 300px;
             width: 287px;
@@ -202,7 +216,7 @@
 
         .news-card {
 
-            width: 95%;
+            width: 97%;
             max-width: 900px;
             margin: 18px auto;
             background: #18224c;
@@ -222,7 +236,7 @@
 
         .news-card img {
 
-            width: 170px;
+            width: 150px;
             height: 140px;
             object-fit: cover;
 
@@ -230,7 +244,7 @@
 
         .info {
 
-            padding: 18px;
+            padding: 5px;
             flex: 1;
             color: white;
 
@@ -239,7 +253,7 @@
         .info h2 {
 
             margin: 0;
-            font-size: 31px;
+            font-size: 23px;
             line-height: 1.2;
 
         }
@@ -251,7 +265,7 @@
             align-items: center;
             gap: 15px;
             color: #d5d5d5;
-            font-size: 17px;
+            font-size: 8px;
 
         }
 
@@ -283,13 +297,13 @@
 
             .info h2 {
 
-                font-size: 24px;
+                font-size: 20px;
 
             }
 
             .bottom {
 
-                font-size: 15px;
+                font-size: 8px;
 
             }
 
@@ -300,13 +314,13 @@
 <body>
     <header>
         <div id="com">
-            <img src="https://image.cdn2.seaart.me/2026-05-15/d83o50te878c73df0g50/2fad43df-f793-4187-8e70-0ab180c0c90a.png"
+            <img src="https://image.cdn2.seaart.me/2026-06-27/d9034dde878c7383j5og/0a30fd4a-e1ac-444c-9f11-812c3b2f9438.png"
                 alt="logo da UFV" id="logo">
             <h1>Universo do <br>Futebol Virtual</h1>
         </div>
         <nav>
             <a href="">Pagina Inicial</a>
-            <a href="tornios.html">Torneio</a>
+            <a href="torneios.html">Torneio</a>
             <a href="estatisticas.html">Estatísticas</a>
             <a href="passatempo.html">Passatempos</a>
             <a href="noticia.html">Notícias</a>
@@ -326,7 +340,7 @@
                 </div>
                 <div class="card">
                     <h2>The Best Sport League</h2>
-                    <img src="https://image.cdn2.seaart.me/2026-04-04/d787qs5e878c739an86g/b7885f05-f891-412b-93ce-181ad7c187ac.jpeg?fbclid=IwY2xjawR0Zy9leHRuA2FlbQIxMQBzcnRjBmFwcF9pZA80MDk5NjI2MjMwODU2MDkAAR4uh-vZRzoK3FrhiEAq8ZSlAN4gFpuYvpvLp358w0lHVpTMumUU-vJkDd-xew_aem_OiOvihE4KBn1FqdOyQo-Ng"
+                    <img src="https://image.cdn2.seaart.me/2026-06-05/d8hk1sle878c73a2rqeg/bee75d82-33cd-43da-b7da-990a9b020004.png"
                         alt="logo da TBSL" class="liga">
                     <p>Ja foram 13 edições da TBSL um torneio de muito destaque no mundo do Quiz online</p>
                 </div>
@@ -351,7 +365,7 @@
         <a href="passatempo.html" class="card-link">
             <div class="news-card">
 
-                <img src="content://media/external/downloads/11128">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260628/a0b27235fcc47549b0d39981349f2fbd_high.webp">
 
                 <div class="info">
 
@@ -471,7 +485,7 @@
             <a href="noticia.html?id=5" class="card-link">
             <div class="news-card">
 
-                <img src="content://media/external/downloads/11043">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260628/701e3244a0c3d643df2f8c115e8cf292_high.webp">
 
                 <div class="info">
 
@@ -483,7 +497,7 @@
 
                 <b>TORNEIOS</b>
 
-                <span>27/Junho/2026</span>
+                <span>27 de Junho de 2026</span>
                 </div>
                 </div>
             </div>
@@ -503,7 +517,7 @@
 
                 <b>TORNEIO</b>
 
-                <span>20/Junho/2026</span>
+                <span>20 de Junho de 2026</span>
                 </div>
                 </div>
             </div>
@@ -511,11 +525,11 @@
             <a href="noticia.html?id=4" class="card-link">
                 <div class="news-card">
 
-                <img src="content://media/external/downloads/11041">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260628/0d79416a4ed38ad174679019a0e60c21_high.webp">
 
                 <div class="info">
 
-                <h2>Os cards da UFV serão anunciados essa semana</h2>
+                <h2>Cards da UFV anunciados essa semana</h2>
 
                 <div class="bottom">
 
@@ -523,7 +537,7 @@
 
                 <b>CLUBE</b>
 
-                <span>27 de Junho de 2026</span>
+                <span>28 de Junho de 2026</span>
                 </div>
                 </div>
                 </div>

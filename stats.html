@@ -1,0 +1,2473 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Stats</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#050814;
+color:white;
+}
+
+/* HERO */
+.hero {
+    background-color: #191538;
+height:300px;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+.hero img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(30%);
+transform:scale(1.1);
+}
+
+.hero h1{
+z-index:2;
+font-size:60px;
+color:#4aa3ff;
+letter-spacing:8px;
+text-shadow:0 0 25px #003a66;
+animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.06);}
+100%{transform:scale(1);}
+}
+
+/* DASHBOARD SOFASCORE STYLE */
+.dashboard{
+background-color: #191538;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:10px;
+padding:15px;
+background:#0b1230;
+}
+
+.dash-card{
+background:#111a3a;
+padding:12px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 0 10px rgba(0,0,0,0.4);
+transition:.3s;
+}
+
+.dash-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 20px #2f6bff;
+}
+
+.dash-card h3{
+margin:5px 0;
+color:#4aa3ff;
+}
+
+/* MENU */
+.menu{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+padding:10px;
+background:#0c1430;
+}
+
+.menu button{
+background:#1a2a55;
+border:none;
+padding:10px 15px;
+border-radius:10px;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+.menu button:hover{
+background:#2f6bff;
+transform:scale(1.05);
+}
+
+/* SECTIONS */
+.section{
+display:none;
+padding:20px;
+animation:fade .4s ease;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(10px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* DATABASE */
+.scroll{
+display:flex;
+overflow-x:auto;
+gap:15px;
+}
+
+.box{
+min-width:260px;
+background:#111a3a;
+padding:12px;
+border-radius:12px;
+animation:slideUp .6s ease forwards;
+opacity:0;
+transform:translateY(20px);
+}
+
+.box:nth-child(1){animation-delay:.1s;}
+.box:nth-child(2){animation-delay:.2s;}
+.box:nth-child(3){animation-delay:.3s;}
+
+@keyframes slideUp{
+to{opacity:1; transform:translateY(0);}
+}
+
+/* TOTS */
+
+.level {
+   width: 100%; 
+   height: 480px;
+   display: flex; 
+   overflow-x: auto; 
+   gap: 13px; 
+   background-color: darkblue;
+   position: relative;
+   overflow: hidden;
+   align-items: center;
+}
+
+.tots{
+background:#4B0082;
+margin: 0;
+border-left:3px solid #2f6bff;
+border-radius:8px;
+align-items: center;
+text-align: center;
+position: absolute;
+top: 0;
+left: 0;
+display: none;
+animation: fade .8s;
+width: 100%;
+height: 469px;
+}
+
+.tots.active {
+   display: block;
+}
+
+.tots img {
+   display: block;
+    width: 250px;
+    padding: 37px;
+   object-fit: cover;
+}
+
+/* VOTE */
+.vote{
+background:#111a3a;
+padding:20px;
+border-radius:12px;
+text-align:center;
+}
+
+.vote button{
+margin:8px;
+padding:10px 15px;
+border:none;
+border-radius:8px;
+background:#2f6bff;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+.vote button:hover{
+transform:scale(1.1);
+}
+
+.count{
+margin-top:10px;
+color:#4aa3ff;
+}
+
+
+/* SECÇÃO */
+
+
+.stats-section h1{
+font-size:38px;
+margin-bottom:25px;
+font-weight:700;
+}
+
+/* ROLAGEM HORIZONTAL */
+
+.stats-scroll{
+display:flex;
+gap:18px;
+overflow-x:auto;
+scroll-behavior:smooth;
+padding-bottom:15px;
+}
+
+.stats-scroll::-webkit-scrollbar{
+height:8px;
+}
+
+.stats-scroll::-webkit-scrollbar-thumb{
+background:#0a1678;
+border-radius:20px;
+}
+
+.rolagem {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   font-family: 'Courier New', Courier, monospace;
+   font-size: 10px;
+   overflow-x: auto;
+}
+
+.rolagem img {
+   height: auto;
+   width: 170px;
+   display: block;
+   margin: auto;
+   padding: 10px;
+   align-items: center;
+   text-align: center;
+}
+
+.rolagem1 {
+   height: 330px;
+   width: 280px;
+   text-align: center;
+   border-radius: 8px;
+   border: 1px solid #6A0DAD;
+}
+
+/* CARD */
+
+.stats-card{
+width: 100%;
+min-width: 100%;
+background:#fff;
+border-radius:28px;
+overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+transition:.35s;
+}
+
+.stats-card:hover{
+transform:translateY(-6px);
+}
+
+/* TOPO */
+
+.card-header{
+background:#06055d;
+color:white;
+padding:28px;
+}
+
+.card-header h2{
+font-size:46px;
+font-weight:700;
+}
+
+/* CONTEÚDO DOS RECORDES */
+
+.stats {
+   display: flex;
+   width: 100%;
+   align-items: center;
+}
+
+.conteudo-stats {
+   width: 75%;
+   font-size: 12px;
+}
+
+.img-stats {
+   width: 35%;
+   align-items: center;
+}
+
+.img-stats  img {
+display: block;
+margin: auto;
+ width: 130px;
+ height: auto;
+}
+
+/* JOGADOR */
+
+.player{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding: 13px 19px;
+border-bottom:1px solid #ececec;
+transition:.3s;
+height: 55px;
+white-space: nowrap;
+}
+
+.player:hover{
+
+background:#f6f9ff;
+
+}
+
+.left{
+display:flex;
+align-items:center;
+gap:18px;
+
+}
+
+/* POSIÇÃO */
+
+.position{
+width:35px;
+text-align:center;
+font-size:30px;
+color:#7c8899;
+font-weight:bold;
+}
+
+/* FOTO */
+
+.photo{
+position:relative;
+width:68px;
+height:68px;
+}
+
+.photo img:first-child{
+width:68px;
+height:68px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid white;
+}
+
+.club{
+position:absolute;
+bottom:-3px;
+right:-4px;
+width:24px;
+height:24px;
+background:white;
+border-radius:50%;
+padding:2px;
+box-shadow:0 0 5px rgba(0,0,0,.25);
+}
+
+/* TEXTO */
+
+.player h3{
+font-size:15px;
+margin-bottom:5px;
+color: #050814;
+}
+
+.player p{
+
+font-size:8px;
+color:#6f7785;
+}
+
+/* GOLOS */
+
+.value{
+font-weight:bold;
+color:#182433;
+text-align: right;
+}
+
+.value h3 {
+   font-size: 16px;
+}
+
+.value p {
+   font-size: 8px;
+   color: #06055d;
+}
+
+/* BOTÃO */
+
+.more-btn{
+width:100%;
+padding:20px;
+background:white;
+border:none;
+cursor:pointer;
+font-size:28px;
+font-weight:bold;
+color:#004cff;
+transition:.3s;
+}
+
+.more-btn:hover{
+background:#edf4ff;
+}
+
+/* MODAL */
+
+.modal{
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,.65);
+backdrop-filter:blur(5px);
+z-index:999;
+}
+
+.modal-content{
+width:92%;
+max-width:850px;
+max-height:88vh;
+overflow:auto;
+background:white;
+border-radius:25px;
+animation:popup .35s;
+}
+
+@keyframes popup{
+
+from{
+transform:scale(.85);
+opacity:0;
+}
+
+to{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+.modal-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px;
+background:#06055d;
+color:white;
+}
+
+.modal-header h2{
+font-size:32px;
+}
+
+.modal-header button{
+background:none;
+border:none;
+font-size:34px;
+color:white;
+cursor:pointer;
+}
+
+/* PESQUISA */
+
+#searchPlayer{
+width:94%;
+margin:20px;
+padding:16px;
+border-radius:14px;
+border:2px solid #d9d9d9;
+font-size:20px;
+outline:none;
+}
+
+#searchPlayer:focus{
+border-color:#004cff;
+}
+
+/* LISTA COMPLETA */
+
+#rankingList{
+padding:0 20px 25px;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:768px){
+.stats-card{
+min-width:94%;
+}
+
+.card-header h2{
+font-size:28px;
+}
+
+.photo{
+width:55px;
+height:55px;
+}
+
+.photo img:first-child{
+width:55px;
+height:55px;
+}
+
+.position{
+font-size:22px;
+}
+
+.more-btn{
+font-size:22px;
+}
+
+}
+
+/* REVKCORDES DA SVS */
+
+#svs-stats {
+   background: linear-gradient(135deg, #4B0082, #6A0DAD);
+      width: 100%;
+      margin: 0 auto;
+      border-radius: 12px;
+      padding: 5px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    #svs-stats h2 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .record-item {
+      background: rgba(255, 255, 255, 0.08);
+      width: auto;
+      margin: 8px 0;
+      border-radius: 8px;
+      text-align: left;
+      font-size: 1.02em;
+      padding: 9px 10px;
+      border-left: 5px solid #FFD700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .record-item strong {
+      color: #FFD700;
+    }
+
+    .section-title {
+      font-size: 1.55em;
+      margin: 30px 0 12px;
+      color: #FFD700;
+      text-transform: uppercase;
+    }
+
+    .table-container {
+      margin-top: 25px;
+    }
+
+  .table-container  table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    . table-container th {
+      background: #FFD700;
+      color: #4B0082;
+      padding: 12px 10px;
+      font-size: 1.05em;
+      text-align: center;           /* Títulos centralizados */
+    }
+
+   . table-container td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 1em;
+    }
+
+    /* Alinhamento específico das colunas */
+    td:nth-child(2), td:nth-child(3) {   /* Apps e Goals */
+      text-align: right;
+      font-weight: 600;
+    }
+
+    th:nth-child(2), th:nth-child(3) {
+      text-align: right;
+    }
+
+ . table-container   tr:hover {
+      background: rgba(255, 215, 0, 0.12);
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+     .container {
+     font-family: 'Inter', system-ui, sans-serif;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .head {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .head span {
+            color: #3b82f6;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .head h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 8px;
+            line-height: 1.1;
+        }
+
+        .ranking-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .team-row {
+            display: flex;
+            align-items: center;
+            background-color: #18181b;
+            border: 1px solid #3f3f46;
+            border-radius: 16px;
+            padding: 14px 18px;
+            transition: all 0.3s ease;
+        }
+
+        .team-row:hover {
+            transform: translateX(8px);
+            background-color: #27272a;
+            border-color: #52525b;
+        }
+
+        .rank {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #71717a;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            background-color: #27272a;
+            border-radius: 50%;
+            padding: 6px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .team-name {
+            flex: 1;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .points {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .points-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4ade80;
+            font-family: monospace;
+        }
+
+        .points-label {
+            font-size: 11px;
+            color: #71717a;
+            margin-top: -4px;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #b91c1c, #ef4444);
+            border-color: #f87171;
+            color: white;
+        }
+
+        .highlight .rank,
+        .highlight .team-name {
+            color: white;
+        }
+
+        .btn-reveal {
+            display: block;
+            margin: 40px auto 0;
+            padding: 16px 32px;
+            background-color: #18181b;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border: 2px solid #3f3f46;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reveal:hover {
+            background-color: #27272a;
+            border-color: #71717a;
+            transform: scale(1.03);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #52525b;
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+            .team-row {
+                padding: 12px 14px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+        }
+        
+        .barca-card {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin: 40px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+
+    .card-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 55%;
+      background: linear-gradient(transparent, rgba(0,0,0,0.92));
+      padding: 30px 25px 25px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .card-title {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .primeiro-time {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+    }
+
+    .yellow-dot {
+      width: 11px;
+      height: 11px;
+      background: #ffeb3b;
+      border-radius: 50%;
+    }
+
+    /* Secção de links da TBSL e premêmios */
+   
+    .messi {
+        display: flex;
+        width: 100%;
+        height: 100px;
+        background-color: #0a1678;
+        color: #d9d9d9;
+        align-items: center;
+        text-align: center;
+    }
+
+    .img-link {
+        width: 35%;
+        align-items: center;
+    }
+     
+     .img-link img {
+        display: block;
+        margin: auto;
+        width: 100%;
+        border: 2px solid #004cff;
+        border-radius: 10px;
+     }
+
+    .info-link {
+        width: 65%;
+        padding: 13px;
+        gap: 13px;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .info-link h3 {
+        color: #FFD700;
+    }
+
+    .messi:hover {
+        color: #f87171;
+    }
+
+    .topo-liga {
+        display: flex;
+    }
+
+    .topo-liga img {
+        width: 60px;
+    }
+
+    .awards-ed {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: flex-start;
+        width:100%;
+        gap: 0;
+        animation: spin infinite linear;
+        transition: transform .8s ease;
+    }
+
+    .awards-card {
+         min-width: 100%;
+         width: 100%;
+         height: 400px;
+         position: relative;
+         padding: 1em;
+         align-content: center;
+    }
+
+    .awards-card img {
+        display: block;
+        width: 250px;
+        height: auto;
+        margin: auto;
+    }
+
+            .carousel {
+                margin: auto;
+                display: flex;
+                overflow: hidden;
+                width:100%
+            }
+
+    .link {
+        background-image: darkblue;
+        display: flex;
+        width: 100%;
+        height: 250px;
+    }
+
+    .link-img {
+        align-items: center;
+        width: 38%;
+    }
+
+    .link-img img {
+        display: block;
+        width: 100%;
+    }
+
+    .info-link {
+        text-align: center;
+        width: 62%;
+        font-size: 13px;
+    }
+
+    #l1,#l2,#l4,#l5 {
+        background-color: #191538;
+    
+    }
+
+    #seven {
+        width: 100%;
+        border: 3px #004cff;
+        border-radius: 10px;
+        align-items: center;
+        text-align: center;
+    }
+
+    #seven h2 {
+        font-size: 25px;
+        color: #004cff;
+    }
+
+    #seven p {
+        color: #ef4444;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 10px;
+    }
+
+    #seven img {
+        display: block;
+        width: 100%;
+        margin: auto;
+    }
+
+
+</style>
+</head>
+
+<body>
+<header id="header"></header>
+<!-- HERO -->
+<div class="hero">
+<img id="slideshow" src="https://image.cdn2.seaart.me/upload/static/20260712/d9a552178197ea029818527135ae0c9d_high.webp">
+<h1>STATS UFV</h1>
+</div>
+
+<!-- DASHBOARD SOFASCORE -->
+<div class="dashboard">
+<div class="dash-card">
+<h3>⚽ Jogos</h3>
+<p>128</p>
+</div>
+<div class="dash-card">
+<h3>🏆4 Ligas</h3>
+<p>DM Elite • TBSL • SVS • FWG</p>
+</div>
+<div class="dash-card">
+<h3>🔥 Equipas</h3>
+<p>64 Teams + 12 Nações</p>
+</div>
+<div class="dash-card">
+<h3>📊 Jogadores</h3>
+<p>36</p>
+</div>
+</div>
+
+<!-- MENU -->
+<div class="menu">
+<button onclick="openTab('s1')">Record</button>
+<button onclick="openTab('s2')">Base de Dados</button>
+<button onclick="openTab('s3')">Tots</button>
+<button onclick="openTab('s4')">Premios</button>
+</div>
+
+<!-- 1 ARTILHARIA -->
+<section id="s1" class="section">
+<div class="stats">
+   <div class="img-stats">
+      <img src="https://image.cdn2.seaart.me/2026-07-05/d95d80de878c73fvaj5g/ee414f60-024e-442a-8c2d-228aa133fe38.png" alt="Card do Zeizi Polo">
+   </div>
+   <div class="conteudo-stats">
+      <h3>Maior Artilheiro da história da Elite League</h3>
+      <p>Zeizi Polo é o maior artilharia da história da Élite League, jogando as 4 edições até agora,foram 54 golos em 45 jogos</p>
+   </div>
+</div>
+<div class="stats">
+   <div class="img-stats">
+      <img src="https://image.cdn2.seaart.me/2026-07-05/d95d2nte878c73aqp5vg/66b168af-91db-4012-b742-41c27cf03d39.png" alt="Card do Anderson">
+   </div>
+   <div class="conteudo-stats">
+   <h3>Mais golos em uma edição da Liga TBSL</h3>
+   <p>Com 17 golos anotados em uma das edições ao serviço dos Blaugranas, Anderson é o jogador com mais golos em uma edição da liga TBSL</p>
+</div>
+</div>
+<div class="stats">
+   <div class="img-stats">
+      <img src="https://image.cdn2.seaart.me/2026-07-05/d95d87te878c73ab39mg/6d87833e-7808-4835-8c8d-7090eba26a37.png" alt="Card do Laurindo">
+   </div>
+   <div class="conteudo-stats">
+      <h3>Mais Golos em uma edição da Liga Football World Games</h3>
+      <p>Laurindo ao serviço do Atlanta Sport é o jogador com mais golos em uma edição da Liga FWG com 20 golos na 3ª Edição</p>
+   </div>
+</div>
+<div class="stats">
+   <div class="img-stats">
+      <img src="https://image.cdn2.seaart.me/2026-06-14/d8ncdbte878c73acqpr0/66b10b6f-2031-4deb-985e-99cf2d191c0d.png" alt="Card do AGUI">
+   </div>
+   <div class="conteudo-stats">
+      <h3>Mais Golos em uma edição do Torneio SVS</h3>
+      <p>AGUI na edição mais recente fez 17 golos em 6 jogos ao serviço do Dream Team, estabelecendo o recorde de mais golos em uma única edição da Team Ok League</p>
+   </div>
+</div>
+<aside class="stats-section">
+
+<h1>Estatísticas dos jogadores</h1>
+
+<div class="stats-scroll">
+
+<!-- GOLOS -->
+<div class="stats-card">
+<div class="card-header">
+<h2>Artilheiros da <i>Elite League</i></h2>
+</div>
+
+<div class="ranking" id="topScorers">
+
+<!-- 1 -->
+<div class="player">
+<div class="left">
+<div class="position">1</div>
+<div class="photo">
+<img src="https://image.cdn2.seaart.me/upload/static/20260707/3735f7d53496a4ca9200258a41992832_high.webp">
+<img class="club" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Logo do Kingsman">
+</div>
+
+<div>
+
+<h3>Zeizi Polo</h3>
+<p>The Kingsman</p>
+
+</div>
+</div>
+
+<div class="value">
+
+54
+
+</div>
+
+</div>
+
+<!-- 2 -->
+
+<div class="player">
+<div class="left">
+<div class="position">2</div>
+<div class="photo">
+<img src="https://image.cdn2.seaart.me/upload/static/20260707/74f9724e5db5c17a44d1834e42f13801_high.webp">
+
+<img class="club"
+src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Logo do Kingsman">
+
+</div>
+<div>
+
+<h3>Katendi Inácio</h3>
+<p>The Kingsman</p>
+
+</div>
+</div>
+
+<div class="value">31</div>
+</div>
+
+<!-- 3 -->
+
+<div class="player">
+<div class="left">
+<div class="position">3</div>
+<div class="photo">
+
+<img src="https://image.cdn2.seaart.me/upload/static/20260707/4e7bb860a613583cf3c99452056c71a1_high.webp">
+
+<img class="club" src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt="Logo do Dream Team FC">
+
+</div>
+<div>
+
+<h3>AGUINALDO</h3>
+<p>Dream Team</p>
+
+</div>
+</div>
+
+<div class="value">26
+</div>
+
+</div>
+
+</div>
+
+<button class="more-btn" onclick="openRanking('golos')">
+
+Ranking completo →
+
+</button>
+
+</div>
+
+
+<div class="stats-card">
+
+<div class="card-header">
+
+<h2>Artilheiros da Nations Trouphy</h2>
+
+</div>
+
+<div class="ranking">
+<div class="player">
+<div class="left">
+<div class="position">1</div>
+<div class="photo">
+
+<img src="https://image.cdn2.seaart.me/upload/static/20260707/3735f7d53496a4ca9200258a41992832_high.webp">
+
+<img class="club"
+src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB3UiTaqyAnLPUajRZzZMQXRz4HCSDaG4sgN6jv9H1Dg&s=10" alt="Bandeira de Portugal">
+
+</div>
+<div>
+
+<h3>Zeizi Polo</h3>
+
+<p>Seleção das Quinas</p>
+
+</div>
+</div>
+
+<div class="value">
+<h3>47</h3>
+<p>27 Jogos</p>
+</div>
+
+</div>
+
+<div class="player">
+<div class="left">
+<div class="position">2</div>
+<div class="photo">
+
+<img src="https://image.cdn2.seaart.me/upload/static/20260707/ab7435b9fd2eeac3af021ed434240c7f_high.webp">
+
+<img class="club src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQntp4hu3c7B8AwfvVp7m0F3QxbZjH6uZUOzEWRo-hoSw&s=10" alt="Bandeira da França">
+
+</div>
+<div>
+
+<h3>Graciano</h3>
+
+<p>Gauleses</p>
+
+</div>
+</div>
+
+<div class="value">
+<h3>36</h3>
+<p>12 Jogos</p>
+</div>
+
+</div>
+
+<div class="player">
+<div class="left">
+<div class="position">3</div>
+<div class="photo">
+
+<img src="https://image.cdn2.seaart.me/upload/static/20260707/8fb2ba81e620e108bb98a0f0293508f4_high.webp">
+
+<img class="club" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNBT-Bf-jc2qU58ZMlffGRPjRuQEb3QR40vO5EbKZtGw&s=10" alt="Bandeira de Marrocos">
+
+</div>
+<div>
+
+<h3>ANDERSON</h3>
+<p>Leões do Atlas</p>
+
+</div>
+</div>
+
+<div class="value">
+   <h3>27</h3>
+   <p>24 Jogos</p>
+</div>
+
+</div>
+</div>
+
+<button class="more-btn" onclick="openRanking('assist')">
+
+Ranking completo →
+
+</button>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- MODAL -->
+
+<div class="modal" id="rankingModal">
+<div class="modal-content">
+<div class="modal-header">
+
+<h2 id="modalTitle">Ranking Completo</h2>
+
+<button onclick="closeRanking()">
+✕
+</button>
+</div>
+
+<input type="text" id="searchPlayer" placeholder="Pesquisar jogador...">
+
+<div id="rankingList">
+
+</div>
+</div>
+</div>
+<div class="rolagem">
+   <div class="rolagem1">
+      <h3>Mais Golos na TBSL Nations</h3>
+      <img src="https://image.cdn2.seaart.me/upload/static/20260709/6209a0501b1f9718eb6f9e0be7e9a2ba_high.webp" alt="Joélcio AN Nations Tour Soccer">
+      <p>Joélcio AN consegui ser o máximo artilheiro da TBSL até ao momento na Nations Tour Soccer na sua edição estreante marcando 12 e superando qualquer outro</p>
+   </div>
+   <div class="rolagem1">
+   <h3>Mais golos em uma edição da Nations Trouphy</h3>
+   <img src="https://image.cdn2.seaart.me/upload/static/20260709/1c4388362dff37f0931a577439a2cb83_high.webp" alt="Graciano on Nations Trouphy">
+   <p>Graciano Tem o recorde de mai golos em uma edição da Nations Trouphy nas suas 4 temporadas.Ele conseguiu 20 na edição mais recente superando os anteriores 17 de Zeizi Polo e ganhou o título com os Gauleses</p>
+   </div>
+   <div class="rolagem1">
+   <h3>Mais golos em uma edição da Copa FWG</h3>
+   <img src="https://image.cdn2.seaart.me/upload/static/20260628/580101ae1c09e2d849463f83d835989f_high.webp" alt="Zeizi on FWG">
+   <p>Marcando 18 golos numa das edições recentes,Zeizi superou a todos e conseguiu 18 golos em uma única época da taça Football World Games</p>
+   </div>
+</div><br>
+<div id="svs-stats">
+<h2>SVS TEAM LEAGUE Records</h2>
+
+    <div class="record-item"><strong>Most Goals:</strong> Zeizi Polo(33) in 27G</div>
+    <div class="record-item"><strong>Most Apps:</strong> Katendi(42) in 5ªED</div>
+    <div class="record-item"><strong>Most Goals in Single ED:</strong>AGUI(17) in 5ªED </div>
+    <div class="record-item"><strong>Best Ratio on Single ED:</strong> Zeizi Polo(3º ED) — 8.6</div>
+    <div class="record-item"><strong>Best Ratio on Single Mach:</strong>Fadarío (4º ED) — 10.0</div>
+    <div class="record-item"><strong>Most Goals in Group Stage:</strong>Zeizi Polo (18)</div>
+    <div class="record-item"><strong>Most Goals in Knockout stage:</strong>Zeizi Polo (16)</div>
+    <div class="record-item"><strong>Longest Goal Streak:</strong>ANDERSON (4ºED) — 7 App</div>
+
+    <div class="section-title">TOP SCORES</div>
+    <div class="section-title" style="margin-top: -8px;">ALL TIMES</div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Players</th>
+            <th>Apps</th>
+            <th>Goals</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Zeizi Polo</strong></td><td>27</td><td>34</td></tr>
+          <tr><td>AGUI</td><td>20</td><td>33</td></tr>
+          <tr><td>Fadario</td><td>15</td><td>26</td></tr>
+          <tr><td>Katendi Inácio</td><td>40</td><td>22</td></tr>
+          <tr><td>Érik Dos Santos</td><td>22</td><td>20</td></tr>
+          <tr><td>Nathan Fuanzolo</td><td>15</td><td>14</td></tr>
+          <tr><td>LAURINDO</td><td>20</td><td>14</td></tr>
+          <tr><td>ANDERSON Chisses</td><td>33</td><td>12</td></tr>
+          <tr><td>Rodrigo L. Pascoal</td><td>11</td><td>12</td></tr>
+          <tr><td>Graciano</td><td>22</td><td>12</td></tr>
+          <tr><td>Jons Carlos</td><td>10</td><td>11</td><tr>
+          <tr><td>Epifânio Manuel</td><td>19</td><td>11</td></tr>
+          <tr><td>Eliano Dembo</td><td>17</td><td>11</td></tr>
+          <tr><td>Afonso AC</td><td>20</td><td>10</td></tr>
+          <tr><td>André Miguel</td><td>28</td><td>10</td></tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+</section>
+
+<!-- 2 DATABASE -->
+<section id="s2" class="section">
+
+<h2>📡 Base de Dados</h2>
+<div class="scroll">
+        <div class="box">
+            <h3>Clubes (Golos)</h3>
+            <p>The Kingsman - 58</p>
+            <p>FC Zeico - 51</p>
+            <p>Cosmic Team - 33</p>
+            <p>Dream Team - 31</p>
+            <p>Crown Excilium - 13</p>
+        </div>
+        <div class="box">
+            <h3>Goleadores</h3>
+            <p>Zeizi Polo - 42</p>
+            <p>Fadario - 33</p>
+            <p>Benedito - 13</p>
+            <p>AGUINALDO - 28</p>
+            <p>André Miguel - 7</p>
+        </div>
+        <div class="box">
+            <h3>Forma</h3>
+            <p>L W W L L</p>
+            <p>W W W W W</p>
+            <p>W L W W L</p>
+            <p>W L W W L</p>
+            <p>W W W W D</p>
+        </div>
+    </div><br>
+    <div class="scroll">
+        <div class="box">
+           <h3>Nações(Golos) </h3>
+           <p>Brasil - 19</p>
+           <p>Inglaterra - 14</p>
+           <p>Moçambique - 14</p>
+           <p>Espanha - 11</p>
+        </div>
+        <div class="box">
+            <h3>Golos Sofridos</h3>
+            <p>Brasil - 10</p>
+            <p>Inglaterra - 11</p>
+            <p>Moçambique - 17</p>
+            <p>Espanha - 11</p>
+        </div>
+        <div class="box">
+            <h3>Forma</h3>
+            <p>W W W D W</p>
+            <p>D W L W L</p>
+            <p>W W W L L</p>
+            <p>L W L D W</p>
+        </div>
+    </div>
+
+<div class="container">
+        <!-- Header -->
+        <div class="head">
+            <span>UFV • 2022-2026</span>
+            <h1>TOP 10 MELHORES TIMES<br>DO MUNDO</h1>
+        </div>
+
+        <!-- Ranking -->
+        <div id="ranking" class="ranking-container"></div>
+
+        <!-- Botão -->
+        <button onclick="toggleRanking()" id="revealBtn" class="btn-reveal">
+            VER OS PRÓXIMOS 5 TIMES
+        </button>
+
+        <!-- Footer -->
+        <div class="footer">
+            ranking elaborado pelo universo do futebol Virtual
+        </div>
+    </div>
+   
+</section>
+
+<!-- 3 Tots da UFV -->
+<div id="s3" class="section">
+<div style="background-image: url('https://image.cdn2.seaart.me/upload/static/20260711/3216ac43c0ef6e0faf1c3ae06db87a09_high.webp'); background-size: cover; width: 100%; height: 150px;">
+<h2>Cards da UFV</h2>
+</div><br>
+<p>Bem-vindo a página dos cards da UFV composta por 5 níveis a classificar os atletas do Quiz online</p><br>
+<img src="https://image.cdn2.seaart.me/upload/static/20260711/812243b619ccd18698ba74ce7e2dfe85_high.webp" style="height: 123px; max-width: 520px; border-radius: 7px;">
+<br><h2>Cards - ARMADORES</h2>
+<section class="level">
+   <div class="tots active">
+<h3>Wilson SM</h3>
+<img src="https://image.cdn2.seaart.me/2026-07-11/d98qs25e878c73d4apm0/e3ff6a4e-c146-4e44-97f7-45d5f8070f83.png" alt="Amador do Wilson de moz">
+<p>Card de Wilson(Amador), jogador de referência do Puli United</p>
+   </div>
+<div class="tots">
+   <h3>Azael Z11</h4>
+   <img src="https://image.cdn2.seaart.me/2026-07-11/d99787le878c73ev9rr0/6b8d96a7-77e6-42df-b65e-47671a002a8a.png" alt="Card do Z11">
+   <p>Nível Amador:juiz da SVS e jogador destacado do FC Zeico</p>
+</div>
+<div class="tots">
+   <h3>Carlos</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-15/d9bvetle878c73e2n05g/07fadfbd-a7e4-4803-8924-b0d123de93a2.png" >
+   <p>Nivel: Amador - Carlos jogador de referência dos Darkwolves</p>
+</div>
+<div class="tots">
+   <h3>John Dos Santos</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-15/d9bvmrde878c73e34ln0/038fc2f3-f264-43cb-8463-2691ccf84a7b.png">
+   <p>John jogador do Marvel FC(Elite)</p>
+</div>
+<div class="tots">
+   <h3>Hamilson</h3>
+   <img src="https://image.cdn2.seaart.me/upload/static/20260711/6ff87f528fd56c168a9d78d23369db94_high.webp" alt="card do Hamilson">
+   <p>Amador: Hamilson dos Black Team</p>
+</div>
+<div class="tots">
+   <h3>Vlad Simba</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-11/d99794te878c73avq6kg/1a0c3532-882f-4a00-9645-d63224353fea.png" alt="Card do Vlad">
+   <p>Amador: Vlad Simba do DC United</p>
+</div>
+</section><br><br>
+<h2>Cards - Profissional</h2>
+<section class="level">
+   <div class="tots active">
+<h3>Ery de Carvalho</h3>
+<img src="https://image.cdn2.seaart.me/2026-07-14/d9ar99le878c73ej0lm0/2934073f-2d9a-4506-87c6-d3b213f99e6b.png" alt="Ery card79">
+<p>Card de Ery(PRO), jogador de referência do Cosmic</p>
+   </div>
+<div class="tots">
+   <h3>Gabriela Sousa</h4>
+   <img src="https://image.cdn2.seaart.me/2026-07-14/d9bap4le878c738q1pa0/c0b3c08a-570f-49df-ad5b-5ca7db65eaec.png" alt="Card do Gabriela FS">
+   <p>Nível PRO: Gabriela Sousa estrela do Dream Team</p>
+</div>
+<div class="tots">
+   <h3>Soza30</h3>
+   <img src="https://image.cdn2.seaart.me/upload/static/20260715/54dd9d4aed972025974897a104947559_high.webp" alt="Card de Soz30">
+   <p>Nivel: PRO - Soza30 do DC United GV</p>
+</div>
+<div class="tots">
+   <h3>Adilson Faustino</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-15/d9bvpile878c73cif790/18b2266d-dd9d-4f13-9188-ecc0dda71418.png" alt="Card de Adilson">
+   <p>Adilson(Nivel:PRO) do Paviterra(FWG)</p>
+</div>
+<div class="tots">
+   <h3>Augusto Kueia</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-15/d9bvmjle878c73ekplk0/d019c966-0e48-446c-8250-cb60fd5ba869.png" alt="card do Augusto Kueia">
+   <p>PRO: Augusto do Dream</p>
+</div>
+</section>
+<h2>Cards - Craques</h2>
+<section class="level">
+   <div class="tots active">
+<h3>Evandro Soller</h3>
+<img src="https://image.cdn2.seaart.me/2026-07-15/d9c0355e878c73e50jag/6cc285b8-3eaa-4b0b-8a5d-0476f98a5a5b.png" alt="Evandro">
+<p>Card de Evandro(Star), jogador de referência do DC United GV</p>
+   </div>
+<div class="tots">
+   <h3>Seraph</h4>
+   <img src="https://image.cdn2.seaart.me/2026-07-14/d9ar74le878c73aahb00/1e3e80ab-1892-4f22-8231-9ce236bd9fb1.png" alt="Card do Seraph">
+   <p>Nível Craque: Seraph</p>
+</div>
+<div class="tots">
+   <h3>Martinho Flaviano</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-15/d9c01v5e878c73ciu6m0/d6b2a681-7d23-484f-ba3c-9dbd0a589e21.png" alt="Card de Martinho">
+   <p>Nivel: Star - Martinho das Águias Negras</p>
+</div>
+<div class="tots">
+   <h3>Eliano Dembo</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-15/d9c02tde878c73elfd3g/fc5380f8-121c-40d5-a8b1-7a96785e66fd.png" alt="Card de Eliano">
+   <p>Eliano(Nivel: Craque) do Bianconerri</p>
+</div>
+<div class="tots">
+   <h3>Kenny Paiva</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-14/d9bb5mle878c738qm7u0/609c7df2-75a8-4b08-a000-566136251cf1.png" alt="card do Hosten">
+   <p>Star: Kenny do Puli United</p>
+</div>
+<div class="tots">
+    <h3>Pedro Chitata</h3>
+    <img src="https://image.cdn2.seaart.me/2026-07-15/d9c07g5e878c73e57k8g/f749a431-d6c0-4b8c-a92a-2927daa883c2.png" alt="Card de Pedri Chitata">
+    <p>Pedro Chitata referência do Team United</p>
+</div>
+<div class="tots">
+    <h3>Ageu da Silva</h3>
+    <img src="https://image.cdn2.seaart.me/2026-07-15/d9c07sle878c73e589r0/0b30a901-54ca-4af5-903e-5a4327c981e6.png" alt="Card de Ageu">
+    <p>Nivel: Craque- Ageu estrela da Seleção das Quinas</p>
+</div>
+<div class="tots">
+    <h3>André Miguel</h3>
+    <img src="https://image.cdn2.seaart.me/2026-07-15/d9c07lte878c73e41tm0/b4995075-7f6d-4a0a-9e9e-5d28e71805c3.png" alt="Card de Andre Miguel">
+    <p>Nivel: Craque- André Miguel dos Parisienses e juíz da Elite</p>
+</div>
+</section><br><br>
+<h2>Cards - SuperCraques</h2>
+<section class="level">
+   <div class="tots active">
+<h3>Requito(Russo)</h3>
+<img src="https://image.cdn2.seaart.me/2026-07-15/d9c025le878c73ele42g/ce574ea4-4705-4fa0-b533-31324cf4e7f4.png" alt="Tot de Requito">
+<p>Card de Russo(SuperCraque), jogador de referência dos Gunners e icone de Quiz</p>
+   </div>
+<div class="tots">
+   <h3>Marcio Samuel</h4>
+   <img src="https://image.cdn2.seaart.me/2026-07-15/d9c02fde878c73e3pdj0/ad6134ec-579d-4cef-a071-4125946757f3.png" alt="Card do Marcio Samuel">
+   <p>Nível SuperCraque: Marcoo estrela do Brasil</p>
+</div>
+<div class="tots">
+   <h3>Benedito Nsingui</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-14/d9ban4le878c738pugl0/60fd63a4-69e6-491d-9a39-5df97e7d2857.png" alt="Card de Benedito">
+   <p>Nivel: SuperCraque: Benedito da Laranja Mecânica</p>
+</div>
+<div class="tots">
+   <h3>Epifânio Manuel</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-14/d9banhte878c738pv9ag/e73ca5c9-4503-4a04-aeff-715332ebc485.png" alt="Card de Epifânio Nobody">
+   <p>Nivel: Super Estrela - Epifânio referência do Quiz Global</p>
+</div>
+<div class="tots">
+   <h3>LAURINDO</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-05/d95d87te878c73ab39mg/6d87833e-7808-4835-8c8d-7090eba26a37.png" alt="card do LAU">
+   <p>PRO: Augusto do Dream</p>
+</div>
+<div class="tots">
+    <h3>AGUINALDO</h3>
+    <img src="https://image.cdn2.seaart.me/2026-06-14/d8ncdbte878c73acqpr0/66b10b6f-2031-4deb-985e-99cf2d191c0d.png" alt="Card de Agui">
+    <p>SuperCraque: Aguinaldo lenda do Quiz Global</p>
+</div>
+<div class="tots">
+    <h3>Katendi Inácio</h3>
+    <img src="https://image.cdn2.seaart.me/2026-07-14/d9aqqa5e878c73ftalfg/5f59d3d2-620f-4d11-80b3-29298be35349.png" alt="Card de Katendi">
+    <p>SuperCraque: Katendi Capitão do Kingsman</p>
+</div>
+<div class="tots">
+    <h3>Joélcio AN</h3>
+    <img src="https://image.cdn2.seaart.me/2026-07-15/d9c0oale878c73ck3o3g/d982ce40-168d-4c1b-b913-26b1ec27e2d7.png" alt="Card de Joélcio Agostinho">
+    <p>Nivel: Super Estela - Joélcio AN referência dos Citizens e Juíz da Elite</p>
+</div>
+<div class="tots">
+    <h3>Afonso AC</h3>
+    <img src="https://image.cdn2.seaart.me/2026-07-15/d9c0o3le878c73e4tk6g/12e47fed-b577-48fd-a538-6d35857aa73c.png" alt="Card de Afonso">
+    <p>Nivel: Super estrela - Afonso referência dos Citizens</p>
+</div>
+</section>
+<section><br><br>
+<h2>PAC - LEGENDS</h2>
+<section class="level" id="Lenda">
+   <div class="tots active" id="l1">
+<h3>Jeovane Cosme</h3>
+<img src="https://image.cdn2.seaart.me/2026-07-15/d9c0u5te878c73emtkgg/e95aac61-62ad-4e31-8a01-f70c561b33a0.png" alt="Amador do Jeovani">
+<p>Caard de Jeovani Cosme (Lenda), jogador de referência do Quiz Global</p>
+   </div>
+<div class="tots" id="l2">
+   <h3>Érik Dos Santos</h4>
+   <img src="https://image.cdn2.seaart.me/2026-07-15/d9c0tmle878c73emsptg/11d0ce70-50cf-4ad2-ab10-4990d7060a13.png" alt="Card do Erik">
+   <p>Nível Lenda: Érik referência do Puli United</p>
+</div>
+<div class="tots" id="l3">
+   <h3>Anderson Chisses</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-05/d95d2nte878c73aqp5vg/66b168af-91db-4012-b742-41c27cf03d39.png" alt="Card de ANDERSON">
+   <p>Nivel: Lenda - Anderson jogador estrela dos Blaugranas</p>
+</div>
+<div class="tots" id="l4">
+   <h3>Zeizi Polo</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-05/d95d80de878c73fvaj5g/ee414f60-024e-442a-8c2d-228aa133fe38.png" alt="Card de Zeizi">
+   <p>Lendário Zeizi referência do Quiz Global e Juíz da TBSL</p>
+</div>
+<div class="tots" id="l5">
+   <h3>Fadario</h3>
+   <img src="https://image.cdn2.seaart.me/2026-07-14/d9bb5ate878c73b733bg/00e6d53b-1c5e-4d4c-b26d-f9b9ecf30662.png" alt="card do Fadario">
+   <p>Nivel: Lenda - Fadario do FC Zeico</p>
+</div>
+</section><br><br>
+<aside id="seven">
+<h2>7 Ideal do Mês de Junho (2026- UFV)</h2>
+<img src="https://image.cdn2.seaart.me/upload/static/20260715/ba31669e521dec6f7717480387bbf1b7_high.webp" alt="Sete ideal">
+<p><i>Escalação baseada nas exibições de cada um durante o mês de junho</i></p>
+</aside>
+</div>
+
+<!-- 4 VOTE -->
+<div id="s4" class="section">
+
+<h2>🎖️Premios</h2>
+
+<div class="barca-card">
+    <!-- Substitua esta URL pela sua imagem -->
+    <img src="https://image.cdn2.seaart.me/upload/static/20260713/c6883a5f54633b2c0674e7ef70cb7a10_high.webp" alt="Jogadores" class="card-image">
+    
+    <div class="card-overlay">
+      <div>
+        <h2 class="card-title">Prêmios da UFV</h2>
+        
+        <div class="card-footer">
+          <span class="primeiro-time">
+            <span class="yellow-dot"></span>
+            VENCEDORES 
+          </span>
+          <span>Awards</span>
+        </div>
+      </div>
+    </div>
+  </div><br>
+  <div class="awards-liga">
+    <div class="topo-liga">
+        <img src="https://image.cdn2.seaart.me/2026-06-05/d8hk1sle878c73a2rqeg/bee75d82-33cd-43da-b7da-990a9b020004.png" alt="Logo da TBSL">
+        <h2>TBSL • Awards</h2>
+    </div>
+    <a href="https://fatimaluisaagostinho44-beep.github.io/TBSLawards/" target="_blank">
+        <div class="messi">
+            <div class="img-link">
+            <img src="https://image.cdn2.seaart.me/upload/static/20260617/31a152297f370bcb9eb37cf234280441_high.webp" alt="TBSL prêmio da NTS">
+            </div>
+            <div class="info-link">
+                <h3>Prêmios da TBSL</h3>
+                <p>Veja agora aqui os prêmios da Nations Tour Soccer</p>
+            </div>
+        </div>
+    </a>
+    <br><div class="topo-liga">
+        <img src="https://image.cdn2.seaart.me/2026-05-14/d8354ile878c738qctjg/30f41c1b-d986-422f-83c5-697691aad052.png" alt="Logo da DM Élite">
+        <h2>DM Élite Season</h2>
+    </div><h3>Awards • 1 Edição</h3>
+    <div class="carrossel">
+    <div class="awards-ed">
+        <div class="awards-card">
+            <h4>Golden Boy</h4>
+            <img src="https://image.cdn2.seaart.me/2026-07-13/d9a4b0te878c73cjdqeg/17056276-da18-4125-bffd-38ef32906505.png" alt="Card do Marto">
+            <p>Martinho Flaviano (Marsell)</p>
+        </div>
+        <div class="awards-card">
+            <h4>Breaktough Player</h4>
+            <img src="https://image.cdn2.seaart.me/2026-07-13/d9a4b0te878c73cjdqeg/17056276-da18-4125-bffd-38ef32906505.png">
+            <p>Martinho Flaviano (Marsell)</p>
+        </div>
+        <div class="awards-card">
+            <h4>Capitain Golden</h4>
+            <img src="https://image.cdn2.seaart.me/2026-07-13/d9a4d4de878c738j34e0/6eb1cb17-50e3-4f8d-bc4f-fce0732944c2.png" alt="Card de Heuler">
+            <p>Heuler(Vermelho Negro)</p>
+        </div>
+        <div class="awards-card">
+            <h4>Ballon D'or</h4>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260713/f01c6bea1b022f087a4a0eca28cf5c0b_high.webp" alt="Nathan card">
+            <p>Nathan fuanzolo (Timão FC)</p>
+        </div>
+        <div class="awards-card">
+            <h4>Melhor Capitão</h4>
+            <img src="https://image.cdn2.seaart.me/2026-07-14/d9apmple878c73fr8d4g/815504ae-2e34-4c3a-8d35-54b70cf3c1c4.png" alt="Heuler">
+            <p>Heuler(Vermelho e Negro)</p>
+        </div>
+        <div class="awards-card">
+            <h4>The Best: Player</h4>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260713/f01c6bea1b022f087a4a0eca28cf5c0b_high.webp" alt="Card de Nathan Fuanzolo">
+            <p>Nathan Fuanzolo (Timão FC)</p>
+        </div>
+        <div class="awards-card">
+            <h4>The Best: Team</h4>
+            <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7unte878c73b1hddg/7ee7b194-8187-4911-8e44-c383698aee14.png" alt="Timão Logo">
+            <p>Timão FC</p>
+        </div>
+    </div><br>
+    <h3>Awards • 2ª Edição</h3>
+    <div class="awards-ed">
+    <div class="awards-card">
+        <h4>Golden Boy</h4>
+        <img src="https://image.cdn2.seaart.me/upload/static/20260612/d1ae022abefbbd0f5463148599773350_high.webp" alt="Card de Graciano">
+        <p>Graciano (Black Team)</p>
+    </div>
+    <div class="awards-card">
+        <h4>Breaktough player</h4>
+        <img src="https://image.cdn2.seaart.me/2026-06-13/d8mph0te878c73ei3er0/1e06c05d-045f-45b3-afa9-ab756ca375c1.png" alt="Card de Eliano">
+        <p>Eliano Dembo (Dream Team FC)</p>
+    </div>
+    <div class="awards-card">
+        <h4>Capitain Golden</h4>
+        <img src="https://image.cdn2.seaart.me/2026-07-14/d9aqqa5e878c73ftalfg/5f59d3d2-620f-4d11-80b3-29298be35349.png" alt="Card de Katendi">
+        <p>Katendi Inácio (The Kingsman)</p>
+    </div>
+    <div class="awards-card">
+        <h4>Ballon D'or</h4>
+        <img src="https://image.cdn2.seaart.me/2026-06-12/d8m3go5e878c73e3mot0/a9f896d6-ea02-4178-974a-83db2573b300.png" alt="carf de AGUINALDO">
+        <p>AGUI(The Kingsman)</p>
+    </div>
+    <div class="awards-card">
+        <h4>The Best:Player</h4>
+        <img src="https://image.cdn2.seaart.me/2026-06-12/d8m3go5e878c73e3mot0/a9f896d6-ea02-4178-974a-83db2573b300.png" alt="Aguinaldo card">
+        <p>AGUI(The Kingsman)</p>
+    </div>
+    <div class="awards-card">
+    <h4>The Best: Team</h4>
+    <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Logo do Kingsman">
+    <p>The Kingsman CD</p>
+    </div>
+  </div>
+  <br><h3>Awards • 3ª Edição</h3>
+  <div class="awards-ed">
+    <div class="awards-card">
+        <h4>Golden Boy</h4>
+        <img src="https://image.cdn2.seaart.me/2026-07-14/d9ar74le878c73aahb00/1e3e80ab-1892-4f22-8231-9ce236bd9fb1.png" alt="Card do Seraph">
+        <p>Seraph(Kingsman)</p>
+    </div>
+    <div class="awards-card">
+        <h4>Breaktough Player</h4>
+        <img src="https://image.cdn2.seaart.me/2026-07-14/d9ardtle878c73fuhdl0/68e8a30a-bb22-435c-bb9c-d1abdcba04f3.png" alt="Card de Érik dos Santos">
+        <p>Erik Dos Santos (Puli United)</p>
+    </div>
+    <div class="awards-card">
+        <h4>Capitain Golden</h4>
+        <img src="https://image.cdn2.seaart.me/2026-07-14/d9ar99le878c73ej0lm0/2934073f-2d9a-4506-87c6-d3b213f99e6b.png" alt="Card de Ery">
+        <p>Ery de Carvalho (Cosmic)</p>
+    </div>
+    <div class="awards-card">
+        <h4>Ballon D'or</h4>
+        <img src="https://image.cdn2.seaart.me/2026-07-14/d9ardtle878c73fuhdl0/68e8a30a-bb22-435c-bb9c-d1abdcba04f3.png" alt="Card de Erik">
+        <p>Érik Dos Santos (Puli United)</p>
+    </div>
+    <div class="awards-card">
+        <h4>The Best:Player</h4>
+        <img src="https://image.cdn2.seaart.me/2026-07-05/d95d2nte878c73aqp5vg/66b168af-91db-4012-b742-41c27cf03d39.png" alt="Card de Anderson Chisses">
+        <p>ANDERSON (COSMIC)</p>
+  </div>
+  <div class="awards-card">
+    <h4>The Best: Team</h4>
+    <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Logotipo do Cosmic Team CF">
+    <p>Cosmic Team CF</p>
+  </div>
+  </div>
+    </div>
+<a href="https://fatimaluisaagostinho44-beep.github.io/TBSLawards/awards.html" target="_blank">
+<div class="link">
+<div class="link-img">
+<img src="https://image.cdn2.seaart.me/upload/static/20260714/1d9337e3c0fa22879f7843bb31394cf3_high.webp">
+</div>
+<div class="info-link">
+<h4>Elite Season Awards</h4>
+<p>Veja agora as nomeações do The Best da Elite</p>
+</div>
+</div></a>
+
+
+<script>
+/* HERO SLIDER */
+let imgs=[
+"https://image.cdn2.seaart.me/upload/static/20260712/bd989dfceaf1116b91991fa2e0cbaea1_high.webp",
+"https://image.cdn2.seaart.me/upload/static/20260712/67b0908638a6ccb68c0fe79c0ace96ab_high.webp",
+"https://image.cdn2.seaart.me/upload/static/20260712/e9a393fcb4f33a5d98aa64d5af418df3_high.webp"
+];
+
+let i=0;
+setInterval(()=>{
+i=(i+1)%imgs.length;
+document.getElementById("slideshow").src=imgs[i];
+},3000);
+
+/* DASHBOARD ANIMATION */
+window.onload=()=>{
+document.querySelectorAll(".dash-card").forEach((el,i)=>{
+setTimeout(()=>{
+el.style.transform="translateY(0)";
+el.style.opacity="1";
+},i*150);
+});
+};
+
+/* NAV */
+function openTab(id){
+document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+document.getElementById(id).style.display="block";
+}
+
+/* ==========================
+   BASE DE DADOS
+========================== */
+
+const rankings = {
+
+golos: [
+
+{
+pos:1,
+nome:"Zeizi Polo",
+clube:"The Kingsman",
+valor:`
+<h3>54</h3>
+<p>45 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/3735f7d53496a4ca9200258a41992832_high.webp",
+logo:"https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png"
+},
+
+{
+pos:2,
+nome:"Katendi Inácio",
+clube:"The Kingsman",
+valor:`
+<h3>31</h3><p>48 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/74f9724e5db5c17a44d1834e42f13801_high.webp",
+logo:"https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png"
+},
+
+{
+pos:3,
+nome:"AGUINALDO",
+clube:"Dream Team",
+valor:`
+<h3>26</h3>
+<p>19 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/4e7bb860a613583cf3c99452056c71a1_high.webp",
+logo:"https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png"
+},
+
+{
+pos:4,
+nome:"Laurindo",
+clube:"Cosmic Team",
+valor:`
+<h3>26</h3>
+<p>31 Jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/25de048705fc7981b8402f46ddd43f36_high.webp",
+logo:"https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png"
+},
+
+{
+pos:5,
+nome:"Érik",
+clube:"Puli United",
+valor:`
+<h3>25</h3>
+<p>23 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/25c3f3c8540f8699bee75babbf34be68_high.webp",
+logo:"https://image.cdn2.seaart.me/upload/static/20260707/91ca63894a7227e9f1c9601cfce6efbf_high.webp"
+},
+
+{
+pos:6,
+nome:"Fadario",
+clube:"FC Zeico",
+valor:`
+<h3>24</h3>
+<p>15 Jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/0615671bd56f3fc30bcb3fe4ddce664b_high.webp",
+logo:"https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png"
+},
+
+{
+pos:7,
+nome:"Nathan",
+clube:"The Kingsman",
+valor:`
+  <h3>23</h3>
+  <p>28 Jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/ecd0168a38c44694ab74f7cef5d7b99d_high.webp",
+logo:"https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png"
+},
+
+{
+pos:8,
+nome:"Graciano",
+clube:"Puli United",
+valor:`
+   <h3>22</h3>
+   <p>19 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/ab7435b9fd2eeac3af021ed434240c7f_high.webp",
+logo:"https://image.cdn2.seaart.me/upload/static/20260707/91ca63894a7227e9f1c9601cfce6efbf_high.webp"
+},
+
+{
+pos:9,
+nome:"Martinho",
+clube:"Black Team",
+valor:`
+<h3>22</h3>
+<p>38 Jogos</h3>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/b0681be8acac6ee38c0df73e4954285a_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAXRBVLmNumJ5cnkymJ8EeraG5tZbvc790qVR28ArGmw&s=10"
+},
+
+{
+pos:10,
+nome:"ANDERSON",
+clube:"Cosmic Team",
+valor:`
+<h3>17</h3>
+<p>26 Jogos</h3>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/8fb2ba81e620e108bb98a0f0293508f4_high.webp",
+logo:"https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png"
+},
+
+{
+pos:11,
+nome:"Epifânio",
+clube:"FC Zeico",
+valor:`
+<h3>17</h3>
+<p>25 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/fffdcb1b73988896b44d26f7adf25ea4_high.webp",
+logo:"https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png"
+},
+
+{
+pos:12,
+nome:"Timóteo",
+clube:"FC Zeico",
+valor:`
+<h3>13</h3>
+<p>24 jogos</p>
+`,
+foto:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Z-lxbuKMIzkSFw8kpOQmIN93lXzYiNdnz_pbSh75cg&s=10",
+logo:"https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png"
+},
+
+{
+pos:13,
+nome:"Heuler",
+clube:"Cosmic Team",
+valor:`
+<h3>13</h3><p>22 jogos</p>
+`,
+foto:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgoHA5oQNzi65m6PiQN1HQVjV7cTp5MXAHi5a9cJ-nsg&s=10",
+logo:"https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png"
+},
+
+{
+pos:14,
+nome:"Ery",
+clube:"Cosmic Team",
+valor:`
+<h3>12</h3><p>43 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/b66f77c8fa1a3e3003c55cf18a04f3cc_high.webp",
+logo:"https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png"
+},
+
+{
+pos:15,
+nome:"Hosten",
+clube:"Puli United",
+valor:`
+<h3>11</h3><p>13 Jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/960b0e979f7fefeb01b5e6eb967225a2_high.webp",
+logo:"https://image.cdn2.seaart.me/upload/static/20260707/91ca63894a7227e9f1c9601cfce6efbf_high.webp"
+},
+
+{
+pos:16,
+nome:"Augusto K",
+clube:"Dream Team",
+valor:`
+<h3>11</h3><p>34 Jogos</p>
+`,
+foto:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYmlWyCAz6Hz5Y4MEIixvc4mQz4VD_fEKFQq2xwtJRqg&s=10",
+logo:"https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png"
+}
+
+],
+
+assist: [
+
+{
+pos:1,
+nome:"Zeizi Polo",
+clube:"Seleção das Quinas",
+valor:`
+<h3>47</h3><p>27 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/3735f7d53496a4ca9200258a41992832_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB3UiTaqyAnLPUajRZzZMQXRz4HCSDaG4sgN6jv9H1Dg&s=10"
+},
+
+{
+pos:2,
+nome:"Graciano",
+clube:"Gauleses",
+valor:`
+<h3>36</h3><p>13 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/ab7435b9fd2eeac3af021ed434240c7f_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQntp4hu3c7B8AwfvVp7m0F3QxbZjH6uZUOzEWRo-hoSw&s=10"
+},
+
+{
+pos:3,
+nome:"ANDERSON",
+clube:"Leões do Atlas",
+valor:`
+<h3>27</h3><p>24 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/8fb2ba81e620e108bb98a0f0293508f4_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNBT-Bf-jc2qU58ZMlffGRPjRuQEb3QR40vO5EbKZtGw&s=10"
+},
+
+{
+pos:4,
+nome:"AGUINALDO",
+clube:"Leões do Atlas",
+valor:`
+<h3>21</h3><p>13 Jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/4e7bb860a613583cf3c99452056c71a1_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNBT-Bf-jc2qU58ZMlffGRPjRuQEb3QR40vO5EbKZtGw&s=10"
+},
+
+{
+pos:5,
+nome:"Katendi Inácio",
+clube:"Palancas Negras",
+valor:`
+<h3>16</h3><p>16 Jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/74f9724e5db5c17a44d1834e42f13801_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFMREaqSNoG4KecnmU00e4jV2ujUOoRlZSXPWwLrAFfg&s=10"
+},
+
+{
+pos:6,
+nome:"Edward",
+clube:"Três Leões",
+valor:`
+<h3>16</h3><p>7 jogos</p>
+`,
+foto:"https://s2.glbimg.com/c1UZ516mc6YGgcsWOWZGdrKvAqI=/e.glbimg.com/og/ed/f/original/2018/10/22/mulher-confronta-negro.jpg",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReS3OY5lQd0zoFM_4bBTEqhdAEHaXJ8gREXCaqxuxF3A&s=10"
+},
+
+{
+pos:7,
+nome:"André Miguel",
+clube:"Canarinhos",
+valor:`
+<h3>15</h3><p>16 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/bef3917b34b33f460d0e750bdac0e55e_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV156RnLjQ_I_hQy7GS50BnhMnckElpS1kL5IpRD1VQQ&s=10"
+},
+
+{
+pos:8,
+nome:"Laurindo",
+clube:"Seleção das Quinas",
+valor:`
+<h3>15</h3><p>19 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/25de048705fc7981b8402f46ddd43f36_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB3UiTaqyAnLPUajRZzZMQXRz4HCSDaG4sgN6jv9H1Dg&s=10"
+},
+
+{
+pos:9,
+nome:"Érik",
+clube:"Gauleses",
+valor:`
+<h3>14</h3><p>26 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/25c3f3c8540f8699bee75babbf34be68_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQntp4hu3c7B8AwfvVp7m0F3QxbZjH6uZUOzEWRo-hoSw&s=10"
+},
+
+{
+pos:10,
+nome:"Fadario",
+clube:"Socceiroos",
+valor:`
+<h3>11</h3><p>3 Jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/0615671bd56f3fc30bcb3fe4ddce664b_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfhRh68JctFUl-__MxCqk_3-riu4SDKQhbWOOBXoQcPw&s=10"
+},
+
+{
+pos:11,
+nome:"Nathan",
+clube:"Palancas Negras",
+valor:`
+<h3>11</h3><p>9 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/ecd0168a38c44694ab74f7cef5d7b99d_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFMREaqSNoG4KecnmU00e4jV2ujUOoRlZSXPWwLrAFfg&s=10"
+},
+
+{
+pos:12,
+nome:"Jeovani",
+clube:"Alviceleste",
+valor:`
+<h3>11</h3><p>6 jogos</p>
+`,
+foto:"https://image.cdn2.seaart.me/upload/static/20260707/7ad9be33eae71c9a4c974fe8bb3d803b_high.webp",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoIlfbewCNNkJDX6MGXkGgYl1hQlw3SjwFlYE1jPIMIg&s"
+},
+
+{
+pos:13,
+nome:"Ageu",
+clube:"Seleção das Quinas",
+valor:`
+<h3>9</h3><p>21 jogos</p>
+`,
+foto:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG0Vsea0hthZ38Tc15YBSx3_nuXT0U7xFHNIkQdYwMkg&s=10",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB3UiTaqyAnLPUajRZzZMQXRz4HCSDaG4sgN6jv9H1Dg&s=10"
+},
+
+{
+pos:14,
+nome:"Fenias",
+clube:"La Roja",
+valor:`
+<h3>8</h3><p>7 jogos</p>
+`,
+foto:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpwqhZueHMwG5RTUnxM_ODlBpJZPn8wjUcnV7zwHLWMw&s",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHbNRjjbM-eI2JzH2iQ5fpoOCSkrOu6G7XwaoWzjrjCg&s=10"
+},
+
+{
+pos:15,
+nome:"Enock",
+clube:"Seleção das Quinas",
+valor:`
+<h3>8</h3><p>6 jogos</p>
+`,
+foto:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsBXyWxnBlOn06Skv8wpPNMm5rakgM705UY0eEEQ17HQ&s=10",
+logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB3UiTaqyAnLPUajRZzZMQXRz4HCSDaG4sgN6jv9H1Dg&s=10"
+}
+
+]
+
+};
+
+/* ==========================
+   VARIÁVEL
+========================== */
+
+let categoriaAtual = "golos";
+
+/* ==========================
+   ABRIR MODAL
+========================== */
+
+function openRanking(tipo){
+
+categoriaAtual = tipo;
+
+document.getElementById("modalTitle").innerText =
+tipo === "golos" ? "Ranking Completo de Golos" : "Ranking Completo de Assistências";
+
+document.getElementById("rankingModal").style.display="flex";
+
+mostrarLista(rankings[tipo]);
+
+document.getElementById("searchPlayer").value="";
+
+}
+
+/* ==========================
+   FECHAR
+========================== */
+
+function closeRanking(){
+
+document.getElementById("rankingModal").style.display="none";
+
+}
+
+/* ==========================
+   GERAR LISTA
+========================== */
+
+function mostrarLista(lista){
+
+const ranking=document.getElementById("rankingList");
+
+ranking.innerHTML="";
+
+lista.forEach(j=>{
+
+ranking.innerHTML+=`
+
+<div class="player">
+
+<div class="left">
+
+<div class="position">
+
+${j.pos}
+
+</div>
+
+<div class="photo">
+
+<img src="${j.foto}">
+
+<img class="club" src="${j.logo}">
+
+</div>
+
+<div>
+
+<h3>${j.nome}</h3>
+
+<p>${j.clube}</p>
+
+</div>
+
+</div>
+
+<div class="value">
+
+${j.valor}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* ==========================
+   PESQUISA
+========================== */
+
+document.getElementById("searchPlayer")
+
+.addEventListener("keyup",function(){
+
+let texto=this.value.toLowerCase();
+
+let resultado=rankings[categoriaAtual].filter(j=>{
+
+return j.nome.toLowerCase().includes(texto)
+
+|| j.clube.toLowerCase().includes(texto);
+
+});
+
+mostrarLista(resultado);
+
+});
+
+/* ==========================
+   FECHAR CLICANDO FORA
+========================== */
+
+window.onclick=function(e){
+
+const modal=document.getElementById("rankingModal");
+
+if(e.target==modal){
+
+closeRanking();
+
+}
+
+};
+
+/* TOTS DIVS TROCA */
+
+document.querySelectorAll(".level").forEach(level => {
+
+    const cards = level.querySelectorAll(".tots");
+
+    let atual = 0;
+
+    cards[0].classList.add("active");
+
+    setInterval(() => {
+
+        cards[atual].classList.remove("active");
+
+        atual++;
+
+        if (atual >= cards.length) {
+            atual = 0;
+        }
+
+        cards[atual].classList.add("active");
+
+    }, 8000);
+
+});
+
+
+const teams = [
+            {
+                rank: 1,
+                logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png",
+                name: "The Kingsman",
+                points: 160
+            },
+            {
+                rank: 2,
+                logo: "https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png",
+                name: "Cosmic Team",
+                points: 127
+            },
+            {
+                rank: 3,
+                logo: "https://image.cdn2.seaart.me/upload/static/20260707/91ca63894a7227e9f1c9601cfce6efbf_high.webp",
+                name: "Puli United",
+                points: 97,
+                highlight: true
+            },
+            {
+                rank: 4,
+                logo: "https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png",
+                name: "Dream Team",
+                points: 95
+            },
+            {
+                rank: 5,
+                logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl3KFJR5wC73yXar4l-sdILvuZn5JO6dobxqK8sukz7g&s=10",
+                name: "Paviterra",
+                points: 62
+            },
+            {
+                rank: 6,
+                logo: "https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png",
+                name: "FC Zeico",
+                points: 57
+            },
+            {
+                rank: 7,
+                logo: "https://image.cdn2.seaart.me/upload/static/20260712/879bd643bf7e232b5183eb573140fae0_high.webp",
+                name: "Laranja Mecânica",
+                points: 54
+            },
+            {
+                rank: 8,
+                logo: "https://image.cdn2.seaart.me/2026-07-12/d99vd5te878c73cbhgv0/834cf825-59e9-48dd-8d81-8aaeba20b852.png",
+                name: "Black Team",
+                points: 43
+            },
+            {
+                rank: 9,
+                logo: "https://image.cdn2.seaart.me/2026-07-12/d99vdr5e878c73d2bkd0/4706c48c-e6fe-4043-874c-2aab6fd76487.png",
+                name: "Galáticos",
+                points: 42
+            },
+            {
+                rank: 10,
+                logo: "https://image.cdn2.seaart.me/upload/static/20260712/89fabb2779bd86fb197445c67e206083_high.webp",
+                name: "Marvel FC",
+                points: 40
+            }
+        ];
+
+        function createTeamElement(team) {
+            const div = document.createElement('div');
+            div.className = `team-row ${team.highlight ? 'highlight' : ''}`;
+            div.id = `team-${team.rank}`;
+
+            div.innerHTML = `
+                <div class="rank">${team.rank}</div>
+                <img src="${team.logo}" alt="${team.name}" class="logo">
+                <div class="team-name">${team.name}</div>
+                <div class="points">
+                    <div class="points-value">${team.points}</div>
+                    <div class="points-label">PONTOS</div>
+                </div>
+            `;
+            return div;
+        }
+
+        function renderRanking() {
+            const container = document.getElementById('ranking');
+            container.innerHTML = '';
+
+            // Top 5
+            for (let i = 0; i < 5; i++) {
+                container.appendChild(createTeamElement(teams[i]));
+            }
+
+            // Bottom 5 (escondidos)
+            for (let i = 5; i < 10; i++) {
+                const el = createTeamElement(teams[i]);
+                el.style.display = 'none';
+                container.appendChild(el);
+            }
+        }
+
+        let expanded = false;
+
+        function toggleRanking() {
+            expanded = !expanded;
+            const btn = document.getElementById('revealBtn');
+
+            for (let i = 6; i <= 10; i++) {
+                const row = document.getElementById(`team-${i}`);
+                if (row) {
+                    row.style.display = expanded ? 'flex' : 'none';
+                }
+            }
+
+            if (expanded) {
+                btn.textContent = 'VER MENOS TIMES';
+            } else {
+                btn.textContent = 'VER OS PRÓXIMOS 5 TIMES';
+            }
+        }
+
+        // Inicializar
+        window.onload = function() {
+            renderRanking();
+        };
+
+         const carrosseis = document.querySelectorAll(".awards-ed");
+
+carrosseis.forEach(carrossel => {
+
+    const cards = carrossel.querySelectorAll(".awards-card");
+
+    let index = 0;
+
+    setInterval(() => {
+
+        index++;
+
+        if(index >= cards.length){
+            index = 0;
+        }
+
+        const largura = cards[0].offsetWidth;
+
+        carrossel.style.transform =
+            `translateX(-${index * largura}px)`;
+
+    },5000);
+
+});
+
+fetch("header.html")
+.then(res=>res.text())
+.then(data=>{
+document.getElementById("header").innerHTML=data;
+});
+
+
+        
+</script>
+
+</body>
+</html>

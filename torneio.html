@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC Torneio - Campeonato Nacional</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #191539;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        section {
+                  align-items: center;
+                  width: 100%;
+                   gap: 15px;
+                                  }
+        
+
+        /* Header */
+        header {
+            background: linear-gradient(#1a1a1a, #0f0f0f);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #c8102e;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: #c8102e;
+        }
+        nav a {
+            color: #ddd;
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        #special,
+    #pb {
+      background: blueviolet;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      padding: 5px;
+      height: 150px;
+      width: 100vw;
+      align-items: center;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+
+    #special::-webkit-scrollbar {
+      display: none;
+    }
+
+    .button {
+              background-color: #2A255F;
+            color: #F9C94A;
+             width: 140px;
+
+            text-align: center;
+            flex: auto;
+            align-items: center;
+            border-radius: 7px;
+             padding: 5px;
+        }
+        
+        .ligas {
+    text-align: center;
+    width: 140px;
+    height: 133px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ligas h1 {
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    line-height: 1.2;
+    margin: 0;
+    min-height: 32px;   /* garante altura igual para todos os títulos */
+}
+
+.liga {
+    display: block;
+    margin: auto;
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: contain;   /* melhor para logos */
+}
+
+        /* Hero */
+        .her {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1622296089863-4c0c5e3c0f3e?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .her-content h1 {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .her-content p {
+            font-size: 22px;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background: #c8102e;
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Cards Section */
+        .section {
+            padding: 60px 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #c8102e;
+        }
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .all {
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            width: 340px;
+            transition: transform 0.3s;
+        }
+        .all:hover {
+            transform: translateY(-10px);
+        }
+        .all img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 20px;
+            background-color: #F9C94A;
+        }
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        /* Posts Section */
+        .posts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .post {
+            background: #1a1a1a;
+            border-radius: 16px;
+            width: 360px;
+            overflow: hidden;
+        }
+        .post img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .post-content {
+            padding: 20px;
+        }
+        .post h3 {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+        
+        .rapper {
+                max-height: 300px;
+                border: 1px solid #8B008B;
+                display: flex;
+                overflow-x: auto;
+                padding: 2px;
+                border-radius: 15px;
+            }
+
+            .rapper::-webkit-scrollbar {
+                display: none;
+            }
+
+            .group{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1em;
+                animation: spin 5s infinite linear;
+                padding: 2px;
+                transition-delay: 2s;
+            }
+
+            .card {
+                flex: 0 0 5em;
+                margin: 100px auto;
+                border: 2px solid #A020F0;
+                padding:1em;
+                width: 300px;
+                min-width: 287px;
+                height: 230px;
+                text-align: center;
+                align-content: center;
+                background-color: indigo;
+                color: #F9C94A;
+                font-size: 12px;
+                border-radius: 15px;
+            }
+
+        footer {
+            background: #2A255F;
+            text-align: center;
+            padding: 20px 10px;
+            color: #F9C94A;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header"></header>
+    
+    <main style="width: 100%;">
+    <section id="special">
+      <a href="elite.html" class=button>
+        <div class="ligas">
+          <h1>DM Elite League</h1>
+          <img
+            src="https://image.cdn2.seaart.me/2026-05-14/d8354ile878c738qctjg/30f41c1b-d986-422f-83c5-697691aad052.png"
+            alt="Logo da Daniel Mujoi Elite League" class="liga">
+        </div>
+      </a>
+      <a href="tbsl.html" class="button">
+        <div class="ligas">
+          <h1>The Best Sport League</h1>
+          <img
+            src="https://image.cdn2.seaart.me/2026-06-05/d8hk1sle878c73a2rqeg/bee75d82-33cd-43da-b7da-990a9b020004.png"
+            alt="Logo da TBSL" class="liga">
+        </div>
+      </a>
+      <a href="fwg.html" class="button">
+        <div class="ligas">
+          <h1>Football World Games</h1>
+          <img
+            src="https://image.cdn2.seaart.me/2026-06-05/d8hjvple878c73ce6oig/d4a5ed51-1a59-4118-a23b-aecd17e319f8.png"
+            alt="Logo da Football World Games" class="liga">
+        </div>
+      </a>
+      <a href="svs.html" class="button">
+        <div class="ligas">
+          <h1>Super Virtual Soccer</h1>
+          <img
+            src="https://image.cdn2.seaart.me/2026-05-14/d8357sle878c738rn2c0/fa0df187-86cc-4292-adf8-7099980e5e15.png"
+            alt="Logo da SVS_Torneio do Azarl" class="liga">
+        </div>
+      </a>
+    </section>
+
+    <section class="her" style="display: flex; align-items: center;">
+        <div class="her-content">
+            <h1>Torneios da UFV</h1>
+            <p>Bem Vindo</p>
+        </div>
+        <img src="https://image.cdn2.seaart.me/2026-06-27/d9034dde878c7383j5og/0a30fd4a-e1ac-444c-9f11-812c3b2f9438.png" style="display: block; height: 100px;">
+    </section><br>
+        <div style="background-image: url('https://image.cdn2.seaart.me/upload/static/20260709/46241c2793fba0ef71058232613e7a76_high.webp'); background-position: center; background-size: cover; height: 150px;"></div>
+    
+
+    <!-- Cards de Navegação -->
+    <section class="section">
+        <h2 class="section-title">ACESSAS COMPETIÇÕES</h2><br>
+        <div class="rapper">
+
+                 <div class="group">
+                <div class="card"> 
+                    <h2>Elit League Daniel Mujoi</h2>
+                    <img src="https://image.cdn2.seaart.me/2026-05-14/d8354ile878c738qctjg/30f41c1b-d986-422f-83c5-697691aad052.png?fbclid=IwY2xjawR0ZeJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA80MDk5NjI2MjMwODU2MDkAAR6BPgkLiZGo7_IOjJbpluPPfDsQ0nq1eMgTPEVroT5ElDvbBAUUnmlGMIz8Ug_aem_0Ha35W47Mz7c-0SfLv1bYw" alt="Elite League Logo" class="liga">
+                    <p>Ao total ja foram feitas 4 edições da Liga Elite de futebol jogada em uma temporada intensa com o torneio da SVS</p>
+                </div>
+                <div class="card">
+                    <h2>The Best Sport League</h2>
+                    <img src="https://image.cdn2.seaart.me/2026-04-04/d787qs5e878c739an86g/b7885f05-f891-412b-93ce-181ad7c187ac.jpeg?fbclid=IwY2xjawR0Zy9leHRuA2FlbQIxMQBzcnRjBmFwcF9pZA80MDk5NjI2MjMwODU2MDkAAR4uh-vZRzoK3FrhiEAq8ZSlAN4gFpuYvpvLp358w0lHVpTMumUU-vJkDd-xew_aem_OiOvihE4KBn1FqdOyQo-Ng" alt="logo da TBSL" class="liga">
+                    <p>Ja foram 13 edições da TBSL um torneio de muito destaque no mundo do Quiz online</p>
+                </div>
+                <div class="card" id="fwg">
+                    <h2>Football World Games</h2>
+                    <img src="https://image.cdn2.seaart.me/2026-06-05/d8hjvple878c73ce6oig/d4a5ed51-1a59-4118-a23b-aecd17e319f8.png" alt="Logo da Football World Games" class="liga">
+                    <p>A FWG é o torneio mais antigo do Quiz moderno, atualmente está para se arrancar mais uma edição em um mês</p>
+                </div>
+                <div class="card">
+                    <h2>Super Virtual Soccer</h2>
+                    <img src="https://image.cdn2.seaart.me/2026-05-14/d8357sle878c738rn2c0/fa0df187-86cc-4292-adf8-7099980e5e15.png?fbclid=IwY2xjawR0aRpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA80MDk5NjI2MjMwODU2MDkAAR45znHw5uHNRXXr3o0USbjq4CwOWe1AwkojySO5KVgICmDs89r6jAbmwTs6Cw_aem_AqGlnpJWYBHo1XImHLQ6-g" alt="logo da SVS" class="liga">
+                    <p>A SVS é uma organização dentro da UFV que realiza eventos e torneios, também tem o seu próprio chat e tem o peso de ter para o futuro os torneios revolucionadores do mundo do Quiz virtual</p>
+                </div>
+            </div>
+        </div><br>
+        <div class="cards">
+            <a href="elite.html#nations" class="all">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260724/ef8ac0be57b1bb4534f0329d8054c644_high.webp" alt="Nations trouphy">
+                <div class="card-body">
+                    <h3>Nations-Trouphy</h3>
+                    <p>Veja agora a Nova temporada da Elite Nations Trouphy</p>
+                </div>
+            </a>
+
+            <a href="tbsl.html#interno1" class="all">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260829/a42ee67566f2c41588cde5d41263c6b5_high.webp" alt="Liga TBSL">
+                <div class="card-body">
+                    <h3>TBSL New era</h3>
+                    <p>Veja agora os dados do mais recente t torneio da TBSL ainda a decorrer grande emoção</p>
+                </div>
+            </a>
+
+            <a href="internacional.html" class="all">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260628/0bbb2eefa04729a310288cf9f395f50d_high.webp" alt="Evandro na FWF">
+                <div class="card-body">
+                    <h3>Football World Games Liga</h3>
+                    <p>As Grand novidades da Liga que retorna sob ajuizamento de Adilson Faustino</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Torneio FC - Todos os direitos reservados</p>
+    </footer>
+
+<script>
+    fetch("header.html")
+    .then(res=>res.text())
+    .then(data=>{
+    document.getElementById("header").innerHTML=data;
+    });
+</script>
+</body>
+</html>

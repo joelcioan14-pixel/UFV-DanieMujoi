@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC Torneio - Campeonato Nacional</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #191539;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        section {
+                  align-items: center;
+                  width: 100%;
+                   gap: 15px;
+                                  }
+        
+
+        /* Header */
+        header {
+            background: linear-gradient(#1a1a1a, #0f0f0f);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #c8102e;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: #c8102e;
+        }
+        nav a {
+            color: #ddd;
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        #special,
+    #pb {
+      background: blueviolet;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      padding: 5px;
+      height: 150px;
+      width: 100vw;
+      align-items: center;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+
+    #special::-webkit-scrollbar {
+      display: none;
+    }
+
+    .button {
+              background-color: #2A255F;
+            color: #F9C94A;
+             width: 140px;
+
+            text-align: center;
+            flex: auto;
+            align-items: center;
+            border-radius: 7px;
+             padding: 5px;
+        }
+        
+        .ligas {
+    text-align: center;
+    width: 140px;
+    height: 133px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ligas h1 {
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    line-height: 1.2;
+    margin: 0;
+    min-height: 32px;   /* garante altura igual para todos os títulos */
+}
+
+.liga {
+    display: block;
+    margin: auto;
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: contain;   /* melhor para logos */
+}
+</style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header"></header>
+    
+    <main style="width: 100%;">
+    <section id="special">
+      <a href="elite.html" class="button">
+        <div class="ligas">
+          <h1>DM Elite League</h1>
+          <img
+            src="https://image.cdn2.seaart.me/2026-05-14/d8354ile878c738qctjg/30f41c1b-d986-422f-83c5-697691aad052.png"
+            alt="Logo da Daniel Mujoi Elite League" class="liga">
+        </div>
+      </a>
+      <a href="tbsl.html" class="button">
+        <div class="ligas">
+          <h1>The Best Sport League</h1>
+          <img
+            src="https://image.cdn2.seaart.me/2026-06-05/d8hk1sle878c73a2rqeg/bee75d82-33cd-43da-b7da-990a9b020004.png"
+            alt="Logo da TBSL" class="liga">
+        </div>
+      </a>
+      <a href="fwg.html" class="button">
+        <div class="ligas">
+          <h1>Football World Games</h1>
+          <img
+            src="https://image.cdn2.seaart.me/2026-06-05/d8hjvple878c73ce6oig/d4a5ed51-1a59-4118-a23b-aecd17e319f8.png"
+            alt="Logo da Football World Games" class="liga">
+        </div>
+      </a>
+      <a href="svs.html" class="button">
+        <div class="ligas">
+          <h1>Super Virtual Soccer</h1>
+          <img
+            src="https://image.cdn2.seaart.me/2026-05-14/d8357sle878c738rn2c0/fa0df187-86cc-4292-adf8-7099980e5e15.png"
+            alt="Logo da SVS_Torneio do Azarl" class="liga">
+        </div>
+      </a>
+    </section>
+    <script>
+    const links=document.querySelectorAll(".menu a");
+
+const pagina=window.location.pathname.split("/").pop();
+
+links.forEach(link=>{
+
+if(link.getAttribute("href")==pagina){
+
+link.classList.add("active");
+
+}
+
+});
+</script>
+    </body>

@@ -25,15 +25,6 @@
                                   }
         
 
-        /* Header */
-        header {
-            background: linear-gradient(#1a1a1a, #0f0f0f);
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 3px solid #c8102e;
-        }
         .logo {
             font-size: 28px;
             font-weight: 900;
@@ -109,7 +100,7 @@
 <body>
 
     <!-- Header -->
-    <header class="header"></header>
+    <header id="header"></header>
     
     <main style="width: 100%;">
     <section id="special">
@@ -160,5 +151,12 @@ link.classList.add("active");
 }
 
 });
+
+fetch("header.html")
+.then(res=>res.text())
+.then(data=>{
+document.getElementById("header").innerHTML=data;
+});
+
 </script>
     </body>

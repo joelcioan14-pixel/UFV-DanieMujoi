@@ -1,0 +1,3698 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Mujoi Elite</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      width: 100%;
+      max-width: 100%;
+      background-color: #2A255F;
+      color: #ffffff;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    section {
+      align-items: center;
+      width: 100%;
+      max-width: 100%;
+      gap: 15px;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+
+    aside.tabs-content {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    .champ {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 0 8px;
+      overflow-x: hidden;
+    }
+
+    #special,
+    #pb,
+    .pb-edicoes {
+      background: blueviolet;
+      border: none;
+      border-bottom: 2px solid #F9C94A;
+      display: flex;
+      gap: 10px;
+      padding: 12px 8px;
+      height: auto;
+      min-height: 160px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      align-items: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+      flex-wrap: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      margin: 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .pb-edicoes button {
+      flex: 0 0 auto;
+      min-width: 130px;
+      max-width: 160px;
+      padding: 8px 6px;
+      background: #2A255F;
+      color: #F9C94A;
+      border: 2px solid #8b008b;
+      border-radius: 12px;
+    }
+
+    .pb-edicoes button:hover,
+    .pb-edicoes button:active {
+      background: #F9C94A;
+      color: #2A255F;
+    }
+
+    .pb-edicoes button img.img {
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+      margin: 6px auto;
+    }
+
+    .pb-edicoes button h2 {
+      font-size: 0.85rem;
+      margin: 0;
+      color: inherit;
+    }
+
+    .pb-edicoes button p {
+      font-size: 0.75rem;
+      margin: 0;
+      color: inherit;
+    }
+
+    #special::-webkit-scrollbar,
+    .pb-edicoes::-webkit-scrollbar {
+      display: none;
+    }
+
+    h1 {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1.1rem;
+    }
+
+    img {
+      max-width: 300px;
+      height: auto;
+    }
+
+    /* Configuração do Card Principal */
+    .card-champions {
+      background: linear-gradient(135deg, #0018a8 0%, #8b008b 100%);
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 100%;
+      margin: 20px auto;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* Linha Superior: Local do Jogo */
+    .local-jogo {
+      font-size: 14px;
+      color: #a0c0ff;
+      margin-bottom: 25px;
+      font-weight: 300;
+    }
+
+    .local-jogo span {
+      margin: 0 8px;
+    }
+
+    /* Alinhamento do Placar (Times e Resultado) */
+    .placar-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    /* Estilo de cada Time */
+    .time1 {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+
+    .time.mandante {
+      justify-content: flex-end;
+    }
+
+    .time.visitante {
+      justify-content: flex-start;
+    }
+
+    .nome-time {
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .escudo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    /* Números do Placar */
+    .resultado {
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding: 0 1px;
+      white-space: nowrap;
+    }
+
+    .coluna-gols {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Linha do Autor do Gol */
+    .autores-gols {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    /* Alinha o gol do Zeico para a esquerda, abaixo do time */
+    .gol-mandante {
+      justify-content: flex-start;
+      padding-left: 5%;
+    }
+
+    /* Alinha o gol do Cosmic para a direita, abaixo do time */
+    .gol-visitante {
+      justify-content: flex-end;
+      padding-right: 5%;
+    }
+
+    .info1 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #e0e8ff;
+      white-space: nowrap;
+    }
+
+    #nations {
+      align-items: center;
+    }
+
+    button {
+      background-color: #2A255F;
+      color: #F9C94A;
+      min-width: 200px;
+
+      text-align: center;
+      flex: auto;
+      align-items: center;
+      border-radius: 7px;
+      padding: 5px;
+    }
+
+    button:hover {
+      background-color: cornflowerblue;
+      color: #2A255F;
+    }
+
+    section::-webkit-scrollbar {
+      width: 0;
+    }
+
+    .liga {
+      max-width: 110px;
+      max-height: 110px;
+    }
+
+    .img {
+      max-width: 70px;
+      max-height: 70px;
+    }
+
+    #conteudo {
+          width: 100%;
+           max-width: 100%;
+           display: none;
+            padding: 20px;
+            box-sizing: border-box;
+           }
+    
+
+    .info {
+      position: absolute;
+      left: 25px;
+      bottom: 30px;
+      z-index: 3;
+      max-width: 700px;
+    }
+
+    .info span {
+      color: #F9C94A;
+    }
+
+    .info h1 {
+      margin-bottom: 10px;
+      font-size: 2.2rem;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: 100%;
+      height: 120px;
+      align-items: center;
+      background: #191970;
+      padding: 15px;
+      gap: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .lado-esquerdo,
+    .lado-direito {
+      width: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Secaoção dos Botões*/
+
+    .tabs {
+      border: 3px solid #0040ff;
+      display: flex;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 4px;
+      padding: 5px;
+      box-sizing: border-box;
+      flex-wrap: nowrap;
+    }
+
+    .tabs button {
+      flex: 0 0 150px;
+      min-width: 150px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .active {
+      border: none;
+      border-radius: 20px;
+      padding: 12px 25px;
+      min-width: 80px;
+      height: 40px;
+      text-align: center;
+      background-color: #8b008b;
+      min-width: 150px;
+      flex: 1 0 150px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .tabs button.active {
+      background-color: #F9C94A;
+      color: #0040ff;
+    }
+
+   .tabs-content {
+      display: none;
+      padding: 20px;
+    }
+
+    .tabs-content.active {
+      display: block;
+    }
+
+    .tabela-box {
+      background: #151d55;
+      padding: 5px;
+      border-radius: 10px;
+      margin-top: 7px;
+      overflow-x: auto;
+    }
+
+    .tabela-box h2 {
+      margin-bottom: 15px;
+      color: gold;
+    }
+
+    .table {
+      width: 95%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      outline: 10px;
+      overflow-x: auto;
+    }
+
+    th {
+      background: gold;
+      color: black;
+      padding: 10px;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #444;
+      text-align: center;
+    }
+
+    tbody tr:hover {
+      background: #222f75;
+    }
+
+    #golos {
+      width: 100%;
+      max-width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #golos img {
+      display: block;
+      border: 2px solid #0040ff;
+      border-radius: 7px;
+      margin: auto;
+    }
+
+    .artilheiros {
+      background: #151d55;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .artilheiros h2 {
+      color: gold;
+      margin-bottom: 15px;
+    }
+
+    .artilheiros li {
+      padding: 8px;
+      margin-bottom: 5px;
+      background: #202d73;
+      border-radius: 5px;
+    }
+
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      padding: 15px;
+      background: #11194d;
+      border-radius: 10px;
+      color: #ccc;
+    }
+
+    @media(max-width:700px) {
+
+      .header {
+        flex-direction: row;
+        text-align: center;
+      }
+
+      .header img {
+        width: 50px;
+        height: auto;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+
+      .header p {
+        font-size: 8px;
+      }
+
+    }
+
+    .lado-esquerdo img,
+    .lado-direito img {
+      width: 60px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .centro {
+      text-align: center flex: 1;
+    }
+
+    .centro h1 {
+      font-size: 20px;
+      color: gold;
+      margin-bottom: 5px;
+    }
+
+    .centro p {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: white;
+    }
+
+    .overlay {
+      position: absolute;
+      min-width: 300px;
+      height: 350px;
+      background: linear-gradient(to top, #11194d 15%, #191970 40%, transparent 70%);
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 40%;
+
+    }
+
+    z-index: 2;
+
+    .destaques {
+      border: 3px solid #F9C94A;
+      display: flex;
+      overflow-x: auto;
+      height: auto;
+      position: relative;
+      width: 100%;
+      flex-flow: row;
+    }
+
+    .destaque {
+      border: 2px solid #8b008b;
+      border-radius: 7px;
+      flex: auto;
+      text-align: center;
+      height: 100%;
+      min-width: 300px;
+      opacity: 1;
+      position: relative;
+      padding: 10px;
+    }
+
+    .destaque img {
+      width: 100%;
+    }
+
+    /* SECÇÃO DE COPA, TAÇA E NATIONS DA ELITE*/
+
+    aside {
+      background-color: #111184;
+      align-items: center;
+      gap: 20px;
+    }
+
+    #dm {
+      background-color: white;
+      color: #191970;
+      border-radius: 6px;
+      width: 100%;
+      padding: 20px;
+      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #dm img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      margin: 0 auto;
+      border-radius: 6px;
+    }
+
+    #padrao {
+      display: block;
+    }
+
+    #flex {
+      display: flex;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .artilharia-card {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 0, 0, .3);
+    }
+
+    .time {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 50px;
+      max-height: 50px;
+      gap: 8px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .logo {
+      max-width: 30px;
+      max-height: 30px;
+    }
+
+    .topo {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .info1 {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .golos1 {
+      display: block;
+      font-size: 100px;
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #0040ff;
+      line-height: 1;
+    }
+
+    .titulo1 {
+      display: block;
+      font-size: 28px;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .jogador1 {
+      text-align: center;
+    }
+
+    .jogador1 img {
+      width: 200px;
+      height: auto;
+      position: relative;
+      left: 15px;
+      border-radius: 10px;
+    }
+
+    .jogador1 h2 {
+      margin-top: 10px;
+      color: #111;
+    }
+
+    .jogador1 p {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: #191970;
+    }
+
+    .tabela1 {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tabela1 tr:nth-child(even) {
+      background: #f3f3f3;
+    }
+
+    .tabela1 td {
+      padding: 14px;
+      color: #111;
+    }
+
+    .posicao {
+      width: 60px;
+      font-weight: bold;
+    }
+
+    .golos-tabela {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    td {
+      white-space: nowrap;
+    }
+
+    .cabecalho {
+      background: #0027d8;
+      color: white;
+    }
+
+    .cabecalho td {
+      color: white;
+      font-weight: bold;
+    }
+
+    .boy {
+      display: flex;
+      border: 3px solid #F9C94A;
+      border-radius: 10px;
+    }
+
+    .boy1,
+    .boy2 {
+      max-height: 260px;
+      width: 100%;
+      align-items: center;
+      text-align: center;
+      font-size: 0.7rem;
+    }
+
+    .card-boy {
+      max-width: 140px;
+      height: auto;
+    }
+
+    .champ {
+      display: none;
+      margin: 0 auto;
+      align-items: center;
+      width: 100%;
+    }
+
+    #champ5,
+    #elite5,
+    #super4,
+    #taca5,
+    #copa5 {
+      display: block;
+    }
+
+    footer,
+    footer.elite-fim {
+      background-color: #11194d;
+      color: #F9C94A;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: 13px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      height: auto;
+      min-height: 40px;
+      margin: 25px 0 10px 0;
+      padding: 14px 16px;
+      text-align: center;
+      border-radius: 10px;
+      line-height: 1.4;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .flex {
+      width: 100%;
+      display: flex;
+      overflow-x: auto;
+      border: 2px solid #800;
+
+    }
+
+    .pic {
+      width: auto;
+      height: 300px;
+      border: 5px solid #0040ff;
+      border-radius: 20px;
+    }
+
+    /* CONTAINER */
+    .slider {
+      width: 90%;
+      max-width: 900px;
+      height: 400px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    /* ÁREA DAS IMAGENS */
+    .auto {
+      display: flex;
+      width: 400%;
+      height: 100%;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    /* CADA FOTO */
+    .slid {
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .slid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* INDICADORES */
+    .indicators {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .indicators span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+
+    .indicators .active {
+      background: #ffd700;
+    }
+     
+  .taca-header {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: goldenrod;
+      padding: 45px;
+      height: 100px;
+  }
+
+  .rolagem-header {
+    background-color: goldenrod;
+    color: #0018a8;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin: 12px;
+    white-space: nowrap;
+    height: 80px;
+  }
+
+  .rolagem-header img {
+    display: block;
+    height: 60px;
+  }
+  
+  /* =========================
+           CARD DO RESULTADO
+        ========================= */
+
+        .resultado-jogo {
+            width: 100%;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 25px;
+            background: indigo;
+            border-radius: 25px;
+            box-shadow:0 10px 30px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            align-items: center;
+        }
+
+
+        /* =========================
+           TOPO
+        ========================= */
+
+        .resultado-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            font-size: 15px;
+        }
+
+        .competicao {
+            color: #a9a9a9;
+        }
+        
+        .estado {
+            color: #ffffff;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+
+        /* =========================
+           EQUIPAS E PLACAR
+        ========================= */
+
+        .equipas-resultado {
+                          display: grid;
+                           grid-template-columns: minmax(0, 1fr) minmax(150px,1.4fr) minmax(0,1fr);
+                           align-items: center;
+                           text-align: center;
+                           width: 100%;
+        }
+
+        .equipa {
+          min-width: 0;
+          overflow: hidden;
+          align-items: center;
+        }
+
+
+        .equipa img {
+          display: block;
+            width: 83px;
+            height: 83px;
+            min-width: 100%;
+            object-fit: contain;
+        }
+
+        .equipa h2 {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: normal;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+        /* =========================
+           PLACAR
+        ========================= */
+
+        .placar-nations {
+            text-align: center;
+        }
+
+
+        .golos-nations {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+
+        .golos-nations span {
+            font-size: 72px;
+            font-weight: 300;
+        }
+
+
+        .golos-nations b {
+            font-size: 37px;
+            font-weight: normal;
+        }
+
+
+        .fase {
+            margin-top: 15px;
+            color: #aaaaaa;
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           MARCADORES
+        ========================= */
+
+        .marcadores {
+            display: grid;
+            grid-template-columns: 1fr 56px 1fr;
+            align-items: start;
+            gap: 14px;
+            margin-top: 27px;
+        }
+
+
+        .marcadores-equipa {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+
+        .marcadores-equipa p {
+            margin: 0;
+        }
+
+
+        .marcadores-equipa span {
+            color: #aaaaaa;
+        }
+
+
+        .marcadores-esquerda {
+            text-align: left;
+        }
+
+
+        .marcadores-direita {
+            text-align: right;
+        }
+
+
+        /* =========================
+           ÍCONE CENTRAL
+        ========================= */
+
+        .icone-golo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 23px;
+        }
+
+
+        /* =========================
+           ESTÁDIO
+        ========================= */
+
+        .estadio {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-top: 20px;
+            padding-top: 8px;
+            border-top: 1px solid #555555;
+            color: #cccccc;
+            font-size: 20px;
+        }
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .resultado-jogo {
+            width: calc(100% - 20px);
+                padding: 9px 6px;
+                border-radius: 15px;
+            }
+
+
+            .resultado-topo {
+                font-size: 13px;
+                margin-bottom: 30px;
+            }
+
+
+            .estado {
+                font-size: 13px;
+            }
+
+            .equipa img {
+                width: 65;
+                height: 65px;
+            }
+
+
+            .equipa h2 {
+                font-size: 16px;
+            }
+
+
+            .golos-nations {
+                gap: 8px;
+               }
+
+
+            .golos-nations span {
+                font-size: 55px;
+            }
+
+
+            .golos-nations b {
+                font-size: 30px;
+            }
+
+
+            .fase {
+                font-size: 14px;
+                margin-top: 8px;
+            }
+
+            .marcadores {
+                grid-template-columns: 1fr 35px 1fr;
+                gap: 5px;
+                margin-top: 28px;
+            }
+
+            .marcadores-equipa {
+                font-size: 13px;
+                line-height: 1.8;
+            }
+
+            .icone-golo {
+                font-size: 22px;
+            }
+
+            .estadio {
+                font-size: 13px;
+                text-align: center;
+            }
+
+        }
+
+        /* SECÇÃO DA FINAL DA COPA DAS CONF */
+       
+.card {
+            width: 100%;
+            max-width: 520px;
+            background: linear-gradient(180deg, #1a1a1a, #111111);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.8);
+            border: 1px solid #333;
+        }
+
+        .player-image {
+            width: 100%;
+            height: 380px;
+            background-image: url('https://image.cdn2.seaart.me/upload/static/20260720/73ee6f9db39fa447d795dfbe8bede7d6_high.webp');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .player-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(transparent, #11194d );
+        }
+
+        .number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 120px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.15);
+            line-height: 1;
+        }
+
+        .result-section {
+            padding: 25px 30px;
+            text-align: center;
+            background: #11194d;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        .score-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin: 15px 0;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .flag {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .score {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .vs {
+            font-size: 28px;
+            font-weight: 700;
+            color: #666;
+        }
+
+        .goals {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            text-align: left;
+            gap: 20px;
+        }
+
+        .goals-left, .goals-right {
+            flex: 1;
+        }
+
+        .goal {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .goal-time {
+            background: #0040ff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #a3a3a3;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+            .container-nations {
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    
+   .container-nations h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #fcd34d;
+      margin-bottom: 30px;
+    }
+
+    .groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 5px;
+    }
+
+    .groupn {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .group-header {
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 5px;
+      color: white;
+      background-color: ;
+    }
+
+    .nations-group {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255,255,255,0.08);
+      font-size: 0.80rem;
+      background-color: indigo;
+    }
+
+  .nations-group  th, td {
+      padding: 4px 3px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+  .nations-group  th {
+      background: rgba(255,255,255,0.2);
+      font-weight: 600;
+      font-size: 0.6rem;
+    }
+
+ .nations-group   td:first-child {
+      text-align: left;
+      padding-left: 9px;
+    }
+
+    .teamn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .points {
+      font-weight: bold;
+      color: #fde047;
+      font-size: 0.9rem;
+    }
+
+    .group-a .group-header { background: #f59e0b; }
+    .group-b .group-header { background: #ef4444; }
+    .group-c .group-header { background: #8b5cf6; }
+
+    .elite-awards {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      border: 2px solid #f59e0b;
+      border-radius: 14px;
+      overflow: visible;
+      min-height: 0;
+      height: auto;
+      background: #0d1240;
+      margin: 15px 0 25px 0;
+      padding-bottom: 8px;
+    }
+
+    .elite-player {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      width: 100%;
+      max-width: 100%;
+      padding: 18px 12px 12px 12px;
+      box-sizing: border-box;
+      animation: fadeInCard 0.5s ease;
+      overflow: visible;
+    }
+
+    .elite-player.active {
+      display: flex;
+    }
+
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .elite-player h3 {
+      font-size: 1.35rem;
+      color: gold;
+      margin: 0 0 10px 0;
+      letter-spacing: 1px;
+      order: 1;
+      width: 100%;
+    }
+
+    .elite-player img {
+      display: block;
+      margin: 0 auto 14px auto;
+      width: min(260px, 78vw);
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+      order: 2;
+    }
+
+    .elite-player span {
+      display: block;
+      width: 92%;
+      max-width: 300px;
+      background-color: indigo;
+      color: goldenrod;
+      border-radius: 10px;
+      padding: 10px 8px;
+      margin: 0 auto;
+      order: 3;
+      box-sizing: border-box;
+    }
+
+    .elite-player ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .elite-player ul li {
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255,215,0,0.25);
+    }
+
+    .elite-player ul li:last-child {
+      border-bottom: none;
+    }
+
+    .awards-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 0 12px 0;
+      background: transparent;
+    }
+
+    .awards-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      cursor: pointer;
+    }
+
+    .awards-dots span.active {
+      background: #F9C94A;
+    }
+
+    /* Nations hero + highlights */
+    .nations-hero {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      margin: 12px auto 20px auto;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .nations-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .nations-hero .hero-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 30%;
+      background: linear-gradient(to top, rgba(0,40,120,0.95) 0%, rgba(0,40,120,0.75) 60%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 12px 14px 16px 14px;
+      box-sizing: border-box;
+    }
+    .nations-hero .hero-overlay p {
+      color: #fff;
+      font-size: 0.92rem;
+      line-height: 1.35;
+      margin: 0;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    }
+    .nations-gallery {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 8px 4px 16px 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .nations-gallery img {
+      flex: 0 0 auto;
+      width: 78%;
+      max-width: 340px;
+      height: auto;
+      border-radius: 10px;
+      border: 2px solid #0040ff;
+      object-fit: cover;
+    }
+    .nations-destaques {
+      margin: 10px 0 22px 0;
+    }
+    .nations-destaques h3 {
+      color: gold;
+      text-align: center;
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+    }
+    .destaques-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 6px 4px 14px 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .destaque-jogador {
+      flex: 0 0 auto;
+      width: 72%;
+      max-width: 280px;
+      text-align: center;
+      background: #151d55;
+      border-radius: 12px;
+      border: 2px solid #8b008b;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .destaque-jogador img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto 8px auto;
+    }
+    .destaque-jogador p {
+      color: #F9C94A;
+      font-weight: bold;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Nations group tables - pixel aligned like reference */
+    .groups {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 0 6px;
+      box-sizing: border-box;
+    }
+
+    .groupn {
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .group-header {
+      display: none !important; /* header is built into the card */
+    }
+
+    .standings-card {
+      background: #ffffff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+    }
+
+    .standings-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) repeat(7, 28px) 36px;
+      align-items: center;
+      gap: 0;
+      padding: 10px 10px 10px 12px;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.4px;
+      color: #fff;
+      border-radius: 18px 18px 0 0;
+    }
+
+    .standings-head.ga { background: linear-gradient(90deg, #c9a227 0%, #d4af37 50%, #e8c547 100%); color: #1a1a1a; }
+    .standings-head.gb { background: linear-gradient(90deg, #e53935 0%, #ef5350 100%); }
+    .standings-head.gc { background: linear-gradient(90deg, #8e24aa 0%, #ab47bc 100%); }
+
+    .standings-head .gh-label {
+      font-size: 0.95rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .standings-head .gh-col {
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      opacity: 0.95;
+    }
+
+    .standings-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) repeat(7, 28px) 36px;
+      align-items: center;
+      gap: 0;
+      padding: 9px 10px 9px 12px;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+
+    /* head is child 1; rows are 2-5 */
+    .standings-row:nth-child(2),
+    .standings-row:nth-child(3) {
+      background: #e8deff;
+    }
+
+    .standings-row:nth-child(4),
+    .standings-row:nth-child(5) {
+      background: #d8f0dc;
+    }
+
+    .standings-row:last-child {
+      border-radius: 0 0 16px 16px;
+    }
+
+    .sr-team {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .sr-team img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 4px;
+    }
+
+    .sr-team span {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sr-stat {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #222;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sr-pts {
+      justify-self: end;
+      background: #c5a3e0;
+      color: #3b1a6d;
+      font-weight: 800;
+      font-size: 0.85rem;
+      min-width: 30px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 14px;
+      padding: 0 6px;
+      box-sizing: border-box;
+    }
+
+    /* hide old table styles if any leftover markup */
+    .nations-group { display: none !important; }
+
+
+</style>
+</head>
+<body>
+  
+           <section id="div1" class="conteudo">
+      <div class="inicio" style="align-items: center; text-align: center;">
+        <img src="https://image.cdn2.seaart.me/2026-05-14/d8354ile878c738qctjg/30f41c1b-d986-422f-83c5-697691aad052.png"
+          alt="Logo da DM Elite na página da Elite" style="display: block; margin:0 auto;">
+        <div id="information">
+          <span>DM ELITE LEAGUE</span>
+          <h2>Season of the Legends</h2>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="active" onclick="showTab('interno')">
+          Liga Elite
+        </button>
+        <button class="active" onclick="showTab('super')">
+          Supertaça
+        </button>
+        <button class="active" onclick="showTab('taca')">
+          Copa Elite
+        </button>
+        <button class="active" onclick="showTab('copa')">
+          Copa Ibérica
+        </button>
+        <button class="active" onclick="showTab('nations')">Nations</button>
+      </div>
+      <aside id="interno" class="tabs-content">
+
+      <article class="pb-edicoes">
+        <button onclick="mostrar('elite1')">
+          <div>
+            <h2>1ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7unte878c73b1hddg/7ee7b194-8187-4911-8e44-c383698aee14.png" alt="Logo Timão FC" class="img">
+            <p>1ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('elite2')">
+          <div>
+            <h2>2ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Logo TheKingsman" class="img">
+            <p>2ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('elite3')">
+          <div>
+            <h2>3ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt="Logo Puli United" class="img">
+            <p>3ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('elite4')">
+          <div>
+            <h2>4ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt="Logo FC Zeico" class="img">
+            <p>4ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('elite5')">
+          <div>
+            <h2>A Decorrer</h2>
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="Logo cinzento" class="img">
+            <p>A Decorrer</p>
+          </div>
+        </button>
+
+      </article>
+
+        <div class="champ" id="elite1">
+<div class="header">
+
+            <div class="lado-esquerdo">
+              <img   src="https://image.cdn2.seaart.me/2026-06-06/d8i7fute878c73bak910/33f72aed-127d-405a-98be-6a232755ef13.png" alt="Troféu da Elite">
+            </div>
+
+            <div class="centro">
+
+              <h1>1ª EDIÇÃO</h1>
+
+              <p>Vencedor:Timão</p>
+
+            </div>
+
+            <div class="lado-direito">
+              <img    src="https://image.cdn2.seaart.me/2026-06-06/d8i7unte878c73b1hddg/7ee7b194-8187-4911-8e44-c383698aee14.png" alt="Logo do Timão">
+            </div>
+
+          </div><br>
+          <div id="dm">
+            <img src="https://image.cdn2.seaart.me/upload/static/20260718/591ef2c58346555b023b0790451bf159_high.webp" alt="Equipa Timão FC">
+            <h2>O Timão venceu a primeira edição da Élite League</h2>
+            <p>Com a primeira edição sendo individual,Natham representando a equipa Timão foi o grande vencedor da liga   Élite estabelecendo um momento incrível,foi-lhe registado com 13 golos na edição em curso isso com o objetivo
+              de minimizar a competição</p><br>
+            <hr><br>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260718/63ed6d007073971574ddc0fc0612c5a0_high.webp" alt="Fadario com uniforme do FC Zeico com o troféu da Elite">
+            <h3>FC Zeico venceu a mais recente edição da Elite League</h3>
+            <p>marcando 21 golos Fadario foi o protagonista da conquista icónica do FC Zeico da Liga elite, com ajuda de
+              Epifânio que foi também uma peça fundamental o FC Zeico conquistou o seu primeiro título na Élite   Season,logo  a Liga</p>
+          </div><br>
+
+          <div class="table">
+            <h2>Tabela de Classificação da Élite League (1ª Edição)</h2><br>
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Pos</th>
+                  <th>Equipa</th>
+                  <th>J</th>
+                  <th>V</th>
+                  <th>E</th>
+                  <th>D</th>
+                  <th>Pts</th>
+                </tr>
+              </thead>
+
+              <tbody id="table"></tbody>
+
+            </table><br>
+
+          </div>
+          <div id=golos>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260718/c1ad41225bc1d1687034e3eda2c33985_high.webp" alt="Nathan">
+            <h3>Nathan Fuanzolo foi o artilheiro da Competição</h3>
+            <p>Apesar de ter feito mais ,Nathan foi contado com 13 golos na edição da Elite,onde estabeleceu a maior
+              sequência de vitórias da história do torneio,ele liderou a artilharia com 13 golos,1 a mais que Zeizo onde    Heuler terminou em terceiro</p><br>
+            <hr>
+            <h2>Artilheiros da 1ª Edição</h2>
+            <ol id="artilheiros"></ol>
+          </div>
+        </div> <br>
+        </div>
+        <div class="champ" id="elite2">
+<div class="header">
+            <div class="lado-esquerdo">
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-06/d8i7fute878c73bak910/33f72aed-127d-405a-98be-6a232755ef13.png" alt="troféu da Liga">
+            </div>
+            <div class="centro">
+              <br>
+              <h2>2ª Edição</h2>
+              <p>Vencedor:TheKingsman</p>
+            </div>
+            <div class="lado-direito">
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Logo do TheKingsman">
+            </div>
+          </div>
+          <br><img src="https://image.cdn2.seaart.me/upload/static/20260611/9a8dfc52b60e66dd4442ee0a78803054_high.webp"alt="TheKingsman campeão da Liga">
+          <h3>The Kingsman campeão da 2ª Edição da Liga elite</h3>
+          <p>The Kingsman foi campeão da 2ª Edição da Liga,com uma equipa fantástica estabelecendo um recorde inédito e  tendo um dos maiores trios da história da Liga Elite com Katendi, Aguinaldo e Nathan estabelecendo o recorde  de maior sequência sem derrotas da história da Liga com 9 jogos</p><br>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260611/d01dac05b46ef1ec2a7dc7d349bf63f6_high.webp" alt="Agui golden foot on EL">
+          <h3>Artilharia da Liga Elite</h3>
+          <p>Aguinaldo foi o artilheiro da equipa campeão com 15 golos em 10 jogos e também foi o melhor jogador da mesma   edição,em segundo ficou Nathan com 11 golos e Zacarias Polo na terceira colocação com 10 golos.Graciano foi   omelhor jogador revelação da Temporada da Liga</p>
+          <div class="classificacao">
+            <br> <h2>Classificação Final - Elite League (2ª Edição)</h2><br>
+
+            <div class="table">
+              <table id="tabela-gol">
+                <thead>
+                  <tr>
+                    <th>Pos</th>
+                    <th>Equipa</th>
+                    <th>J</th>
+                    <th>V</th>
+                    <th>E</th>
+                    <th>D</th>
+                    <th>GM</th>
+                    <th>GS</th>
+                    <th>DG</th>
+                    <th>Pts</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>TheKingsman</td>
+                    <td>14</td>
+                    <td>11</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>37</td>
+                    <td>9</td>
+                    <td>+28</td>
+                    <td>35</td>
+                  </tr>
+
+                  <tr>
+                    <td>2</td>
+                    <td>DreamTeam</td>
+                    <td>14
+                    <td>10</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>26</td>
+                    <td>14</td>
+                    <td>+12</td>
+                    <td>32</td>
+                  </tr>
+
+                  <tr>
+                    <td>3</td>
+                    <td>BlackTeam</td>
+                    <td>14</td>
+                    <td>8</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>28</td>
+                    <td>14</td>
+                    <td>+14
+                    <td>27
+                  </tr>
+
+                  <tr>
+                    <td>4</td>
+                    <td>Cosmic Team</td>
+                    <td>14</td>
+                    <td>7</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>20</td>
+                    <td>16</td>
+                    <td>+4</td>
+                    <td>25</td>
+                  </tr>
+
+                  <tr>
+                    <td>5</td>
+                    <td>FC Destroyes</td>
+                    <td>14</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>18</td>
+                    <td>22</td>
+                    <td>-4</td>
+                    <td>21</td>
+                  </tr>
+
+                  <tr>
+                    <td>6</td>
+                    <td>Barça Dragons</td>
+                    <td>14</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>7</td>
+                    <td>14</td>
+                    <td>25</td>
+                    <td>-9</td>
+                    <td>14</td>
+                  </tr>
+
+                  <tr>
+                    <td>7</td>
+                    <td>Marvel FC</td>
+                    <td>14</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>18</td>
+                    <td>29</td>
+                    <td>-11</td>
+                    <td>13</td>
+                  </tr>
+
+                  <tr>
+                    <td>8</td>
+                    <td>FC Eagles</td>
+                    <td>14</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>11</td>
+                    <td>5</td>
+                    <td>39</td>
+                    <td>-34</td>
+                    <td>3</td>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <footer class="elite-fim">Assim terminou a segunda edição da Elite League</footer>
+        </div>
+        </div>
+        <div class="champ" id="elite3">
+<div class="header">
+            <div class="lado-esquerdo">
+              <img  src="https://image.cdn2.seaart.me/2026-06-06/d8i7fute878c73bak910/33f72aed-127d-405a-98be-6a232755ef13.png" alt="troféu">
+            </div>
+            <div class="centro">
+              <h2>3ª Edição</h2>
+              <p>Vencedor: Puli United</p>
+            </div>
+            <div class="lado-direito">
+              <img src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png"   alt="Puli United">
+            </div>
+          </div>
+          <div id="edicao-3">
+            <br> <img    src="https://image.cdn2.seaart.me/upload/static/20260609/52051e8ffdd5f0cfe2ab8fc89c87e721_high.webp" alt="Puli a levantar o troféu da liga">
+            <h3>Puli United campeão da Elite League da 4ª edição</h3><br>
+            <div class="destaques" style="display: flex; overflow-x: auto;">
+              <div class="destaque">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260609/0ba7d4395a0b71a1604f7a075013e54e_high.webp"alt="Erik artilheiro da lig Elite">
+                <div class="overlay"></div>
+                <div class="info"><span>Érik dos Santos artilheiro da liga</span></div>
+              </div>
+              <div class="destaque">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260609/6b0d6653d8ffc01b2b3f31cc75a465c1_high.webp" alt="gloria de Erik">
+                <div class="overlay"></div>
+                <div class="info"><span>Érik foi o melhor jogador Revelação da Liga</span></div>
+              </div>
+              <div class="destaque">
+                <img  src="https://image.cdn2.seaart.me/upload/static/20260609/c987f09ea1068265c315a323971f8809_high.webp"   alt="Érik Troféu">
+                <div class="overlay"></div>
+                <div class="info"><span>Grande destaque da Temporada da liga</span></div>
+              </div>
+            </div>
+
+            <br> <div class="table">
+              <h2>Classificação final da Liga Élite (3ª Edição)</h2><br>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Pos</th>
+                    <th>Equipa</th>
+                    <th>J</th>
+                    <th>V</th>
+                    <th>E</th>
+                    <th>D</th>
+                    <th>GM</th>
+                    <th>GS</th>
+                    <th>DG</th>
+                    <th>Pts</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Puli_Utd</td>
+                    <td>14</td>
+                    <td>9</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>33</td>
+                    <td>17</td>
+                    <td>+16</td>
+                    <td>29</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>The Kingsman</td>
+                    <td>14</td>
+                    <td>8</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>27</td>
+                    <td>12</td>
+                    <td>+15</td>
+                    <td>28</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Cosmic Team</td>
+                    <td>14</td>
+                    <td>8</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>31</td>
+                    <td>18</td>
+                    <td>+13</td>
+                    <td>27</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Black Team</td>
+                    <td>14</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>18</td>
+                    <td>21</td>
+                    <td>-3</td>
+                    <td>21</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>União_Galáticos</td>
+                    <td>14</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>20</td>
+                    <td>25</td>
+                    <td>-5</td>
+                    <td>21</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>FC Zeico</td>
+                    <td>14</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>6</td>
+                    <td>15</td>
+                    <td>23</td>
+                    <td>-8</td>
+                    <td>18</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Dream Team</td>
+                    <td>14</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>11</td>
+                    <td>36</td>
+                    <td>-25</td>
+                    <td>12</td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>Marvel FC</td>
+                    <td>14</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>39</td>
+                    <td>-29</td>
+                    <td>7</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <br>
+        </div>
+        <div class="champ" id="elite4">
+<div class="header">
+              <div class="lado-esquerdo">
+                <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7fute878c73bak910/33f72aed-127d-405a-98be-6a232755ef13.png" alt="troféu da Élite league">
+              </div>
+              <br>
+              <div class="centro">
+                <h2>4ª Edição</h2>
+                <p>Vencedor: FC Zeico</p>
+              </div>
+              <div class="lado-direito">
+                <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png"   alt="Logo do FC Zeico">
+              </div>
+            </div>
+            <div id="elite.da">
+              <br><img  src="https://image.cdn2.seaart.me/upload/static/20260609/eb1980f89ced0b5134abb79e52537d4f_high.webp"  alt="zeico winner elite league">
+              <h3>FC Zeico campeão da Elite League</h3>
+              <p>O FC Zeico foi o grande campeão da 4ª edição da Liga Élite a edição mais recente,eles se tornaram na 4ª
+                equipa diferente a conquistar a competição e de lembrar que o título da liga de elite se tornou no primeiro   título oficial do clube</p>
+              <br>
+              <h2>Outros grandes destaques da competição:</h2><br>
+              <div class="destaques"   style="display: flex; overflow-x: auto; border: 3px solid #0040ff; width: 100%; padding: 10px;">
+                <div class="destaque">
+                  <img  src="https://image.cdn2.seaart.me/upload/static/20260609/f4461f4376b1691bfeb6254477122ba4_high.webp"  alt="Zeizi e Fadario">
+                  <div class="overlay"></div>
+                  <div class="info"><span>Zeizi & Fadario Golden Foot with 21 goals</span></div>
+                </div>
+                <div class="destaque">
+                  <img src="https://image.cdn2.seaart.me/upload/static/20260609/773b8336a358a259f9c9afec24082655_high.webp"  alt="Fadario com o troféu da elite">
+                  <div class="overlay"></div>
+                  <div class="info"><span>Fadario o Principal Jogad destaque da Competição</span></div>
+                </div>
+                <div class="destaque">
+                  <img  src="https://image.cdn2.seaart.me/upload/static/20260609/e78fd033f544c6e733dd3ff1c75d3719_high.webp" alt="Fadario em Glória">
+                  <div class="overlay"></div>
+                  <div class="info"><span>O melhor momento da temporada com 4 golos na partida mais decisiva</span>  </div>
+                </div>
+              </div>
+              <br> <h2>Artilharia da Temporada (4ª Edição)</h2>
+              <img src="https://image.cdn2.seaart.me/upload/static/20260609/ef4d49e11fb0c59942cede6c23ba42c5_high.webp"  alt="artilharia da 4ª Edição da liga Élite">
+              <p>Assim ficou a artilharia final da liga Élite após 4 jornadas</p><br>
+              <h2>Classificação da Liga elite(4ª Edição)</h2>
+              <img src="https://image.cdn2.seaart.me/upload/static/20260609/6808f49edafb79c16942c3cd7c4b497b_high.webp"
+                alt="Classificação da 4ª edição da Liga elite">
+              <p>Assim ficou a classificação final da liga Élite da 4ª temporada com o FC Zeico campeão em título</p>
+            </div>
+            <br><h2>Jogador da Temporada da Liga</h2><br>
+            <div class="elite-awards">
+              <div class="elite-player active">
+                <h3>Fadario</h3>
+                <img src="https://image.cdn2.seaart.me/2026-07-14/d9bb5ate878c73b733bg/00e6d53b-1c5e-4d4c-b26d-f9b9ecf30662.png" alt="Card de Fadario">
+                <span>
+                  <ul>
+                    <li>10 Jogos</li><li>21 Golos</li><li>10x MVP</li><li>5 POTM</li>
+                  </ul>
+                </span>
+              </div>
+              <div class="elite-player">
+                <h3>Zeizi Polo</h3>
+                <img src="https://image.cdn2.seaart.me/2026-07-05/d95d80de878c73fvaj5g/ee414f60-024e-442a-8c2d-228aa133fe38.png" alt="Card de Zeizi">
+                <span>
+                  <ul>
+                    <li>11 Jogos</li><li>21 Golos</li><li>10x MVP</li><li>4 POTM</li>
+                  </ul>
+                </span>
+              </div>
+              <div class="elite-player">
+                <h3>Hosten</h3>
+                <img src="https://image.cdn2.seaart.me/2026-07-14/d9bb5mle878c738qm7u0/609c7df2-75a8-4b08-a000-566136251cf1.png" alt="Card de Hosten">
+                <span>
+                  <ul>
+                    <li>7 jogos</li><li>11 Golos</li><li>5x MVP</li><li>1 POTM</li>
+                  </ul>
+                </span>
+              </div>
+            </div>
+          </div>
+        <footer class="elite-fim">Assim ficou então a grande quarta edição da Elite League (abril-maio de 2025)</footer>
+        </div>
+        <div class="champ" id="elite5" style="display:block;">
+
+          <div class="rolagem-header">
+              <h2>Edição a decorrer</h2>
+            </div>
+          <div style="text-align:center; padding:30px;">
+            <h2 style="color:gold;">5ª Edição da Elite League</h2>
+            <p style="margin:20px 0; font-size:1.1rem;">A 5ª edição da Liga Elite está prevista a iniciar em breve.</p>
+            <h3 style="color:#F9C94A; margin-top:30px;">Artilharia</h3>
+            <ol id="artilheiros-5" style="max-width:400px; margin:15px auto; text-align:left;">
+              <li style="color:#aaa;">Ainda sem registos</li>
+            </ol>
+            <p style="margin-top:25px; color:#ccc;"><i>Fique atento às próximas atualizações.</i></p>
+          </div>
+
+        </div>
+      </aside>
+      <aside id="super" class="tabs-content">
+
+      <article class="pb-edicoes">
+        <button onclick="mostrar('super1')">
+          <div>
+            <h2>1ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Logo TheKingsman" class="img">
+            <p>1ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('super2')">
+          <div>
+            <h2>2ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt="Logo Puli United" class="img">
+            <p>2ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('super3')">
+          <div>
+            <h2>3ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Logo Cosmic Team" class="img">
+            <p>3ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('super4')">
+          <div>
+            <h2>A Decorrer</h2>
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="Logo cinzento" class="img">
+            <p>A Decorrer</p>
+          </div>
+        </button>
+
+      </article>
+
+        <div class="champ" id="super1">
+<img src="https://image.cdn2.seaart.me/upload/static/20260611/d06c36fe468f3157d7adbf4cabd1b49e_high.webp" alt="Kingsman campeão da Supertaça">
+          <h3>Kingsman vencedor da Primeira Edição</h3>
+          <p>The Kingsman foi a equipa que venceu a primeira edição da Supercup Élite em uma final frente ao Dream Team
+            jogada a 2 mãos,3-2 na ida e 4-2 na volta</p>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260611/df5d31e8508fc41af47c900009bba3a6_high.webp"   alt="Nathan in Supercup">
+          <p>Nathan Fuanzolo resolveu essa edição com 4 golos nesses 2 jogo s sendoa Principal figura dessa competição
+          </p><br>
+        </div>
+        <div class="champ" id="super2">
+<img src="https://image.cdn2.seaart.me/upload/static/20260611/9af475d570f3df78c7b2b93b5f18f37f_high.webp"  alt="Puli United campeão da Supertaça">
+          <h3>Puli United campeão da 2ª Edição</h3>
+          <p>O Puli United com máximo individualismo de Graciano ganhou a segunda edição da super da taça depois de
+            bater o FC Zeico de Ageu nas Semfinias ganhou o Cosmic na final da SuperTaça,esse foi o primeiro título da
+            equipa onde teve Graciano sendo o melhor jogador do Torneio</p><br>
+        </div>
+        <div class="champ" id="super3">
+<img src="https://image.cdn2.seaart.me/upload/static/20260611/22d56058f7ebcc46cfaf496b50e5365f_high.webp" alt="Cosmic campeão da Supertaça">
+          <h3>Cosmic Team Campeão da 3ª Edição</h3>
+          <p>O Cosmic Team é o mais recente vencedor da Supertaça,eles venceram o Puli United em uma revanche e foi a
+            terceira equipa diferente a conquistar a competição </p>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260611/b3a0005fbafb64d0e846490508067c4d_high.webp"  alt="Laurindo campeão da Supertaça">
+          <p>Laurindo foi o melhor jogador da Supertaça de Elite,ele se destacou com 2 golos que garantiram a vitória de
+            sua equipa por 3-1</p>
+        </div>
+        <div class="champ" id="super4" style="display:block;">
+
+          <div class="rolagem-header">
+              <h2>4ª Edição a decorrer</h2>
+            </div>
+          <div style="text-align:center; padding:30px;">
+            <h2 style="color:gold;">4ª Edição da Supertaça Elite</h2>
+            <p style="margin:20px 0; font-size:1.1rem;">A 4ª edição da Supertaça está a decorrer / prevista a iniciar em breve.</p>
+            <h3 style="color:#F9C94A; margin-top:30px;">Artilharia</h3>
+            <ol style="max-width:400px; margin:15px auto; text-align:left;">
+              <li style="color:#aaa;">Ainda sem registos</li>
+            </ol>
+            <p style="margin-top:25px; color:#ccc;"><i>Fique atento às próximas atualizações.</i></p>
+          </div>
+
+        </div>
+      </aside>
+      <aside id="taca" class="tabs-content">
+
+        <div class="taca-header">
+          <img
+            src="https://image.cdn2.seaart.me/2026-06-20/d8rd8tte878c73fb2kag/c7f6acd0-6ea6-4348-8b07-ba2a1a13aea2.png"
+            alt="Logo da Copa Elite" style="height: 80px;">
+          <h2>Elite Cup</h2>
+        </div>
+        <div class="factos">
+          <h3>Foram realizadas até agora 4 edições da copa Élite</h3>
+          <p>A copa elite é um torneio realizado na elite season é considerado o 2º troféu mais prestigiado do quarteto
+            Élite que conta com a liga, taça da liga e a Supertaça. O vencedor dessa competição ganha uma vaga
+            diretamente para a Supertaça da época seguinte</p><br>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260620/10c36651585b6e136f4a4b7af43fab6d_high.webp"
+            alt="Todos os campeões da copa Elite" style="border-radius: 6px;">
+          <p>Ate ao momento 4 equipas diferentes conquistaram o torneio,Puli United é o campeão mais recentes após
+            conquistar a última edição em uma final frente ao The Kingsman</p>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260613/cfacdeb1e3c886fc2202ea04941310e8_high.webp"
+            alt="Érik artilheiro histórico da Copa Elite">
+          <p>Érik Dos Santos é o maior artilheiro histórico da Copa Élite com 14 golos e o jogador com mais golos em uma
+            edição da competição (10)</p>
+          <img
+            src="https://image.cdn2.seaart.me/2026-06-20/d8rdgile878c73e8j4dg/03f425b5-1896-4178-b1fb-76ab0c3160c1.png"
+            alt="KatendiInácio card-june">
+          <p>Katendi Inácio Samuel é o jogador com mais partidas(14) e com mais presenças igualado com Zeizi Polo (4)
+          </p>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260620/55dad3c71f0b0885964e2c4158437771_high.webp"
+            alt="COSMIC troféu com Ery">
+          <p>Nenhuma equipa marcou mais golos que o COSMIC TEAM na história da Copa Elite</p><br>
+          <ol>
+            <li>Cosmic Team - 37 ⚽</li>
+            <li>The Kingsman - 33 ⚽</li>
+            <li>Dream Team - 29 ⚽</li>
+            <li>Puli United - 25 ⚽</li>
+            <li>Black Team - 13 ⚽</li>
+          </ol>
+        </div>
+        
+
+      <article class="pb-edicoes">
+        <button onclick="mostrar('taca1')">
+          <div>
+            <h2>1ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7unte878c73b1hddg/7ee7b194-8187-4911-8e44-c383698aee14.png" alt="Logo Timão FC" class="img">
+            <p>1ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('taca2')">
+          <div>
+            <h2>2ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt="Logo Dream Team" class="img">
+            <p>2ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('taca3')">
+          <div>
+            <h2>3ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Logo Cosmic Team" class="img">
+            <p>3ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('taca4')">
+          <div>
+            <h2>4ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt="Logo Puli United" class="img">
+            <p>4ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('taca5')">
+          <div>
+            <h2>A Decorrer</h2>
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="Logo cinzento" class="img">
+            <p>A Decorrer</p>
+          </div>
+        </button>
+
+      </article>
+
+        <div class="champ" id="taca1">
+<div class="rolagem1">
+            <div class="rolagem-header">
+              <h2>1ª Edição</h2>
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-06/d8i7unte878c73b1hddg/7ee7b194-8187-4911-8e44-c383698aee14.png"
+                alt="Logo do Timão copa elite" class="img-header">
+            </div>
+            <h3>O Timão venceu a primeira edição</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260620/6581e0d0bcf067be74afd467b8e9f939_high.webp">
+            <p>O timão venceu a Copa Élite na sua primeira edição de existência com Nathan (7) sendo o artilheiro e
+              jogador de destaque numa final contra Jons FC ganha por 4-2</p>
+            <br>   <p>A primeira edição foi individual em 2024 com Nathan representando a equipa do Timão.Jons teria eliminado Vermelho Negro de Heuler</p>
+          </div>
+        </div>
+        <div class="champ" id="taca2">
+<div class="rolagem1">
+            <div class="rolagem-header">
+              <h2>2ª Edição</h2>
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png"
+                alt="Logo do Dream Team FC copa elite" class="img-header">
+            </div>
+            <h3>Dream Team vencedor do torneio</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260620/9703cca0efd1849abada1c60105726ee_high.webp"
+              alt="Dream Team wins ec">
+            <p>O Dream Team FC ganhou a 2ª edição numa das épocas mais aflitas ganhando o todo poderoso The Kingsman na
+              final do torneio</p>
+            <img
+              src="https://image.cdn2.seaart.me/2026-06-12/d8m3p35e878c73dch9h0/f79a0625-3f40-4d9b-802d-69e392ae83e1.png"
+              alt="card do Zeizi">
+            <p>Zacarias Polo foi o artilheiro com 6 empatado com Nathan,e o jogador em destaque dando o primeiro título
+              a sua equipa Dream Team</p>
+          </div>
+        </div>
+        <div class="champ" id="taca3">
+<div class="rolagem1">
+            <div class="rolagem-header">
+              <h2>3ª Edição</h2>
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png"
+                class="img-header">
+            </div>
+            <h3>Cosmic campeão</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260620/6487deb7b2aa0a05af71ef3030049b12_high.webp"   alt="Cosmic wins Élite cup">
+            <p>COSMIC TEAM venceu com grande união a 3ª temporada da Copa Elite batendo o recorde de golos marcados</p>
+            <p>Anderson foi o jgador de destaque e o artilheiro do torneio com 6 golos dando o ítulo a sua equipa </p>
+          </div>
+        </div>
+        <div class="champ" id="taca4">
+<div class="rolagem1">
+            <div class="rolagem-header">
+              <h2>4ª Edição</h2>
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png"
+                alt="Logo do _Puli_Utd" class="img-header">
+            </div>
+            <h3>Puli United campeão</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260620/a4ac56abe07cb15fe1330419015b9bc2_high.webp"alt="Puli United">
+            <p>O Puli United foi o campeão da Copa elite, isso na edição mais recentes com protagonismo de Érik Dos
+              Santos</p>
+            <h3>Artilharia da Copa Élite</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260620/dcf11c31683b7bd33d7d0f7ab36c365f_high.webp"
+              alt="Artilharia da Copa Elite" style="width: 600px;">
+            <p style="height: 11px; color: #ccc; "><i>Lista de artilheiro s da Copa Elite</i></p>
+            <br><h2>Jogador da Temporada da Copa Ibérica</h2><br>
+            <div class="elite-awards">
+              <div class="elite-player active">
+                <h3>Érik Dos Santos</h3>
+                <img src="https://image.cdn2.seaart.me/2026-07-14/d9ardtle878c73fuhdl0/68e8a30a-bb22-435c-bb9c-d1abdcba04f3.png" alt="Card de Érik">
+                <span>
+                  <ul>
+                    <li>4 Jogos</li><li>10 Golos</li><li>2x MVP</li><li>Campeão</li>
+                  </ul>
+                </span>
+              </div>
+              <div class="elite-player">
+                <h3>Zeizi Polo</h3>
+                <img src="https://image.cdn2.seaart.me/2026-07-05/d95d80de878c73fvaj5g/ee414f60-024e-442a-8c2d-228aa133fe38.png" alt="Card de Zeizi">
+                <span>
+                  <ul>
+                    <li>3 Jogos</li><li>5 Golos</li><li>2x MVP</li><li>Vice-Campeão</li>
+                  </ul>
+                </span>
+              </div>
+              <div class="elite-player">
+                <h3>Benedito Nsingui</h3>
+                <img src="https://image.cdn2.seaart.me/2026-07-14/d9ban4le878c738pugl0/60fd63a4-69e6-491d-9a39-5df97e7d2857.png" alt="Card de Benedito">
+                <span>
+                  <ul>
+                    <li>3 jogos</li><li>3 Golos</li><li>1x MVP</li><li>semifinaista</li>
+                  </ul>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="champ" id="taca5" style="display:block;">
+
+          <div class="rolagem-header">
+              <h2>5ª Edição a decorrer</h2>
+            </div>
+          <div style="text-align:center; padding:30px;">
+            <h2 style="color:gold;">5ª Edição da Copa Elite</h2>
+            <p style="margin:20px 0; font-size:1.1rem;">A 5ª Edição da Copa Élite está prevista a iniciar pontualmente em Agosto.</p>
+            <h3 style="color:#F9C94A; margin-top:30px;">Artilharia</h3>
+            <ol style="max-width:400px; margin:15px auto; text-align:left;">
+              <li style="color:#aaa;">Ainda sem registos</li>
+            </ol>
+            <p style="margin-top:25px; color:#ccc;"><i>Fique atento às próximas atualizações.</i></p>
+          </div>
+
+        </div>
+      </aside>
+      <aside id="copa" class="tabs-content">
+
+        <div class="taca-header">
+          <img
+            src="https://image.cdn2.seaart.me/2026-06-20/d8rf4g5e878c73fe06a0/9c6f9f4e-3857-41d2-a13e-423cbe1cf7ee.png" style="height:80px;" alt="Troféu da Copa Ibérica">
+          <h2>Copa Ibérica</h2>
+        </div>
+        <div class="factos">
+          <h3>Até ao momento foram realizados 4 edições</h3>
+          <p>A Copa Ibérica é a taça da Liga Élite é conhecida com esse nome desde a segunda edição devido ao facto de
+            ter questões relacionadas a países ibéricos (Espanha, Portugal e Marrocos). Apenas uma equipa venceu o
+            torneio mais de uma vez</p>
+          <img
+            src="https://image.cdn2.seaart.me/2026-06-12/d8m3p35e878c73dch9h0/f79a0625-3f40-4d9b-802d-69e392ae83e1.png"
+            alt="card do Zeizi 2024">
+          <p>Zeizi Polo é o maior artilheiro da história da Taca da Liga(15) e com mais partidas (25),mas apesar de tudo
+            nunca venceu a taça da liga </p>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260620/903dbb66621694077fce197bcdbb39a3_high.webp"
+            alt="Cosmic juntos">
+          <p>O Cosmic é a única equipa a vencer a Taça da liga mais de 1 vez,eles conquistaram 2 títulos sendo o maior
+            campeão e o único a vencer 2x seguidas</p>
+        </div>
+        
+
+      <article class="pb-edicoes">
+        <button onclick="mostrar('copa1')">
+          <div>
+            <h2>1ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7unte878c73b1hddg/7ee7b194-8187-4911-8e44-c383698aee14.png" alt="Logo Timão FC" class="img">
+            <p>1ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('copa2')">
+          <div>
+            <h2>2ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Logo TheKingsman" class="img">
+            <p>2ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('copa3')">
+          <div>
+            <h2>3ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Logo Cosmic Team" class="img">
+            <p>3ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('copa4')">
+          <div>
+            <h2>4ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Logo Cosmic Team" class="img">
+            <p>4ª EDIÇÃO</p>
+          </div>
+        </button>
+
+        <button onclick="mostrar('copa5')">
+          <div>
+            <h2>5ª EDIÇÃO</h2>
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="Logo cinzento" class="img">
+            <p>5ª EDIÇÃO</p>
+          </div>
+        </button>
+
+      </article>
+
+        <div class="champ" id="copa1">
+<div class="rolagem1">
+            <div class="rolagem-header">
+              <h2>1ª Ediçã</h2>
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-06/d8i7unte878c73b1hddg/7ee7b194-8187-4911-8e44-c383698aee14.png"
+                alt="Logo do timão copa Ibérica" class="img-header">
+            </div>
+            <h3>O Timão campeão da primeira edição</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260620/d083b087d8804f90c29463f34c4ad1e0_high.webp"
+              alt="Timão levanta a Taça da liga Élite">
+            <p>O Timão venceu novamente uma competição na primeira temporada de elite juntando com a Liga e a Copa
+              Elite.Eles foram liderados por Nathan que foi o jogador em destaque dessa edição</p>
+          </div>
+        </div>
+        <div class="champ" id="copa2">
+<div class="rolagem1">
+            <div class="rolagem-header">
+              <h2>2ª Edição</h2>
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png"
+                alt="Logo do TheKingsman" class="img-header">
+            </div>
+            <h3>Os Leões reais venceram a segunda edição</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260620/cbe42faaa9e7f1be1970c403019e4733_high.webp"
+              alt="Kings win Copa Ibérica">
+            <p>The Kingsman foram aquipe vencedora dessa edição em destaque que se passou a copa Ibérica. Nathan foi o
+              jogador de destaque de sua equipa </p>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260612/d1ae022abefbbd0f5463148599773350_high.webp"
+              alt="Card do 🇦🇴Graciano" style="width: 500px;">
+            <p>Graciano foi o artilheiro dessa edição da Copa Ibérica com 7 golos, lembrando que com 14 golos é o
+              segundo maior artilheiro da história da Copa Ibérica</p>
+          </div>
+        </div>
+        <div class="champ" id="copa3">
+<div class="rolagem1">
+            <div class="rolagem-header">
+              <h2>3ª Edição</h2>
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png"
+                alt="Logo do Cosmic" class="img-header">
+            </div>
+            <h3>Cosmic venceu a terceira temporada</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260620/493def48dc6d4670a014b590b3dd3786_high.webp"
+              alt="Cosmic celebrando o troféu da Copa Ibérica">
+            <p>O COSMIC consegui vencer a terceira edição superando o PulUnited na final por 3-2 com bis de Laurindo,
+              est foi o primeiro título da equipa na elite onde haveria de juntar mais 3 troféus</p>
+            <br>
+            <p>Nessa mesma edição Ânderson igualado com Graciano (7) foi artilheiro da Copa Ibérica</p>
+          </div>
+        </div>
+        <div class="champ" id="copa4">
+<div class="rolagem1">
+            <div class="rolagem-header">
+              <h2>4ª Edição</h2>
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png"
+                alt="Logo do COSMIC" class="img-header">
+            </div>
+            <h3>Cosmic Team defende o título</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260620/2d8f528f116ac46e6208fe8bc7fd4c39_high.webp"
+              style="width: 500px;">
+            <p>O COSMIC veio defender o seu título na edição mais recente se tornando na primeira equipa na elite Season
+              a revalidar um título, até ao momento é o maior campeão da história da taça da liga</p>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260724/e63d5a9b588eef5712adc137f7681701_high.webp"  style="margin: auto;">
+            <p><i>Lista de artilheiros da Taça da liga Élite (Maio de 2026)</i></p>
+            <br><h2>Jogador da Temporada da Copa Ibérica</h2><br>
+            <div class="elite-awards">
+              <div class="elite-player active">
+                <h3>Afonso AC</h3>
+                <img src="https://image.cdn2.seaart.me/2026-07-15/d9c0o3le878c73e4tk6g/12e47fed-b577-48fd-a538-6d35857aa73c.png" alt="Card de Afonso AC">
+                <span>
+                  <ul>
+                    <li>4 Jogos</li><li>8 Golos</li><li>2x MVP</li><li>Campeão</li>
+                  </ul>
+                </span>
+              </div>
+              <div class="elite-player">
+                <h3>Zeizi Polo</h3>
+                <img src="https://image.cdn2.seaart.me/2026-07-05/d95d80de878c73fvaj5g/ee414f60-024e-442a-8c2d-228aa133fe38.png" alt="Card de Zeizi">
+                <span>
+                  <ul>
+                    <li>6 Jogos</li><li>8 Golos</li><li>3x MVP</li><li>Vice-Campeão</li>
+                  </ul>
+                </span>
+              </div>
+              <div class="elite-player">
+                <h3>Benedito Nsingui</h3>
+                <img src="https://image.cdn2.seaart.me/2026-07-14/d9ban4le878c738pugl0/60fd63a4-69e6-491d-9a39-5df97e7d2857.png" alt="Card de Benedito">
+                <span>
+                  <ul>
+                    <li>4 jogos</li><li>5 Golos</li><li>1x MVP</li><li>Campeão</li>
+                  </ul>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="champ" id="copa5" style="display:block;">
+
+          <div class="rolagem-header">
+              <h2>5ª Edição</h2>
+            </div>
+          <div style="text-align:center; padding:30px;">
+            <h2 style="color:gold;">5ª Edição da Copa Ibérica</h2>
+            <p style="margin:20px 0; font-size:1.1rem;">A 5ª edição da Copa Ibérica será anunciada em breve.</p>
+            <h3 style="color:#F9C94A; margin-top:30px;">Artilharia</h3>
+            <ol style="max-width:400px; margin:15px auto; text-align:left;">
+              <li style="color:#aaa;">Ainda sem registos</li>
+            </ol>
+            <p style="margin-top:25px; color:#ccc;"><i>Fique atento às próximas atualizações.</i></p>
+          </div>
+
+        </div>
+      </aside>
+      <aside id="nations" class="tabs-content">
+
+        <div class="taca-header" style="padding:70px;">
+          <img src="https://image.cdn2.seaart.me/2026-06-14/d8nhgu5e878c73fsci9g/565486b4-b74b-4f7e-a4a6-69c767b2e3fa.png" style="height:100px;"   alt="Logo da Nations Trouphy">
+          <h2><i>NATIONS<br>TROUPHY</i></h2>
+        </div>
+        <article class="pb-edicoes">
+        <button onclick="mostrar('champ1')">
+          <div>
+            <h2>1ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/2026-07-18/d9dsms5e878c739g2kcg/5db1b7ae-20c4-4aa5-9815-51d73cb78444.png"  alt="Logo da Equipa das Quinas" class="img">
+            <p>Equipa das Quinas</p>
+          </div>
+        </button>
+        <button onclick="mostrar('champ2')">
+          <div>
+            <h2>2ª EDIÇÃO</h2>
+            <img  src="https://image.cdn2.seaart.me/2026-07-18/d9dsms5e878c739g2kcg/5db1b7ae-20c4-4aa5-9815-51d73cb78444.png"   alt="Equipa das Quinas logo" class="img">
+            <p>Equipa das Quinas</p>
+          </div>
+        </button>
+        <button onclick="mostrar('champ3')">
+          <div>
+            <h2>3ª EDIÇÃO</h2>
+            <img   src="https://image.cdn2.seaart.me/upload/static/20260720/69e4e23fb577a17674cbd0dbf9e566e7_high.webp"   alt="Logo dos Gauleses" class="img">
+            <p>Gauleses</p>
+          </div>
+        </button>
+        <button onclick="mostrar('champ5')">
+          <div>
+            <h2>4ª EDIÇÃO</h2>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260720/69e4e23fb577a17674cbd0dbf9e566e7_high.webp" alt="Logo dos Gauleses" class="img">
+            <p>Gauleses</p>
+          </div>
+        </button>
+      </article>
+        <div class="champ" id="champ1">
+          <div class="rolagem-header">
+              <h2>1ª Ediçã</h2>
+              <img
+                src="https://image.cdn2.seaart.me/2026-06-14/d8nhgu5e878c73fsci9g/565486b4-b74b-4f7e-a4a6-69c767b2e3fa.png" alt="Logo da Nations" class="img-header">
+            </div>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260614/cd289c569f88bf188de324f0070e3c31_high.webp"
+            alt="Quinas primeira edição">
+          <h3>Campeão do Torneio: Seleção das Quinas</h3>
+          <p>A equipa das quinas foi quem venceu a primeira edição.Eles derrotaram os Leões do Atlas na final por 3-1 se
+            consagrando o primogénito,em uma edição de muita união eles conseguem.A disputa do bronze foi entre Três
+            leões e Palancas Negras onde os três leões levaram a melhor</p><br>
+          <h2 style="color: gold; text-align: center;">nomeações
+            <img src="https://image.cdn2.seaart.me/upload/static/20260614/48e1849fa287a73e816cc470ace9e089_high.webp"
+              alt="Aguinaldo melhor jogador revelação">
+            <h3>Melhor Jogador revelação: AGUINALDO</h3>
+            <p>Na sua primeira temporada na elite ele se destacou na Nations com os Leões do Atlas chegando a final e
+              sendo até artilheiro e MVP do torneio e venceu a medalha pratiada</p>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260614/8938f0a7dee4bc56c88b3e11bf635789_high.webp"
+              alt="Melhor duo da primeira edição">
+            <h3>Melhor Dupla: Aguinaldo & Anderson</h3>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260614/8fd6c7a4037e2681df87a02ee2a49c74_high.webp"
+              alt="Artilheiros da Nations">
+            <h3>Premio de artilharia da Nations:</h3>
+            <ol type="I">
+              <li>🇲🇦 AGUINALDO - Leões do Atlas</li>
+              <li>🇵🇹 Zacarias Polo - Seleção das quinas</li>
+              <li>🇦🇴Nathan Fuanzolo - Palancas Negras</li>
+            </ol><br>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260614/c87273d1aebe42e46277bd03cec3070e_high.webp"
+              alt="Bola dourada da natins a 3">
+            <h3>Prêmio de MVP do Torneio:</h3>
+            <ol type="I">
+              <li>🇲🇦AGUINALDO - Leões do Atlas</li>
+              <li>🇵🇹Zeizi Polo- Seleção das Quinas</li>
+              <li>🇲🇦Anderson - Leões do Atlas</li>
+            </ol>
+            <h2>Lista de artilharia final</h2>
+            <img src="https://image.cdn2.seaart.me/upload/static/20260614/333257695b7f0d3293f8b83176c52160_high.webp"
+              alt="Artilharia da Nations">
+            <p style="font-size: 8px;"><i>Artilharia fonal da Nations Trouphy•1ª Edição</i></p>
+        </div>
+        <div class="champ" id="champ2">
+                <div class="rolagem-header">
+              <h2>2ª Edição</h2>
+              <img src="https://image.cdn2.seaart.me/2026-06-14/d8nhgu5e878c73fsci9g/565486b4-b74b-4f7e-a4a6-69c767b2e3fa.png" alt="Logo da Nations" class="img-header">
+            </div>
+            <div class="conf">
+              <img src="https://image.cdn2.seaart.me/upload/static/20260718/7698bcb2bee21db43a53a4bf538af692_high.webp" alt="Quinas vence a Copa das Confederações">
+              <h3>Vencedor da 1ª Edição</h3>
+              <p>A Equipa das Quinas venceu a primeira edição da Copa das Confederações em uma final que saiu a 4-2 frente aos leões do Atlas na ida e 2-2 na volta 
+                <br><hr><img src="https://image.cdn2.seaart.me/upload/static/20260718/062db4d86027c8b424276ce35f083c12_high.webp" alt="Premio da Copa das Confederações">
+                <h3>Prémios da Copa</h3>
+                <ol>
+                  <li>🇵🇹Zeizi Polo</li>
+                  <li>🇲🇦Anderson</li>
+                  <li>🇲🇦DonCuller</li>
+                </ol>
+              </p>
+            </div>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260614/aaf5999b7334b3550f5da0443ee248ff_high.webp"
+            alt="Quinas win Nations">
+          <h3>Campeão: Seleção das Quinas</h3>
+          <p>A equipa das Quinas venceu a segunda edição do torneio,foi o seu bicampeão e na mesma época venceu a Copa
+            das Confederações</p>
+          <h2>Nomeação do Torneio</h2>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260614/b5b4147b7a1ce29020f30f28a00a49b1_high.webp"
+            alt="Enock best revelação">
+          <h3>Melhor Jogador Revelação: Enock</h3>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260615/8938f0a7dee4bc56c88b3e11bf635789_high.webp"
+            alt="Melhor dupla">
+          <h3>Melhor Dupla: Zeizi e Enock</h3>
+          <p>Nessa edição Enock Jorge ao serviço da Equipa das Quinas foi o melhor jogador Revelação após ter feito 8
+            golos e ter conquistado o título com a sua Nação</p>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260614/4d323498cc62550b48f44e377ff1885f_high.webp"
+            alt="Golden Boot Awards">
+          <h3>Premio de artilheiros</h3>
+          <ol>
+            <li>🇵🇹 Zeizi Polo</li>
+            <li>🇦🇴Graciano</li>
+            <li>🇦🇴Jeovani Cosme</li>
+          </ol><br>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260614/a7bbcb8c448a146140869dec9961b408_high.webp"
+            alt="Golden Ballon awards">
+          <h3>MVP do torneio</h3>
+          <ol type="I">
+            <li> 🇵🇹Zeizi Poll</li>
+            <li>🇦🇷 Jeovani Cosme</li>
+            <li>🇲🇦Anderson
+              <br>
+              <h2>Lista de Artilharia:</h2>
+              <img src="https://image.cdn2.seaart.me/upload/static/20260614/a1bec253bf8df4b7c7f1a9db28a33855_high.webp"
+                alt="Artilharia da Nations">
+              <p style="font-size: 10px; color: #a0c0ff; "><i>Artilharia da segunda edição da Nations Trouphy</i></p>
+        </div>
+        <div class="champ" id="champ3">
+                <div class="rolagem-header">
+              <h2>3ª Edição</h2>
+              <img src="https://image.cdn2.seaart.me/upload/static/20260718/f27bdba45c5551e3e4b7d789fec54526_high.webp" alt="Logo da Nations" class="img-header">
+            </div>
+            <div class="conf">
+            <img src="https://image.cdn2.seaart.me/upload/static/20260718/c7ac56faf0d79fa99d4dc95e2e294cef_high.webp" alt="Leões do Atlas vencedor da Copa">
+            <h3>Segunda edição da Copa das Confederações</h3>
+            <p>Os Leões do Atlas foram os grandes vencedores, apartir desta edição o torneio passou a ser entre os semifinalistas da época transacta. O cenário favoreceu os Leões do Atlas apos superarem os detentores Seleção dad Quinas nas meias finais e Socceiroos na Final</p>
+            <br>
+       <section class="resultado-jogo">
+        <div class="resultado-topo">
+            <span class="competicao">
+ Copa Das Conf • 12/04/26
+            </span>
+<strong class="estado">FULL TIME</strong>
+ </div>
+        <!-- EQUIPAS E PLACAR -->
+
+        <div class="equipas-resultado">
+            <!-- EQUIPA DE CASA-->
+
+            <div class="equipa">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260718/eaf307c07e1fa88676f68cbf05ff7d72_high.webp" alt="Logo da Lá Roj">
+                <h2>Lá Roja</h2>
+
+            </div>
+            <!-- PLACAR -->
+
+            <div class="placar-nations">
+                <div class="golos-nations">
+                    <span>3</span>
+              <b> - </b>
+              <span>1</span>
+                </div>
+               <p class="fase">Semifinal</p>
+             </div>
+            <!-- EQUIPA VISITANTE-->
+            <div class="equipa">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260718/991a88f1e93b5b01db44e74c9847f88f_high.webp" alt="Logo do dos Socceiroos">
+                <h2>Socceiroos</h2>
+            </div>
+        </div>
+        <!-- MARCADORES -->
+        <div class="marcadores">
+        
+            <!-- MARCADORES DE CASA -->
+
+            <div class="marcadores-equipa marcadores-esquerda">
+                <p>L. Felisberto<span>20', 63' , 71'</span></p>
+            </div>
+
+            <!-- ÍCONE -->
+            <div class="icone-golo">⚽</div>
+
+         <!-- MARCADORES DE FORA -->
+
+            <div class="marcadores-equipa marcadores-direita">
+                <p>Gabryel <span>54'</span></p>
+            </div>
+        </div>
+
+        <!-- ESTÁDIO -->
+        <div class="estadio">
+            <span>🏟️ </span><strong>Lá Cartuja,Sevilla</strong>
+          </div>
+           </section>
+           
+           <br><section class="resultado-jogo">
+        <div class="resultado-topo">
+            <span class="competicao">
+ Copa Das Conf • 12/04/26
+            </span>
+<strong class="estado">FULL TIME</strong>
+ </div>
+        <!-- EQUIPAS E PLACAR -->
+
+        <div class="equipas-resultado">
+            <!-- EQUIPA DE CASA-->
+
+            <div class="equipa">
+                <img src="https://image.cdn2.seaart.me/2026-07-18/d9dsms5e878c739g2kcg/5db1b7ae-20c4-4aa5-9815-51d73cb78444.png" alt="Logo da Seleção Quinas">
+                <h2>Quinas</h2>
+
+            </div>
+            <!-- PLACAR -->
+
+            <div class="placar-nations">
+                <div class="golos-nations">
+                    <span>2</span>
+              <b> - </b>
+              <span>1</span>
+                </div>
+               <p class="fase">Semifinal</p>
+             </div>
+            <!-- EQUIPA VISITANTE-->
+            <div class="equipa">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260718/1ee9869ac0df268d9a6bb41a3e90b330_high.webp" alt="Logo do dos Leões">
+                <h2>Leões</h2>
+            </div>
+        </div>
+        <!-- MARCADORES -->
+        <div class="marcadores">
+        
+            <!-- MARCADORES DE CASA -->
+
+            <div class="marcadores-equipa marcadores-esquerda">
+                <p>Zeizi<span>43', 69' </span></p>
+            </div>
+
+            <!-- ÍCONE -->
+            <div class="icone-golo">⚽</div>
+
+         <!-- MARCADORES DE FORA -->
+
+            <div class="marcadores-equipa marcadores-direita">
+                <p>Anderson<span>81'</span></p>
+            </div>
+        </div>
+
+        <!-- ESTÁDIO -->
+        <div class="estadio">
+            <span>🏟️ </span><strong>Estádio da Luz, Lisboa</strong>
+          </div>
+           </section>
+           
+           <br><section class="resultado-jogo">
+        <div class="resultado-topo">
+            <span class="competicao">
+ Copa Das Conf • 13/04/26
+            </span>
+<strong class="estado">FULL TIME</strong>
+ </div>
+        <!-- EQUIPAS E PLACAR -->
+
+        <div class="equipas-resultado">
+            <!-- EQUIPA DE CASA-->
+
+            <div class="equipa">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260718/1ee9869ac0df268d9a6bb41a3e90b330_high.webp" alt="Logo dos Leões">
+                <h2>Leões</h2>
+
+            </div>
+            <!-- PLACAR -->
+
+            <div class="placar-nations">
+                <div class="golos-nations">
+                    <span>4</span>
+              <b> - </b>
+              <span>2</span>
+                </div>
+               <p class="fase">Semifinal(5-4)</p>
+             </div>
+            <!-- EQUIPA VISITANTE-->
+            <div class="equipa">
+                <img src="https://image.cdn2.seaart.me/2026-07-18/d9dsms5e878c739g2kcg/5db1b7ae-20c4-4aa5-9815-51d73cb78444.png" alt="Logo das Quinas">
+                <h2>Quinas</h2>
+            </div>
+        </div>
+        <!-- MARCADORES -->
+        <div class="marcadores">
+        
+            <!-- MARCADORES DE CASA -->
+
+            <div class="marcadores-equipa marcadores-esquerda">
+                <p>AGUI <span>17', 44' , 75 </span></p>
+                <p>Anderson <span>51'</spam><p>
+            </div>
+
+            <!-- ÍCONE -->
+            <div class="icone-golo">⚽</div>
+
+         <!-- MARCADORES DE FORA -->
+
+            <div class="marcadores-equipa marcadores-direita">
+                <p>Ageu <span>33', 67'</span></p>
+            </div>
+        </div>
+
+        <!-- ESTÁDIO -->
+        <div class="estadio">
+            <span>🏟️ </span><strong>Stade Prince Moulay Abdelah</strong>
+          </div>
+           </section>
+           
+           <br><section class="resultado-jogo">
+        <div class="resultado-topo">
+            <span class="competicao">
+ Copa Das Conf • 13/04/26
+            </span>
+<strong class="estado">FULL TIME</strong>
+ </div>
+        <!-- EQUIPAS E PLACAR -->
+
+        <div class="equipas-resultado">
+            <!-- EQUIPA DE CASA-->
+
+            <div class="equipa">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260718/991a88f1e93b5b01db44e74c9847f88f_high.webp" alt="Logo dos Socceiroos">
+                <h2>Socceiroos</h2>
+
+            </div>
+            <!-- PLACAR -->
+
+            <div class="placar-nations">
+                <div class="golos-nations">
+                    <span>4</span>
+              <b> - </b>
+              <span>1</span>
+                </div>
+               <p class="fase">Semifinal(5-4)</p>
+             </div>
+            <!-- EQUIPA VISITANTE-->
+            <div class="equipa">
+                <img src="https://image.cdn2.seaart.me/upload/static/20260718/eaf307c07e1fa88676f68cbf05ff7d72_high.webp" alt="Logo da Lá Roja">
+                <h2>Lá Roja</h2>
+            </div>
+        </div>
+        <!-- MARCADORES -->
+        <div class="marcadores">
+        
+            <!-- MARCADORES DE CASA -->
+
+            <div class="marcadores-equipa marcadores-esquerda">
+                <p>Gabryel <span>20', 69' </span></p>
+                <p>J'E <span>55'</span></p>
+                <p>Adilson <span>87'</span></p>
+            </div>
+
+            <!-- ÍCONE -->
+            <div class="icone-golo">⚽</div>
+
+         <!-- MARCADORES DE FORA -->
+
+            <div class="marcadores-equipa marcadores-direita">
+                <p>Seraph<span>71'</span></p>
+            </div>
+        </div>
+
+        <!-- ESTÁDIO -->
+        <div class="estadio">
+            <span>🏟️ </span><strong>Olímpic Sydney Stadium, Sydney</strong>
+          </div>
+           </section><br>
+           
+           <h2>Final da Copa Das Confederações</h2>
+           
+           <div class="card">
+        <!-- Imagem do Jogador -->
+        <div class="player-image" id="playerImage">
+    <div class="number">10</div>
+    <div class="player-overlay"></div>
+
+</div>
+
+        <!-- Resultado -->
+        <div class="result-section">
+            <div class="title">RESULTADO</div>
+            
+            <div class="score-container">
+                <!-- Leões do Atlas -->
+                <div class="team">
+                    <img src="https://image.cdn2.seaart.me/upload/static/20260718/1ee9869ac0df268d9a6bb41a3e90b330_high.webp" alt="LEÕES do Atlas" class="flag">
+                    <span style="font-weight: 450;">Leões d'Atlas</span>
+                </div>
+
+                <div style="font-size: 48px; font-weight: 900; color: #fff;">3</div>
+                <div class="vs">×</div>
+                <div style="font-size: 48px; font-weight: 900; color: #fff;">2</div>
+
+                <!-- TEAM FORA -->
+                <div class="team">
+                    <img src="https://image.cdn2.seaart.me/upload/static/20260718/991a88f1e93b5b01db44e74c9847f88f_high.webp" alt="Socceiroos" class="flag">
+                    <span style="font-weight: 450;">Socceiroos</span>
+                </div>
+            </div>
+
+            <!-- Goleadores -->
+            <div class="goals">
+                <!-- CASA -->
+                <div class="goals-left">
+                    <div class="goal">⚽ AGUI <span class="goal-time">18'</span></div>
+                    <div class="goal">⚽ AGUI<span class="goal-time">33'</span></div>
+                    <div class="goal">⚽ AGUI<span class="goal-time">78'</span></div>
+                </div>
+
+                <!-- FORA -->
+                <div class="goals-right">
+                    <div class="goal">J'E <span class="goal-time">30'</span> ⚽</div>
+                    <div class="goal">Gabryel <span class="goal-time">65'</span> ⚽</div>
+                </div>
+            </div>
+        </div>
+           </div>
+        <br><br>
+        <hr><br><img src="https://image.cdn2.seaart.me/upload/static/20260718/be90c05b9492a0045aa7d8ba5c2e303d_high.webp" alt="Prêmios da Copa Das Confederações">
+       <h3>Prêmios da Copa das Conf</h3>
+       <ol>
+       <li>🇲🇦 AGUINALDO</li>
+       <li>🇦🇺Gabryel</li>
+       <li>🇲🇦 Anderson</li>
+      </ol>
+      <br>
+      
+            </div><br>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260615/295eaad7200ee5f93b5992ad87cebf31_high.webp"
+            alt="Gauleses win Nations">
+          <h3>Campeão:Gauleses 🇫🇷</h3>
+          <p>Essa foi a revolução após nas 2 primeiras edições termos a mesma equipa a vencer o torneio, Gaulesas de
+            Graciano se superaram sobre qualquer adversário vencendo os 3 Leões na Final</p>
+          <h2>Nomeações:</h2>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260615/e221ce1a6a135194ac27c9a859304c33_high.webp"
+            alt="Edward melhor jogador revelação">
+          <h3>Melhor jogador revelação: Edward</h3>
+          <p>Com a sua nação Edward carregou os 3 leões na fase de grupos até a final marcando 16 golos e sendo vice vom
+            a sua equipa</p>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260615/51aaee9157f90cff269fb61ad5e64073_high.webp"
+            alt="Graciano e Erik">
+          <h3>Melhor Dupla: Graciano e Erik</h3>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260615/23eb49feb663f4d868619aeacfa1192f_high.webp"
+            alt="Nomeação de chuteira">
+          <h3>Premio de Artilheiro:</h3>
+          <ol>
+            <li>🇫🇷Graciano - Gauleses</li>
+            <li>🇵🇹Zeizi Polo - Seleção dad Quinas</li>
+            <li>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Edward - Três Leões</li>
+          </ol><br>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260615/cce57abc9f4e18b2b4bca2d152db9af9_high.webp"
+            alt="MVP da terceira edição Awards">
+          <h3>Premio de MVP da Terceira edição</h3>
+          <ol>
+            <li>🇫🇷Graciano - Gauleses</li>
+            <li>🇵🇹Zeizi Polo - Seleção das Quinas</li>
+            <li>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Edward - Três Leões</li>
+          </ol>
+          <br>
+          <h2>Lista de Artilheiros da 3ª Edição</h2>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260615/f39564dfa0422826bd720c402adaed38_high.webp"
+            alt="Artilharia list 3ª Edição" style="margin: auto;">
+          <p style="font-size: 10px;"><i>Artilharia da 3ª edição da Nations</i></p>
+        </div>
+    <div id="champ5" class="champ">
+    <div class="rolagem-header">
+              <h2>4ª Edição</h2>
+              <img src="https://image.cdn2.seaart.me/upload/static/20260718/3add210f52ad2fa832218b5e6992ecab_high.webp" alt="Logo da Nations" class="img-header">
+            </div><br>
+
+      <div class="nations-hero">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260904/8e85bac5fc55b7ad7a5e8b0819fd106a_high.webp" alt="Gauleses campeões Nations">
+        <div class="hero-overlay">
+          <p>Gauleses venceram a edição mais recente da Nations Trouphy e da Copa das Confecções, fazendo igualando as Quinas</p>
+        </div>
+      </div>
+
+      <div class="nations-gallery">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260904/ef49e35d20b75d445c65f8c6aae6314f_high.webp" alt="Nations imagem 2">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260904/07da981f8ad120e219894627befd83e2_high.webp" alt="Nations imagem 3">
+      </div>
+
+      <div class="nations-destaques">
+        <h3>Os principais destaques da Nations Trouphy</h3>
+        <div class="destaques-scroll">
+          <div class="destaque-jogador">
+            <img src="https://image.cdn2.seaart.me/upload/static/20260904/103f3cb29268ff6d010738ba0550cf13_high.webp" alt="Joélcio AN">
+            <p>Joélcio AN</p>
+          </div>
+          <div class="destaque-jogador">
+            <img src="https://image.cdn2.seaart.me/upload/static/20260904/eb796f610102f24f6e93cf8c5a11d9bb_high.webp" alt="Zacarias Polo">
+            <p>Zacarias Polo</p>
+          </div>
+          <div class="destaque-jogador">
+            <img src="https://image.cdn2.seaart.me/upload/static/20260904/f02cee822c01fc018fa1d2d1c6226cd9_high.webp" alt="Erik Dos Santos">
+            <p>Erik Dos Santos</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-nations">
+    <h2>GROUP STAGE</h2>
+    <div class="subtitle">NATIONS TROPHY • 4ª Edição</div>
+
+        <div class="groups">
+
+      <!-- GROUP A -->
+      <div class="groupn">
+        <div class="standings-card">
+          <div class="standings-head ga">
+            <div class="gh-label">GROUP A</div>
+            <div class="gh-col">G</div>
+            <div class="gh-col">W</div>
+            <div class="gh-col">D</div>
+            <div class="gh-col">L</div>
+            <div class="gh-col">GM</div>
+            <div class="gh-col">GA</div>
+            <div class="gh-col">GD</div>
+            <div class="gh-col"></div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/de.png" alt=""><span>Die Manchaft</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">3</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">1</div>
+            <div class="sr-stat">9</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">7</div>
+            <div class="sr-pts">11</div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/br.png" alt=""><span>Canarinhos</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">3</div>
+            <div class="sr-stat">1</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">8</div>
+            <div class="sr-stat">8</div>
+            <div class="sr-stat">0</div>
+            <div class="sr-pts">10</div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/ao.png" alt=""><span>Palancas</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">1</div>
+            <div class="sr-stat">3</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">5</div>
+            <div class="sr-stat">1</div>
+            <div class="sr-pts">4</div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/au.png" alt=""><span>Socceroos</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">0</div>
+            <div class="sr-stat">3</div>
+            <div class="sr-stat">3</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">9</div>
+            <div class="sr-stat">-7</div>
+            <div class="sr-pts">3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUP B -->
+      <div class="groupn">
+        <div class="standings-card">
+          <div class="standings-head gb">
+            <div class="gh-label">GROUP B</div>
+            <div class="gh-col">G</div>
+            <div class="gh-col">W</div>
+            <div class="gh-col">D</div>
+            <div class="gh-col">L</div>
+            <div class="gh-col">GM</div>
+            <div class="gh-col">GA</div>
+            <div class="gh-col">GD</div>
+            <div class="gh-col"></div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/es.png" alt=""><span>La Roja</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">4</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">0</div>
+            <div class="sr-stat">13</div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">7</div>
+            <div class="sr-pts">14</div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/pt.png" alt=""><span>Sel.Quinas</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">12</div>
+            <div class="sr-stat">8</div>
+            <div class="sr-stat">4</div>
+            <div class="sr-pts">8</div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/ar.png" alt=""><span>Alviceleste</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">1</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">3</div>
+            <div class="sr-stat">5</div>
+            <div class="sr-stat">10</div>
+            <div class="sr-stat">-5</div>
+            <div class="sr-pts">5</div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/ma.png" alt=""><span>Leões d Atlas</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">1</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">3</div>
+            <div class="sr-stat">4</div>
+            <div class="sr-stat">11</div>
+            <div class="sr-stat">-7</div>
+            <div class="sr-pts">5</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUP C -->
+      <div class="groupn">
+        <div class="standings-card">
+          <div class="standings-head gc">
+            <div class="gh-label">GROUP C</div>
+            <div class="gh-col">G</div>
+            <div class="gh-col">W</div>
+            <div class="gh-col">D</div>
+            <div class="gh-col">L</div>
+            <div class="gh-col">GM</div>
+            <div class="gh-col">GA</div>
+            <div class="gh-col">GD</div>
+            <div class="gh-col"></div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/fr.png" alt=""><span>Gauleses</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">4</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">0</div>
+            <div class="sr-stat">14</div>
+            <div class="sr-stat">1</div>
+            <div class="sr-stat">13</div>
+            <div class="sr-pts">14</div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/mz.png" alt=""><span>Mambas</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">8</div>
+            <div class="sr-stat">-2</div>
+            <div class="sr-pts">8</div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/jp.png" alt=""><span>Samurais</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">5</div>
+            <div class="sr-stat">-1</div>
+            <div class="sr-pts">5</div>
+          </div>
+          <div class="standings-row">
+            <div class="sr-team"><img src="https://flagcdn.com/w40/gb-eng.png" alt=""><span>Três leões</span></div>
+            <div class="sr-stat">6</div>
+            <div class="sr-stat">0</div>
+            <div class="sr-stat">2</div>
+            <div class="sr-stat">4</div>
+            <div class="sr-stat">5</div>
+            <div class="sr-stat">10</div>
+            <div class="sr-stat">-5</div>
+            <div class="sr-pts">2</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>
+
+
+      </aside>
+
+    </section>
+<script>
+  /* Botões da Liga, Taça, Supertaça e Nations */
+      function showTab(tabId) {
+
+            const tabs = document.querySelectorAll('.tabs-content');
+
+         tabs.forEach(tab => {
+         tab.style.display = 'none';
+          });
+
+        document.getElementById(tabId).style.display = 'block';
+         }
+
+         // liga TBS aberta por padrão //
+         showTab('interno');
+         
+         function mostrarDivs(id) {
+    const divs = document.querySelectorAll('.conteudo');
+
+    divs.forEach(section => {
+      section.style.display = 'none';
+    });
+
+    document.getElementById(id).style.display = 'block';
+  }
+
+  function mostrar(id) {
+    const champions = document.querySelectorAll('.champ');
+
+    champions.forEach(article => {
+      article.style.display = 'none';
+    });
+
+    document.getElementById(id).style.display = 'block';
+  }
+
+  const classificacao = [
+
+    {
+      equipa: "TimãoFC",
+      j: 14,
+      v: 12,
+      e: 1,
+      d: 1,
+      pts: 37
+    },
+
+    {
+      equipa: "Vermelho",
+      j: 14,
+      v: 10,
+      e: 2,
+      d: 2,
+      pts: 32
+    },
+
+    {
+      equipa: "FCEagles",
+      j: 14,
+      v: 9,
+      e: 3,
+      d: 2,
+      pts: 30
+    },
+
+    {
+      equipa: "DreamTeam",
+      j: 14,
+      v: 8,
+      e: 2,
+      d: 4,
+      pts: 26
+    },
+
+    {
+      equipa: "TheKingsman",
+      j: 14,
+      v: 7,
+      e: 4,
+      d: 3,
+      pts: 25
+    },
+
+    {
+      equipa: "Lanceiros",
+      j: 14,
+      v: 6,
+      e: 3,
+      d: 5,
+      pts: 21
+    },
+
+    {
+      equipa: "FCDestroyes",
+      j: 14,
+      v: 5,
+      e: 3,
+      d: 6,
+      pts: 18
+    },
+
+    {
+      equipa: "BlackTeam",
+      j: 14,
+      v: 4,
+      e: 3,
+      d: 7,
+      pts: 15
+    }
+
+
+  ];
+
+  const goleadores = [
+
+    ["Nathan Fuanzolo", 13],
+    ["Zeizi Polo", 12],
+    ["Heuler", 10],
+    ["Laurindo", 9],
+    ["Timóteo Adriano", 8],
+    ["Martinho", 7],
+    ["Katendi Inácio", 6],
+    ["Kelson Manuel", 5],
+    ["Anderson Chisses", 4],
+    ["Silvera", 4]
+
+  ];
+
+  const tabela = document.getElementById("table");
+
+  if (tabela) classificacao.forEach((equipa, posicao) => {
+
+    tabela.innerHTML += `
+        <tr>
+        <td>${posicao + 1}</td>
+        <td>${equipa.equipa}</td>
+        <td>${equipa.j}</td>
+        <td>${equipa.v}</td>
+        <td>${equipa.e}</td>
+        <td>${equipa.d}</td>
+        <td>${equipa.pts}</td>
+        </tr>
+        `;
+
+  });
+
+  const lista = document.getElementById("artilheiros");
+
+  if (lista) goleadores.forEach(jogador => {
+
+    lista.innerHTML += `
+        <li>${jogador[0]} - ${jogador[1]} golos</li>
+        `;
+
+  });
+
+  const grupoA = [
+
+    {
+      equipa: "Moçambique",
+      j: 2,
+      v: 2,
+      e: 0,
+      d: 0,
+      pts: 6
+    },
+
+    {
+      equipa: "França",
+      j: 1,
+      v: 1,
+      e: 0,
+      d: 1,
+      pts: 3
+    },
+
+    {
+      equipa: "Portugal",
+      j: 2,
+      v: 1,
+      e: 0,
+      d: 1,
+      pts: 3
+    },
+
+    {
+      equipa: "Brasil",
+      j: 2,
+      v: 0,
+      e: 0,
+      d: 2,
+      pts: 0
+    }
+
+  ];
+
+  const grupoB = [
+
+    {
+      equipa: "Inglaterra",
+      j: 2,
+      v: 1,
+      e: 0,
+      d: 1,
+      pts: 3
+    },
+
+    {
+      equipa: "Espanha",
+      j: 2,
+      v: 1,
+      e: 0,
+      d: 1,
+      pts: 3
+    },
+
+    {
+      equipa: "Angola",
+      j: 2,
+      v: 1,
+      e: 0,
+      d: 1,
+      pts: 3
+    },
+
+    {
+      equipa: "Argentina",
+      j: 2,
+      v: 1,
+      e: 0,
+      d: 1,
+      pts: 3
+    }
+
+  ];
+
+  const tabelaA = document.getElementById("grupoA");
+  const tabelaB = document.getElementById("grupoB");
+
+  if (tabelaA) grupoA.forEach((equipa, pos) => {
+
+    tabelaA.innerHTML += `
+        <tr>
+        <td>${pos + 1}</td>
+        <td>${equipa.equipa}</td>
+        <td>${equipa.j}</td>
+        <td>${equipa.v}</td>
+        <td>${equipa.e}</td>
+        <td>${equipa.d}</td>
+        <td>${equipa.pts}</td>
+        </tr>
+        `;
+
+  });
+
+  if (tabelaB) grupoB.forEach((equipa, pos) => {
+
+    tabelaB.innerHTML += `
+        <tr>
+        <td>${pos + 1}</td>
+        <td>${equipa.equipa}</td>
+        <td>${equipa.j}</td>
+        <td>${equipa.v}</td>
+        <td>${equipa.e}</td>
+        <td>${equipa.d}</td>
+        <td>${equipa.pts}</td>
+        </tr>
+        `;
+
+  });
+
+  const roda = document.querySelectorAll('.slide');
+
+  let atual = 0;
+
+  setInterval(() => {
+    roda[atual].classList.remove('active');
+
+    atual++;
+
+    if (atual >= roda.length) {
+      atual = 0;
+    }
+    roda[atual].classList.add('active');
+  }, 4000);
+  
+       
+
+  /* Awards auto-rotate carousel */
+  (function() {
+    const awardsBlocks = document.querySelectorAll('.elite-awards');
+    awardsBlocks.forEach(function(block) {
+      const players = block.querySelectorAll('.elite-player');
+      if (players.length < 2) return;
+      let idx = 0;
+      // ensure first is active
+      players.forEach((p, i) => p.classList.toggle('active', i === 0));
+
+      // dots
+      let dotsWrap = block.querySelector('.awards-dots');
+      if (!dotsWrap) {
+        dotsWrap = document.createElement('div');
+        dotsWrap.className = 'awards-dots';
+        players.forEach((_, i) => {
+          const s = document.createElement('span');
+          if (i === 0) s.classList.add('active');
+          s.dataset.i = i;
+          s.addEventListener('click', () => { idx = i; show(); });
+          dotsWrap.appendChild(s);
+        });
+        block.appendChild(dotsWrap);
+      }
+
+      function show() {
+        players.forEach((p, i) => p.classList.toggle('active', i === idx));
+        const dots = dotsWrap.querySelectorAll('span');
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+
+      setInterval(function() {
+        idx = (idx + 1) % players.length;
+        show();
+      }, 3000);
+    });
+  })();
+
+
+  /* Ensure default edition visible when switching main tabs */
+  const defaultEdition = {
+    interno: 'elite5',
+    super: 'super4',
+    taca: 'taca5',
+    copa: 'copa5',
+    nations: 'champ5'
+  };
+
+  const _origShowTab = showTab;
+  showTab = function(tabId) {
+    _origShowTab(tabId);
+    if (defaultEdition[tabId]) {
+      // only show default if no champ of this section is already visible... 
+      // always reset to default when entering the tab for consistency
+      mostrar(defaultEdition[tabId]);
+    }
+  };
+
+</script>
+</body>
+</html>

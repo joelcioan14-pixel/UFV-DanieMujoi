@@ -1760,6 +1760,402 @@
         font-size: 0.9rem;
       }
     }
+
+    /* ===== 5ª EDIÇÃO ELITE ===== */
+    .elite5-scroll {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 12px 8px 16px 8px;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .elite5-scroll::-webkit-scrollbar { height: 6px; }
+    .elite5-scroll::-webkit-scrollbar-thumb { background: #F9C94A; border-radius: 4px; }
+
+    .elite5-panel {
+      flex: 0 0 auto;
+      width: min(92vw, 380px);
+      scroll-snap-align: start;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0d1240;
+      border: 2px solid #8b008b;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    }
+
+    /* Classificação: imagem a preencher a div; tabela do calção até ao fundo */
+    .pl-standings-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      min-height: 0;
+      background: #0a0e28;
+      overflow: hidden;
+    }
+    .pl-standings-card .pl-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .pl-standings-card .pl-shadow {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: auto;
+      height: 38%;
+      background: linear-gradient(to top, rgba(6,8,24,.98) 0%, rgba(6,8,24,.95) 55%, rgba(6,8,24,.75) 85%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 6px 8px 6px;
+      box-sizing: border-box;
+    }
+    .pl-standings-card .pl-title {
+      font-size: 0.55rem;
+      letter-spacing: 1px;
+      color: #aaa;
+      text-align: center;
+      margin: 0 0 3px 0;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .pl-table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      font-size: 0.65rem;
+      color: #fff;
+      flex: 1 1 auto;
+    }
+    .pl-table col.col-pos { width: 6%; }
+    .pl-table col.col-logo { width: 20px; }
+    .pl-table col.col-team { width: 26%; }
+    .pl-table col.col-stat { width: 7%; }
+    .pl-table col.col-pts { width: 9%; }
+    .pl-table th {
+      background: transparent;
+      color: #999;
+      font-weight: 600;
+      font-size: 0.55rem;
+      padding: 2px 1px;
+      text-align: center;
+      border: none;
+      white-space: nowrap;
+    }
+    .pl-table th:nth-child(3) { text-align: left; padding-left: 2px; }
+    .pl-table td {
+      padding: 2.5px 1px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      text-align: center;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pl-table td.pl-td-logo {
+      width: 22px;
+      min-width: 22px;
+      max-width: 22px;
+      padding: 2px 0;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .pl-table td.pl-td-team {
+      text-align: left;
+      padding-left: 4px;
+      font-weight: 700;
+      font-size: 0.62rem;
+      color: #fff;
+    }
+    .pl-table tr:last-child td { border-bottom: none; }
+    .pl-table .pl-pos {
+      font-weight: 800;
+      color: #F9C94A;
+      font-size: 0.65rem;
+    }
+    /* Logótipo: caixa fixa idêntica em todas as linhas */
+    .pl-table .pl-logo-wrap {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      min-height: 18px;
+      max-width: 18px;
+      max-height: 18px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .pl-table .pl-logo-wrap img,
+    .pl-table .pl-logo {
+      width: 18px !important;
+      height: 18px !important;
+      min-width: 18px !important;
+      min-height: 18px !important;
+      max-width: 18px !important;
+      max-height: 18px !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+      border-radius: 2px;
+      display: block !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      vertical-align: middle;
+    }
+    /* legado flex (se ainda houver markup antigo) */
+    .pl-table .pl-team {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      font-size: 0.62rem;
+      text-align: left;
+    }
+    .pl-table .pl-team span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1 1 auto;
+      min-width: 0;
+      text-align: left;
+    }
+    .pl-table .pl-pts { font-weight: 800; color: #F9C94A; }
+    .pl-league-logo {
+      text-align: center;
+      margin-top: 4px;
+      font-size: 0.55rem;
+      color: #ccc;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+
+    /* Artilharia / Assistências estilo La Liga */
+    .laliga-scorers {
+      background: #fff;
+      color: #111;
+      min-height: 420px;
+      padding: 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+    .laliga-scorers .laliga-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 12px 12px 8px 14px;
+      background: #fff;
+    }
+    .laliga-scorers .laliga-goals-big {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #0046a4;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .laliga-scorers .laliga-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #555;
+      letter-spacing: .5px;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+    .laliga-scorers .laliga-rank {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #111;
+      margin-top: 4px;
+    }
+    .laliga-scorers .laliga-name {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #111;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      line-height: 1.15;
+    }
+    .laliga-scorers .laliga-club {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      color: #444;
+      margin-top: 3px;
+    }
+    .laliga-scorers .laliga-club img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+    }
+    .laliga-scorers .laliga-card {
+      width: 90px;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: none !important;
+      background: transparent !important;
+      flex-shrink: 0;
+      display: block;
+    }
+    .laliga-scorers .laliga-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid #e8e8e8;
+    }
+    .laliga-scorers .laliga-list li {
+      display: flex;
+      align-items: center;
+      padding: 5px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.8rem;
+      gap: 6px;
+      min-height: 28px;
+    }
+    .laliga-scorers .laliga-list li:nth-child(odd) { background: #f7f7f7; }
+    .laliga-scorers .laliga-list li:nth-child(even) { background: #fff; }
+    .laliga-scorers .laliga-list .pos {
+      font-weight: 700;
+      color: #666;
+      width: 20px;
+      flex-shrink: 0;
+      font-size: 0.72rem;
+    }
+    .laliga-scorers .laliga-list .logo {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .laliga-scorers .laliga-list .name {
+      flex: 1;
+      font-weight: 700;
+      color: #111;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .laliga-scorers .laliga-list .goals {
+      font-weight: 800;
+      color: #111;
+      min-width: 22px;
+      text-align: right;
+    }
+    .laliga-scorers .laliga-list li.hidden-scorer { display: none; }
+    .laliga-scorers .laliga-list.expanded li.hidden-scorer { display: flex; }
+    .laliga-scorers .laliga-footer {
+      margin-top: auto;
+      padding: 10px 14px 12px;
+      text-align: left;
+    }
+    .laliga-scorers .btn-todos {
+      background: none;
+      border: none;
+      color: #e30613;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: .3px;
+      cursor: pointer;
+      padding: 0;
+      text-transform: uppercase;
+      min-width: auto;
+    }
+    .laliga-scorers .btn-todos:hover {
+      text-decoration: underline;
+      background: none;
+      color: #e30613;
+    }
+
+    .melhor-jornada {
+      width: 100%;
+      max-width: 420px;
+      margin: 18px auto 10px auto;
+      background: linear-gradient(145deg, #1a1a4e 0%, #2A255F 50%, #11194d 100%);
+      border: 2px solid #F9C94A;
+      border-radius: 16px;
+      padding: 16px 14px;
+      box-sizing: border-box;
+      text-align: center;
+      box-shadow: 0 8px 22px rgba(0,0,0,.35);
+    }
+    .melhor-jornada h3 {
+      color: gold;
+      font-size: 1rem;
+      margin: 0 0 12px 0;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+    .melhor-jornada .mj-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .melhor-jornada .mj-card img {
+      width: 110px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: none;
+      background: transparent;
+    }
+    .melhor-jornada .mj-info { text-align: left; }
+    .melhor-jornada .mj-info .mj-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #F9C94A;
+      margin-bottom: 4px;
+    }
+    .melhor-jornada .mj-info .mj-team {
+      font-size: 0.85rem;
+      color: #ccc;
+      margin-bottom: 6px;
+    }
+    .melhor-jornada .mj-info .mj-stats {
+      font-size: 0.8rem;
+      color: #fff;
+      line-height: 1.5;
+    }
+    .melhor-jornada .mj-badge {
+      display: inline-block;
+      background: #F9C94A;
+      color: #1a1a2e;
+      font-weight: 800;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 8px;
+      letter-spacing: .5px;
+    }
+    .elite5-hint {
+      text-align: center;
+      color: #888;
+      font-size: 0.75rem;
+      margin: 6px 0 0 0;
+    }
+    @media (max-width: 480px) {
+      .elite5-panel { width: 88vw; }
+      .laliga-scorers { min-height: 380px; }
+      .laliga-scorers .laliga-goals-big { font-size: 2.6rem; }
+      .laliga-scorers .laliga-card { width: 75px; }
+      .melhor-jornada .mj-card img { width: 90px; }
     }
   </style>
 </head>
@@ -2363,16 +2759,147 @@
       <div class="champ" id="elite5" style="display:block;">
 
         <div class="rolagem-header">
-          <h2>Edição a decorrer</h2>
+          <h2>5ª Edição – A Decorrer</h2>
         </div>
-        <div style="text-align:center; padding:30px;">
-          <h2 style="color:gold;">5ª Edição da Elite League</h2>
-          <p style="margin:20px 0; font-size:1.1rem;">A 5ª edição da Liga Elite está prevista a iniciar em breve.</p>
-          <h3 style="color:#F9C94A; margin-top:30px;">Artilharia</h3>
-          <ol id="artilheiros-5" style="max-width:400px; margin:15px auto; text-align:left;">
-            <li style="color:#aaa;">Ainda sem registos</li>
-          </ol>
-          <p style="margin-top:25px; color:#ccc;"><i>Fique atento às próximas atualizações.</i></p>
+
+        <p class="elite5-hint">← Desliza para ver Classificação · Artilharia · Assistências →</p>
+
+        <div class="elite5-scroll">
+
+          <!-- Classificação: tabela do calção até ao fundo da div, colunas alinhadas -->
+          <div class="elite5-panel">
+            <div class="pl-standings-card">
+              <img class="pl-bg"
+                src="https://image.cdn2.seaart.me/upload/static/20260927/2a3d327dc90c6cf2f8a2fc563c4d1c57_high.webp"
+                alt="Jogador em destaque Elite League">
+              <div class="pl-shadow">
+                <div class="pl-title">Elite League · Classificação</div>
+                <table class="pl-table">
+                  <colgroup>
+                    <col class="col-pos">
+                    <col class="col-logo">
+                    <col class="col-team">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-pts">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th>EQUIPA</th>
+                      <th>J</th>
+                      <th>V</th>
+                      <th>E</th>
+                      <th>D</th>
+                      <th>GM</th>
+                      <th>GF</th>
+                      <th>DG</th>
+                      <th>PTS</th>
+                    </tr>
+                  </thead>
+                  <tbody id="elite5-standings-body"></tbody>
+                </table>
+                <div class="pl-league-logo">★ DM ELITE LEAGUE ★</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artilharia estilo La Liga -->
+          <div class="elite5-panel">
+            <div class="laliga-scorers">
+              <div class="laliga-header">
+                <div>
+                  <div class="laliga-goals-big">2</div>
+                  <div class="laliga-label">Golos</div>
+                  <div class="laliga-rank">1º</div>
+                  <div class="laliga-name">Kenny Paiva</div>
+                  <div class="laliga-club">
+                    <img src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt="Puli United logo">
+                    <span>Puli United</span>
+                  </div>
+                </div>
+                <img class="laliga-card"
+                  src="https://image.cdn2.seaart.me/upload/static/20260927/96101ce4b7cf03bfa2f804e6119b1f15_high.webp"
+                  alt="Hosten">
+              </div>
+              <ul class="laliga-list" id="scorers-elite5">
+                <li><span class="pos">01</span><img class="logo" src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt="Puli United"><span class="name">Kenny Paiva</span><span class="goals">2</span></li>
+                <li><span class="pos">02</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Cosmic"><span class="name">Laurindo</span><span class="goals">2</span></li>
+                <li><span class="pos">03</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="COSMIC TEAM"><span class="name">Alvaro dos Santos</span><span class="goals">1</span></li>
+                <li><span class="pos">04</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt="Zeico"><span class="name">Epifânio Manuel</span><span class="goals">1</span></li>
+                <li><span class="pos">05</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt=""><span class="name">Benedito Nsingui</span><span class="goals">1</span></li>
+                <li class="hidden-scorer"><span class="pos">06</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt=""><span class="name">Z11</span><span class="goals">1</span></li>
+                <li class="hidden-scorer"><span class="pos">07</span><img class="logo" src="https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp" alt="Marvel FC"><span class="name">John</span><span class="goals">1</span></li>
+                <li class="hidden-scorer"><span class="pos">08</span><img class="logo" src="https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp" alt="Black"><span class="name">Geverson Santana</span><span class="goals">1</span></li>
+                <li class="hidden-scorer"><span class="pos">09</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt=""><span class="name">Erik Dos Santos</span><span class="goals">0</span></li>
+                <li class="hidden-scorer"><span class="pos">10</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt=""><span class="name">Afonso AC</span><span class="goals">0</span></li>
+              </ul>
+              <div class="laliga-footer">
+                <button type="button" class="btn-todos" id="btn-scorers-elite5" onclick="toggleScorersElite5()">Todos os líderes em golos ►</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assistências estilo La Liga -->
+          <div class="elite5-panel">
+            <div class="laliga-scorers">
+              <div class="laliga-header">
+                <div>
+                  <div class="laliga-goals-big">1</div>
+                  <div class="laliga-label">Assistências</div>
+                  <div class="laliga-rank">1º</div>
+                  <div class="laliga-name">Pedro Chitata</div>
+                  <div class="laliga-club">
+                    <img src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt="Puli United">
+                    <span>Puli United</span>
+                  </div>
+                </div>
+                <img class="laliga-card"
+                  src="https://image.cdn2.seaart.me/upload/static/20260927/7449ecd57a8ad74fd356e9e3b75c19bf_high.webp"
+                  alt="Card Pedro Chitata">
+              </div>
+              <ul class="laliga-list" id="assists-elite5">
+                <li><span class="pos">01</span><img class="logo" src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt="Puli United"><span class="name">Pedro Chitata</span><span class="goals">1</span></li>
+                <li><span class="pos">02</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="COSMIC TEAM"><span class="name">Álvaro dos Santos</span><span class="goals">1</span></li>
+                <li><span class="pos">03</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt="FC Zeico"><span class="name">Anderson</span><span class="goals">0</span></li>
+                <li><span class="pos">04</span><img class="logo" src="https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp" alt="Black Team"><span class="name">Martinho Flaviano</span><span class="goals">0</span></li>
+                <li><span class="pos">05</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt=""><span class="name">Erik Dos Santos</span><span class="goals">0</span></li>
+                <li class="hidden-scorer"><span class="pos">06</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt=""><span class="name">Katendi Inácio</span><span class="goals">0</span></li>
+                <li class="hidden-scorer"><span class="pos">07</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt=""><span class="name">Eliano Dembo</span><span class="goals">0</span></li>
+                <li class="hidden-scorer"><span class="pos">08</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt=""><span class="name">Fadario</span><span class="goals">0</span></li>
+                <li class="hidden-scorer"><span class="pos">09</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt=""><span class="name">Ery de Carvalho</span><span class="goals">0</span></li>
+                <li class="hidden-scorer"><span class="pos">10</span><img class="logo" src="https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp" alt="Black"><span class="name">Bengui</span><span class="goals">0</span></li>
+              </ul>
+              <div class="laliga-footer">
+                <button type="button" class="btn-todos" id="btn-assists-elite5" onclick="toggleAssistsElite5()">Todos os líderes em assistências ►</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Melhor Jogador da Jornada -->
+        <div class="melhor-jornada">
+          <h3>⭐ Melhor Jogador da Jornada</h3>
+          <div class="mj-card">
+            <img src="https://image.cdn2.seaart.me/upload/static/20260927/96101ce4b7cf03bfa2f804e6119b1f15_high.webp"
+              alt="Melhor jogador da jornada">
+            <div class="mj-info">
+              <div class="mj-name">Kenny Paiva</div>
+              <div class="mj-team">Puli United</div>
+              <div class="mj-stats">
+                2 Golos · 0 Assistência<br>
+                Nota: 8.7 · MVP
+              </div>
+              <span class="mj-badge">JORNADA 1</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -2455,17 +2982,99 @@
       <div class="champ" id="super4" style="display:block;">
 
         <div class="rolagem-header">
-          <h2>4ª Edição a decorrer</h2>
+          <h2>4ª Edição – Concluída</h2>
         </div>
-        <div style="text-align:center; padding:30px;">
-          <h2 style="color:gold;">4ª Edição da Supertaça Elite</h2>
-          <p style="margin:20px 0; font-size:1.1rem;">A 4ª edição da Supertaça está a decorrer / prevista a iniciar em
-            breve.</p>
-          <h3 style="color:#F9C94A; margin-top:30px;">Artilharia</h3>
-          <ol style="max-width:400px; margin:15px auto; text-align:left;">
-            <li style="color:#aaa;">Ainda sem registos</li>
-          </ol>
-          <p style="margin-top:25px; color:#ccc;"><i>Fique atento às próximas atualizações.</i></p>
+
+        <h3 style="color:gold; text-align:center; margin:16px 0 8px;">Semifinais</h3>
+
+        <section class="resultado-jogo">
+          <div class="resultado-topo">
+            <span class="competicao">Supertaça Elite · Semifinal</span>
+            <strong class="estado">FULL TIME</strong>
+          </div>
+          <div class="equipas-resultado">
+            <div class="equipa">
+              <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="TheKingsman">
+              <h2>Kingsman</h2>
+            </div>
+            <div class="placar-nations">
+              <div class="golos-nations">
+                <span>3</span>
+                <b> - </b>
+                <span>4</span>
+              </div>
+              <p class="fase">Semifinal</p>
+            </div>
+            <div class="equipa">
+              <img src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt="Puli United">
+              <h2>Puli United</h2>
+            </div>
+          </div>
+        </section>
+
+        <section class="resultado-jogo">
+          <div class="resultado-topo">
+            <span class="competicao">Supertaça Elite · Semifinal</span>
+            <strong class="estado">FULL TIME</strong>
+          </div>
+          <div class="equipas-resultado">
+            <div class="equipa">
+              <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Cosmic Team">
+              <h2>Cosmic</h2>
+            </div>
+            <div class="placar-nations">
+              <div class="golos-nations">
+                <span>4</span>
+                <b> - </b>
+                <span>1</span>
+              </div>
+              <p class="fase">Semifinal</p>
+            </div>
+            <div class="equipa">
+              <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt="FC Zeico">
+              <h2>FC Zeico</h2>
+            </div>
+          </div>
+        </section>
+
+        <h3 style="color:gold; text-align:center; margin:20px 0 8px;">Final</h3>
+
+        <section class="resultado-jogo">
+          <div class="resultado-topo">
+            <span class="competicao">Supertaça Elite · Final</span>
+            <strong class="estado">FULL TIME</strong>
+          </div>
+          <div class="equipas-resultado">
+            <div class="equipa">
+              <img src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt="Puli United">
+              <h2>Puli United</h2>
+            </div>
+            <div class="placar-nations">
+              <div class="golos-nations">
+                <span>6</span>
+                <b> - </b>
+                <span>0</span>
+              </div>
+              <p class="fase">Final</p>
+            </div>
+            <div class="equipa">
+              <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Cosmic Team">
+              <h2>Cosmic</h2>
+            </div>
+          </div>
+        </section>
+
+        <div class="boy-win" style="margin-top:24px;">
+          <h3>🏆 Campeão – Puli United</h3>
+          <img src="https://image.cdn2.seaart.me/upload/static/20260926/0508a4642c739dcd12ee97a97dbfe542_high.webp"
+            alt="Puli United campeão da Supertaça 4ª Edição">
+          <p>Puli United conquistou a 4ª edição da Supertaça Elite</p>
+        </div>
+
+        <div style="max-width:480px; margin:24px auto; padding:18px 16px; background:#151d55; border-radius:14px; border:2px solid #F9C94A; text-align:center;">
+          <h3 style="color:gold; margin:0 0 14px 0;">⭐ Prémios da 4ª Edição</h3>
+          <p style="color:#fff; margin:8px 0; font-size:0.95rem;"><strong style="color:#F9C94A;">MVP:</strong> Erik Dos Santos <span style="color:#aaa;">(Puli United)</span></p>
+          <p style="color:#fff; margin:8px 0; font-size:0.95rem;"><strong style="color:#F9C94A;">Artilheiro:</strong> Erik Dos Santos <span style="color:#aaa;">(Puli United)</span> — 4 golos</p>
         </div>
 
       </div>
@@ -2649,17 +3258,86 @@
       <div class="champ" id="taca5" style="display:block;">
 
         <div class="rolagem-header">
-          <h2>5ª Edição a decorrer</h2>
+          <h2>5ª Edição – A Decorrer</h2>
         </div>
-        <div style="text-align:center; padding:30px;">
-          <h2 style="color:gold;">5ª Edição da Copa Elite</h2>
-          <p style="margin:20px 0; font-size:1.1rem;">A 5ª Edição da Copa Élite está prevista a iniciar pontualmente em
-            Agosto.</p>
-          <h3 style="color:#F9C94A; margin-top:30px;">Artilharia</h3>
-          <ol style="max-width:400px; margin:15px auto; text-align:left;">
-            <li style="color:#aaa;">Ainda sem registos</li>
-          </ol>
-          <p style="margin-top:25px; color:#ccc;"><i>Fique atento às próximas atualizações.</i></p>
+
+        <p class="elite5-hint">← Desliza: Artilharia · Assistências →</p>
+
+        <div class="elite5-scroll">
+
+          <!-- Artilharia Copa Elite -->
+          <div class="elite5-panel">
+            <div class="laliga-scorers">
+              <div class="laliga-header">
+                <div>
+                  <div class="laliga-goals-big">0</div>
+                  <div class="laliga-label">Golos</div>
+                  <div class="laliga-rank">1º</div>
+                  <div class="laliga-name">ANDERSON</div>
+                  <div class="laliga-club">
+                    <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt="">
+                    <span>FC Zeico</span>
+                  </div>
+                </div>
+              </div>
+              <ul class="laliga-list" id="scorers-copa5">
+                <li><span class="pos">01</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt=""><span class="name">ANDERSON</span><span class="goals">0</span></li>
+                <li><span class="pos">02</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt=""><span class="name">Erik Dos Santos</span><span class="goals">0</span></li>
+                <li><span class="pos">03</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt=""><span class="name">Zeizi Polo</span><span class="goals">0</span></li>
+                <li><span class="pos">04</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt=""><span class="name">Laurindo</span><span class="goals">0</span></li>
+                <li><span class="pos">05</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt=""><span class="name">Pedro Chitata</span><span class="goals">0</span></li>
+              </ul>
+              <div class="laliga-footer">
+                <button type="button" class="btn-todos" id="btn-scorers-copa5" onclick="toggleScorersCopa5()">Todos os líderes em golos ►</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assistências Copa Elite -->
+          <div class="elite5-panel">
+            <div class="laliga-scorers">
+              <div class="laliga-header">
+                <div>
+                  <div class="laliga-goals-big">0</div>
+                  <div class="laliga-label">Assistências</div>
+                  <div class="laliga-rank">1º</div>
+                  <div class="laliga-name">ERIK DOS SANTOS</div>
+                  <div class="laliga-club">
+                    <img src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt="">
+                    <span>Puli United</span>
+                  </div>
+                </div>
+              </div>
+              <ul class="laliga-list" id="assists-copa5">
+                <li><span class="pos">01</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt=""><span class="name">Erik Dos Santos</span><span class="goals">0</span></li>
+                <li><span class="pos">02</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt=""><span class="name">Fadario</span><span class="goals">0</span></li>
+                <li><span class="pos">03</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt=""><span class="name">Zeizi Polo</span><span class="goals">0</span></li>
+                <li><span class="pos">04</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt=""><span class="name">Benedito</span><span class="goals">0</span></li>
+                <li><span class="pos">05</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt=""><span class="name">Gabriela Sousa</span><span class="goals">0</span></li>
+              </ul>
+              <div class="laliga-footer">
+                <button type="button" class="btn-todos" id="btn-assists-copa5" onclick="toggleAssistsCopa5()">Todos os líderes em assistências ►</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="melhor-jornada">
+          <h3>⭐ Prémio da Jornada</h3>
+          <div class="mj-card">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png"
+              alt="Pedro Chitata - Puli United">
+            <div class="mj-info">
+              <div class="mj-name">A Determinar</div>
+              <div class="mj-team">Puli United</div>
+              <div class="mj-stats">
+                0 Golos · 0 Assistências<br>
+                Prémio Estrela da Copa Elite
+              </div>
+              <span class="mj-badge">5ª EDIÇÃO</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -2859,16 +3537,174 @@
       <div class="champ" id="copa5" style="display:block;">
 
         <div class="rolagem-header">
-          <h2>5ª Edição</h2>
+          <h2>5ª Edição – A Decorrer</h2>
         </div>
-        <div style="text-align:center; padding:30px;">
-          <h2 style="color:gold;">5ª Edição da Copa Ibérica</h2>
-          <p style="margin:20px 0; font-size:1.1rem;">A 5ª edição da Copa Ibérica será anunciada em breve.</p>
-          <h3 style="color:#F9C94A; margin-top:30px;">Artilharia</h3>
-          <ol style="max-width:400px; margin:15px auto; text-align:left;">
-            <li style="color:#aaa;">Ainda sem registos</li>
-          </ol>
-          <p style="margin-top:25px; color:#ccc;"><i>Fique atento às próximas atualizações.</i></p>
+
+        <p class="elite5-hint">← Desliza: Grupo A · Grupo B · Artilharia · Assistências →</p>
+
+        <div class="elite5-scroll">
+
+          <!-- Grupo A -->
+          <div class="elite5-panel">
+            <div class="pl-standings-card">
+              <img class="pl-bg"
+                src="https://image.cdn2.seaart.me/upload/static/20260718/c1ad41225bc1d1687034e3eda2c33985_high.webp"
+                alt="Jogador em destaque Copa Ibérica">
+              <div class="pl-shadow">
+                <div class="pl-title">Copa Ibérica · Grupo A</div>
+                <table class="pl-table">
+                  <colgroup>
+                    <col class="col-pos">
+                    <col class="col-logo">
+                    <col class="col-team">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-pts">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th>EQUIPA</th>
+                      <th>J</th>
+                      <th>V</th>
+                      <th>E</th>
+                      <th>D</th>
+                      <th>GM</th>
+                      <th>GF</th>
+                      <th>DG</th>
+                      <th>PTS</th>
+                    </tr>
+                  </thead>
+                  <tbody id="iberica-grupo-a-body"></tbody>
+                </table>
+                <div class="pl-league-logo">★ COPA IBÉRICA · GRUPO A ★</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grupo B -->
+          <div class="elite5-panel">
+            <div class="pl-standings-card">
+              <img class="pl-bg"
+                src="https://image.cdn2.seaart.me/upload/static/20260718/c1ad41225bc1d1687034e3eda2c33985_high.webp"
+                alt="Jogador em destaque Copa Ibérica">
+              <div class="pl-shadow">
+                <div class="pl-title">Copa Ibérica · Grupo B</div>
+                <table class="pl-table">
+                  <colgroup>
+                    <col class="col-pos">
+                    <col class="col-logo">
+                    <col class="col-team">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-stat">
+                    <col class="col-pts">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th>EQUIPA</th>
+                      <th>J</th>
+                      <th>V</th>
+                      <th>E</th>
+                      <th>D</th>
+                      <th>GM</th>
+                      <th>GF</th>
+                      <th>DG</th>
+                      <th>PTS</th>
+                    </tr>
+                  </thead>
+                  <tbody id="iberica-grupo-b-body"></tbody>
+                </table>
+                <div class="pl-league-logo">★ COPA IBÉRICA · GRUPO B ★</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artilharia Ibérica -->
+          <div class="elite5-panel">
+            <div class="laliga-scorers">
+              <div class="laliga-header">
+                <div>
+                  <div class="laliga-goals-big">0</div>
+                  <div class="laliga-label">Golos</div>
+                  <div class="laliga-rank">1º</div>
+                  <div class="laliga-name">ANDERSON</div>
+                  <div class="laliga-club">
+                    <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt="">
+                    <span>FC Zeico</span>
+                  </div>
+                </div>
+              </div>
+              <ul class="laliga-list" id="scorers-iberica5">
+                <li><span class="pos">01</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt=""><span class="name">ANDERSON</span><span class="goals">0</span></li>
+                <li><span class="pos">02</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt=""><span class="name">Erik Dos Santos</span><span class="goals">0</span></li>
+                <li><span class="pos">03</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt=""><span class="name">Zeizi Polo</span><span class="goals">0</span></li>
+                <li><span class="pos">04</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt=""><span class="name">Alvaro dos Santos</span><span class="goals">0</span></li>
+                <li><span class="pos">05</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt=""><span class="name">Pedro Chitata</span><span class="goals">0</span></li>
+              </ul>
+              <div class="laliga-footer">
+                <button type="button" class="btn-todos" id="btn-scorers-iberica5" onclick="toggleScorersIberica5()">Todos os líderes em golos ►</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assistências Ibérica -->
+          <div class="elite5-panel">
+            <div class="laliga-scorers">
+              <div class="laliga-header">
+                <div>
+                  <div class="laliga-goals-big">0</div>
+                  <div class="laliga-label">Assistências</div>
+                  <div class="laliga-rank">1º</div>
+                  <div class="laliga-name">ERIK DOS SANTOS</div>
+                  <div class="laliga-club">
+                    <img src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt="">
+                    <span>Puli United</span>
+                  </div>
+                </div>
+              </div>
+              <ul class="laliga-list" id="assists-iberica5">
+                <li><span class="pos">01</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt=""><span class="name">Erik Dos Santos</span><span class="goals">0</span></li>
+                <li><span class="pos">02</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt=""><span class="name">Epifânio Manuel</span><span class="goals">0</span></li>
+                <li><span class="pos">03</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt=""><span class="name">Katendi Inácio</span><span class="goals">0</span></li>
+                <li><span class="pos">04</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt=""><span class="name">Ery de Carvalho</span><span class="goals">0</span></li>
+                <li><span class="pos">05</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt=""><span class="name">Gabriela Sousa</span><span class="goals">0</span></li>
+              </ul>
+              <div class="laliga-footer">
+                <button type="button" class="btn-todos" id="btn-assists-iberica5" onclick="toggleAssistsIberica5()">Todos os líderes em assistências ►</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="melhor-jornada">
+          <h3>⭐ Melhor Jogador da Jornada</h3>
+          <div class="mj-card">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png"
+              alt="Pedro Chitata - Puli United">
+            <div class="mj-info">
+              <div class="mj-name">A determinar</div>
+              <div class="mj-team">Team name</div>
+              <div class="mj-stats">
+                0 Golos · 0 Assistências<br>
+                Prémio da Jornada · Copa Ibérica
+              </div>
+              <span class="mj-badge">5ª EDIÇÃO</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -3976,6 +4812,143 @@
         mostrar(defaultEdition[tabId]);
       }
     };
+
+    /* 5ª Edição: classificação automática */
+    const elite5Teams = [
+      { equipa: "Black Team", logo: "https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp", j: 1, v: 0, e: 0, d: 1, gm: 1, gs: 4,},
+      { equipa: "TheKingsman", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png", j: 1, v: 0, e: 0, d: 1, gm: 0, gs: 1, },
+      { equipa: "FC Zeico", logo: "https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png", j: 1, v: 0, e: 1, d: 0, gm: 2, gs: 2 ,},
+      { equipa: "Puli United", logo: "https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png", j: 1, v: 0, e: 1, d: 0, gm: 2, gs: 2, },
+      { equipa: "Cosmic Team", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png", j: 1, v: 1, e: 0, d: 0, gm: 4, gs: 1, },
+      { equipa: "DreamTeam", logo: "https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png", j: 1, v: 0, e: 1, d: 0, gm: 0, gs: 0, },
+      { equipa: "Marvel FC", logo: "https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp", j: 1, v: 1, e: 0, d: 0, gm: 1, gs: 0, },
+      { equipa: "Galáticos", logo: "https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp", j: 1, v: 0, e: 1, d: 0, gm: 0, gs: 0, }
+    ];
+
+    function calcPts(t) { return t.v * 3 + t.e; }
+    function calcDG(t) { return (t.gm || 0) - (t.gs || 0); }
+
+    function sortStandings(teams) {
+      return [...teams].sort((a, b) => {
+        const ptsA = calcPts(a), ptsB = calcPts(b);
+        if (ptsB !== ptsA) return ptsB - ptsA;
+        const dgA = calcDG(a), dgB = calcDG(b);
+        if (dgB !== dgA) return dgB - dgA;
+        if ((b.gm || 0) !== (a.gm || 0)) return (b.gm || 0) - (a.gm || 0);
+        return a.equipa.localeCompare(b.equipa);
+      });
+    }
+
+    function renderElite5Standings() {
+      const tbody = document.getElementById("elite5-standings-body");
+      if (!tbody) return;
+      const sorted = sortStandings(elite5Teams);
+      tbody.innerHTML = sorted.map((t, i) => {
+        const pts = calcPts(t);
+        const logoInner = t.logo
+          ? `<img class="pl-logo" src="${t.logo}" alt="" width="18" height="18">`
+          : `<span style="display:block;width:18px;height:18px;background:${t.color || '#555'};border-radius:2px;"></span>`;
+        const gm = t.gm || 0;
+        const gf = t.gs || 0;
+        const dg = gm - gf;
+        return `<tr>
+          <td class="pl-pos">${i + 1}</td>
+          <td class="pl-td-logo"><span class="pl-logo-wrap">${logoInner}</span></td>
+          <td class="pl-td-team">${t.equipa}</td>
+          <td>${t.j}</td><td>${t.v}</td><td>${t.e}</td><td>${t.d}</td>
+          <td>${gm}</td><td>${gf}</td><td>${dg}</td>
+          <td class="pl-pts">${pts}</td>
+        </tr>`;
+      }).join("");
+    }
+
+    function updateElite5Standings() { renderElite5Standings(); }
+
+    if (document.getElementById("elite5-standings-body")) renderElite5Standings();
+
+    /* Copa Ibérica – Grupo A e Grupo B (4 equipas cada) */
+    const ibericaGrupoA = [
+      { equipa: "FC Zeico", logo: "https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png", j: 0, v: 0, e: 0, d: 0, gm: 0, gs: 0 },
+      { equipa: "Puli United", logo: "https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png", j: 0, v: 0, e: 0, d: 0, gm: 0, gs: 0 },
+      { equipa: "Marvel FC", logo: "https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp", j: 0, v: 0, e: 0, d: 0, gm: 0, gs: 0 },
+      { equipa: "Galáticos", logo: "https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp", j: 0, v: 0, e: 0, d: 0, gm: 0, gs: 0 }
+    ];
+    const ibericaGrupoB = [
+      { equipa: "TheKingsman", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png", j: 0, v: 0, e: 0, d: 0, gm: 0, gs: 0 },
+      { equipa: "Cosmic Team", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png", j: 0, v: 0, e: 0, d: 0, gm: 0, gs: 0 },
+      { equipa: "DreamTeam", logo: "https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png", j: 0, v: 0, e: 0, d: 0, gm: 0, gs: 0 },
+      { equipa: "Black Team", logo: "https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp", j: 0, v: 0, e: 0, d: 0, gm: 0, gs: 0 }
+    ];
+
+    function renderIbericaGroup(tbodyId, teams) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      const sorted = sortStandings(teams);
+      tbody.innerHTML = sorted.map((t, i) => {
+        const pts = calcPts(t);
+        const gm = t.gm || 0;
+        const gf = t.gs || 0;
+        const dg = gm - gf;
+        const logoInner = t.logo
+          ? `<img class="pl-logo" src="${t.logo}" alt="" width="18" height="18">`
+          : `<span style="display:block;width:18px;height:18px;background:#555;border-radius:2px;"></span>`;
+        return `<tr>
+          <td class="pl-pos">${i + 1}</td>
+          <td class="pl-td-logo"><span class="pl-logo-wrap">${logoInner}</span></td>
+          <td class="pl-td-team">${t.equipa}</td>
+          <td>${t.j}</td><td>${t.v}</td><td>${t.e}</td><td>${t.d}</td>
+          <td>${gm}</td><td>${gf}</td><td>${dg}</td>
+          <td class="pl-pts">${pts}</td>
+        </tr>`;
+      }).join("");
+    }
+    renderIbericaGroup("iberica-grupo-a-body", ibericaGrupoA);
+    renderIbericaGroup("iberica-grupo-b-body", ibericaGrupoB);
+
+    function toggleScorersElite5() {
+      const list = document.getElementById("scorers-elite5");
+      const btn = document.getElementById("btn-scorers-elite5");
+      if (!list || !btn) return;
+      list.classList.toggle("expanded");
+      btn.textContent = list.classList.contains("expanded") ? "Ver menos ◄" : "Todos os líderes em golos ►";
+    }
+
+    function toggleAssistsElite5() {
+      const list = document.getElementById("assists-elite5");
+      const btn = document.getElementById("btn-assists-elite5");
+      if (!list || !btn) return;
+      list.classList.toggle("expanded");
+      btn.textContent = list.classList.contains("expanded") ? "Ver menos ◄" : "Todos os líderes em assistências ►";
+    }
+
+    function toggleScorersCopa5() {
+      const list = document.getElementById("scorers-copa5");
+      const btn = document.getElementById("btn-scorers-copa5");
+      if (!list || !btn) return;
+      list.classList.toggle("expanded");
+      btn.textContent = list.classList.contains("expanded") ? "Ver menos ◄" : "Todos os líderes em golos ►";
+    }
+    function toggleAssistsCopa5() {
+      const list = document.getElementById("assists-copa5");
+      const btn = document.getElementById("btn-assists-copa5");
+      if (!list || !btn) return;
+      list.classList.toggle("expanded");
+      btn.textContent = list.classList.contains("expanded") ? "Ver menos ◄" : "Todos os líderes em assistências ►";
+    }
+    function toggleScorersIberica5() {
+      const list = document.getElementById("scorers-iberica5");
+      const btn = document.getElementById("btn-scorers-iberica5");
+      if (!list || !btn) return;
+      list.classList.toggle("expanded");
+      btn.textContent = list.classList.contains("expanded") ? "Ver menos ◄" : "Todos os líderes em golos ►";
+    }
+    function toggleAssistsIberica5() {
+      const list = document.getElementById("assists-iberica5");
+      const btn = document.getElementById("btn-assists-iberica5");
+      if (!list || !btn) return;
+      list.classList.toggle("expanded");
+      btn.textContent = list.classList.contains("expanded") ? "Ver menos ◄" : "Todos os líderes em assistências ►";
+    }
 
     fetch("torneioh.html")
       .then(res => res.text()).then(data => {

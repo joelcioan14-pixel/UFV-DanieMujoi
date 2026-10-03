@@ -1,0 +1,2391 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Virtual Soccer | UFV</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0f0f23;
+      --bg-card: #1a1a3e;
+      --bg-card-hover: #24245a;
+      --primary: #6c5ce7;
+      --primary-light: #a29bfe;
+      --accent: #fdcb6e;
+      --text: #ffffff;
+      --text-muted: #b2bec3;
+      --border: rgba(108, 92, 231, 0.3);
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      padding-bottom: 115px;
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      background: linear-gradient(135deg, #c9b3f5 0%, #c9b3f5 60%, #1a1a4e 100%);
+      padding: 14px 16px;
+      text-align: center;
+      border-bottom: 2px solid var(--primary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+    }
+
+    header .logo-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    header img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.15);
+      padding: 4px;
+    }
+
+    header h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1a1a3e;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    header p {
+      font-size: 0.72rem;
+      color: #2d2d5a;
+      margin-top: 2px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ========== CONTEÚDO DAS EDIÇÕES ========== */
+    .edicao {
+      display: none;
+      padding: 18px 12px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .edicao.ativa {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .edicao-titulo {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .edicao-titulo h2 {
+      font-size: 1.45rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .edicao-titulo .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 0.72rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .badge.live {
+      background: linear-gradient(90deg, #e17055, #fdcb6e);
+      color: #1a1a3e;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.75; }
+    }
+
+    .hero-img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      background: #12122a;
+      border-radius: 14px;
+      border: 2px solid var(--border);
+      box-shadow: 0 6px 22px rgba(0,0,0,0.35);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.22);
+    }
+
+    .card h3 {
+      color: var(--accent);
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .card strong {
+      color: var(--text);
+    }
+
+    .destaques-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 560px) {
+      .destaques-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .destaque-card {
+      background: var(--bg-card);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .destaque-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(108, 92, 231, 0.28);
+    }
+
+    .destaque-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      object-position: center top;
+      background: #12122a;
+    }
+
+    .destaque-card .info {
+      padding: 12px;
+    }
+
+    .destaque-card h4 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 3px;
+    }
+
+    .destaque-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .destaque-card .tag {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 0.68rem;
+      padding: 3px 9px;
+      border-radius: 10px;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* Placar */
+    .placar-box {
+      background: linear-gradient(135deg, #0018a8 0%, #6c1b9e 100%);
+      border-radius: 14px;
+      padding: 18px 14px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .placar-box .local {
+      font-size: 0.75rem;
+      color: #a0c0ff;
+      margin-bottom: 12px;
+    }
+
+    .placar-linha {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .time-lado {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .time-lado img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .time-lado span {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .resultado {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      min-width: 60px;
+    }
+
+    .gols-lista {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.75rem;
+      color: #e0e8ff;
+    }
+
+    .gols-lista > div { flex: 1; text-align: left; }
+    .gols-lista > div:last-child { text-align: right; }
+
+    /* Artilharia (edições antigas) */
+    .artilharia {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.28);
+    }
+
+    .artilharia-topo {
+      background: linear-gradient(135deg, #0027d8, #6c1b9e);
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .artilharia-topo .golos-num {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .artilharia-topo .golos-label {
+      font-size: 0.85rem;
+      color: #c0d0ff;
+      letter-spacing: 2px;
+    }
+
+    .artilharia-topo .jogador-info {
+      text-align: center;
+    }
+
+    .artilharia-topo .jogador-info img {
+      width: 90px;
+      height: auto;
+      max-height: 110px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    .artilharia-topo .jogador-info h4 {
+      color: #fff;
+      margin-top: 6px;
+      font-size: 0.95rem;
+    }
+
+    .artilharia-topo .jogador-info .time-mini {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 3px;
+      font-size: 0.75rem;
+      color: #c0d0ff;
+    }
+
+    .artilharia-topo .jogador-info .time-mini img {
+      width: 20px;
+      height: 20px;
+      border: none;
+      border-radius: 3px;
+      object-fit: contain;
+    }
+
+    .artilharia table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .artilharia th {
+      background: #f0f0f5;
+      color: #333;
+      padding: 10px 8px;
+      font-size: 0.75rem;
+      text-align: left;
+    }
+
+    .artilharia td {
+      padding: 10px 8px;
+      color: #222;
+      border-bottom: 1px solid #eee;
+      font-size: 0.85rem;
+    }
+
+    .artilharia tr:nth-child(even) td {
+      background: #f8f8fc;
+    }
+
+    .artilharia .pos {
+      font-weight: 700;
+      color: var(--primary);
+      width: 36px;
+    }
+
+    .artilharia .gols {
+      font-weight: 700;
+      text-align: right;
+      color: #0027d8;
+    }
+
+    .edicao-footer {
+      text-align: center;
+      padding: 12px;
+      background: rgba(108, 92, 231, 0.15);
+      border-radius: 10px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* ========== 6ª EDIÇÃO – TABELAS COMPACTAS ========== */
+    .scroll-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .scroll-wrap.dark {
+      background: var(--bg-card);
+    }
+
+    .scroll-wrap::-webkit-scrollbar {
+      height: 5px;
+    }
+    .scroll-wrap::-webkit-scrollbar-track {
+      background: #e8e8f0;
+    }
+    .scroll-wrap.dark::-webkit-scrollbar-track {
+      background: #12122a;
+    }
+    .scroll-wrap::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 3px;
+    }
+
+    /* Classificação compacta – cabe na largura do ecrã */
+    .classificacao-table {
+      width: 100%;
+      min-width: 0;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+      table-layout: fixed;
+    }
+
+    .classificacao-table th {
+      background: linear-gradient(135deg, #0027d8, #6c1b9e);
+      color: #fff;
+      padding: 8px 3px;
+      font-weight: 600;
+      text-align: center;
+      white-space: nowrap;
+      font-size: 0.68rem;
+    }
+
+    .classificacao-table th:first-child {
+      text-align: left;
+      padding-left: 6px;
+      width: 38%;
+    }
+
+    .classificacao-table td {
+      padding: 7px 3px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .classificacao-table td:first-child {
+      text-align: left;
+      padding-left: 6px;
+    }
+
+    .classificacao-table tr:nth-child(even) td {
+      background: rgba(255,255,255,0.03);
+    }
+
+    .classificacao-table tr:hover td {
+      background: rgba(108, 92, 231, 0.15);
+    }
+
+    .equipa-cell {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .equipa-cell img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .equipa-cell .nome-eq {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 0.7rem;
+    }
+
+    .pos-num {
+      font-weight: 700;
+      color: var(--accent);
+      width: 16px;
+      display: inline-block;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+    }
+
+    /* Artilharia / Assistências estilo edição 5 (fundo branco) */
+    .artilharia6 {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.28);
+    }
+
+    .artilharia6 .topo {
+      background: linear-gradient(135deg, #0027d8, #6c1b9e);
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .artilharia6 .golos-num {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .artilharia6 .golos-label {
+      font-size: 0.8rem;
+      color: #c0d0ff;
+      letter-spacing: 2px;
+    }
+
+    .artilharia6 .jogador-info {
+      text-align: center;
+    }
+
+    .artilharia6 .jogador-info img {
+      width: 90px;
+      height: auto;
+      max-height: 110px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .artilharia6 .jogador-info .placeholder-card {
+      width: 70px;
+      height: 90px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 2px dashed rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Prémios 5ª edição */
+    .premios-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    @media (min-width: 520px) {
+      .premios-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .premio-card {
+      background: var(--bg-card);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      text-align: center;
+      padding-bottom: 12px;
+    }
+    .premio-card img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      background: transparent;
+      border: none;
+      display: block;
+    }
+    .premio-card h4 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin: 10px 8px 4px;
+    }
+    .premio-card p {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 0 8px;
+    }
+    .premio-card .tag {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.68rem;
+      padding: 3px 10px;
+      border-radius: 10px;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* 5 Ideal */
+    .ideal5 {
+      background: linear-gradient(160deg, #2d1b69 0%, #1a0a3e 50%, #4a148c 100%);
+      border-radius: 16px;
+      padding: 18px 12px 20px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(253, 203, 110, 0.3);
+      text-align: center;
+    }
+    .ideal5 h3 {
+      color: var(--accent);
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+    }
+    .ideal5 .sub {
+      color: #c0b0ff;
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+    .ideal5-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .ideal5-grid img {
+      width: calc(33% - 8px);
+      max-width: 120px;
+      height: auto;
+      object-fit: contain;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    }
+    @media (min-width: 500px) {
+      .ideal5-grid img {
+        width: calc(20% - 10px);
+        max-width: 140px;
+      }
+    }
+
+
+    .artilharia6 .jogador-info h4 {
+      color: #fff;
+      margin-top: 6px;
+      font-size: 0.9rem;
+    }
+
+    .artilharia6 .jogador-info p {
+      color: #c0d0ff;
+      font-size: 0.72rem;
+    }
+
+    .stats-table6 {
+      width: 100%;
+      min-width: 0;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+
+    .stats-table6 th {
+      background: #f0f0f5;
+      color: #333;
+      padding: 9px 6px;
+      font-weight: 600;
+      text-align: left;
+      white-space: nowrap;
+      font-size: 0.72rem;
+    }
+
+    .stats-table6 th:last-child,
+    .stats-table6 td:last-child {
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    .stats-table6 th.center,
+    .stats-table6 td.center {
+      text-align: center;
+    }
+
+    .stats-table6 td {
+      padding: 8px 6px;
+      color: #222;
+      border-bottom: 1px solid #eee;
+      white-space: nowrap;
+    }
+
+    .stats-table6 tr:nth-child(even) td {
+      background: #f8f8fc;
+    }
+
+    .stats-table6 .pos {
+      font-weight: 700;
+      color: #6c5ce7;
+      width: 28px;
+    }
+
+    .stats-table6 .gols-val {
+      font-weight: 700;
+      color: #0027d8;
+    }
+
+    .stats-table6 tr.hidden-row {
+      display: none;
+    }
+
+    .stats-table6 tr.hidden-row.show {
+      display: table-row;
+    }
+
+    .club-logo {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-right: 2px;
+    }
+
+    .ver-mais-btn {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 11px;
+      background: linear-gradient(135deg, var(--primary), #8b008b);
+      color: #fff;
+      border: none;
+      border-radius: 0 0 14px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .ver-mais-btn:hover {
+      opacity: 0.9;
+    }
+
+    .section-title {
+      color: var(--accent);
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Carrossel horizontal: Classificação | Artilharia | Assistências */
+    .h-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 0;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      scrollbar-width: none;
+    }
+    .h-carousel::-webkit-scrollbar {
+      display: none;
+    }
+    .h-panel {
+      flex: 0 0 100%;
+      width: 100%;
+      min-width: 100%;
+      scroll-snap-align: start;
+      padding: 0 2px;
+      box-sizing: border-box;
+    }
+    .h-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .h-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .h-dots span.active {
+      background: var(--accent);
+      transform: scale(1.25);
+    }
+    .h-panel-label {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    .h-panel-label strong {
+      color: var(--accent);
+    }
+
+    /* Cards artilharia – tamanho equilibrado */
+    .artilharia-topo .jogador-info img,
+    .artilharia6 .jogador-info img {
+      width: 72px !important;
+      max-height: 95px !important;
+      height: auto !important;
+    }
+    .artilharia6 .topo,
+    .artilharia-topo {
+      padding: 12px 14px !important;
+      min-height: 0 !important;
+    }
+    .artilharia6 .golos-num,
+    .artilharia-topo .golos-num {
+      font-size: 2.4rem !important;
+    }
+    .artilharia6 .golos-label,
+    .artilharia-topo .golos-label {
+      font-size: 0.72rem !important;
+    }
+    .artilharia6 .jogador-info h4,
+    .artilharia-topo .jogador-info h4 {
+      font-size: 0.85rem !important;
+      margin-top: 4px !important;
+    }
+    .artilharia6 .jogador-info p,
+    .artilharia-topo .jogador-info .time-mini {
+      font-size: 0.7rem !important;
+    }
+    /* Logo equipa no topo da artilharia */
+    .artilharia6 .jogador-info p img,
+    .artilharia-topo .jogador-info .time-mini img {
+      width: 40px !important;
+      height: 40px !important;
+      object-fit: contain !important;
+      border: none !important;
+      background: transparent !important;
+    }
+    .club-logo {
+      width: 22px !important;
+      height: 22px !important;
+    }
+
+    /* Botão especial Dream League */
+    .edicao-btn.dream {
+      background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+      border-color: #fdcb6e;
+      color: #1a1a3e;
+      min-width: 100px;
+      max-width: 112px;
+    }
+    .edicao-btn.dream .num {
+      color: #1a1a3e;
+      font-weight: 800;
+    }
+    .edicao-btn.dream span {
+      color: #1a1a3e;
+    }
+    .edicao-btn.dream.ativo,
+    .edicao-btn.dream:hover {
+      background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+      border-color: #fff;
+      box-shadow: 0 4px 16px rgba(253, 203, 110, 0.5);
+      transform: translateY(-2px);
+    }
+    .edicao-btn.dream img {
+      filter: brightness(0.2);
+      background: rgba(255,255,255,0.5);
+      border-radius: 6px;
+      padding: 2px;
+    }
+
+    /* Jogador da Jornada */
+    .jornada-card {
+      background: linear-gradient(135deg, #1a1a3e 0%, #2d1b69 50%, #6c1b9e 100%);
+      border-radius: 14px;
+      padding: 18px 16px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(253, 203, 110, 0.35);
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .jornada-card h3 {
+      color: var(--accent);
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .jornada-card p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .jornada-card .jornada-badge {
+      display: inline-block;
+      background: rgba(253, 203, 110, 0.2);
+      color: var(--accent);
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+
+    /* ========== BOTÕES FIXOS DAS EDIÇÕES (mais compactos) ========== */
+    .edicoes-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(15,15,35,0.97) 0%, #0f0f23 100%);
+      padding: 8px 8px 12px;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      z-index: 200;
+      border-top: 2px solid var(--primary);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .edicoes-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .edicao-btn {
+      flex: 0 0 auto;
+      min-width: 88px;
+      max-width: 100px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 6px 5px;
+      color: var(--text);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .edicao-btn img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .edicao-btn span {
+      font-size: 0.6rem;
+      font-weight: 600;
+      line-height: 1.15;
+      max-width: 90px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .edicao-btn .num {
+      font-size: 0.58rem;
+      color: var(--accent);
+      letter-spacing: 0.3px;
+    }
+
+    .edicao-btn:hover,
+    .edicao-btn.ativo {
+      background: linear-gradient(135deg, var(--primary), #8b008b);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(108, 92, 231, 0.4);
+    }
+
+    .edicao-btn.ativo {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 380px) {
+      .edicao-btn {
+        min-width: 78px;
+        padding: 5px 4px;
+      }
+      .edicao-btn img {
+        width: 28px;
+        height: 28px;
+      }
+      header h1 {
+        font-size: 1.15rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-area">
+      <img src="https://image.cdn2.seaart.me/2026-05-14/d8357sle878c738rn2c0/fa0df187-86cc-4292-adf8-7099980e5e15.png" alt="Logo SVS">
+      <div>
+        <h1>Super Virtual Soccer</h1>
+        <p>Team League • UFV</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== 1ª EDIÇÃO ========== -->
+  <section id="champ1" class="edicao">
+    <div class="edicao-titulo">
+      <h2>1ª Edição da Team League</h2>
+      <span class="badge">CAMPEÃO: Dream Team FC</span>
+    </div>
+
+    <img class="hero-img" src="https://image.cdn2.seaart.me/upload/static/20260612/d1416635249a1c143ad220b432c64e73_high.webp" alt="Dream Team campeão da 1ª edição">
+
+    <div class="card">
+      <h3>🏆 Campeão</h3>
+      <p>O <strong>Dream Team FC</strong> sagrou-se campeão da primeira edição da SVS Team League ao vencer o The Kingsman por <strong>3-1</strong> na final, com 2 golos de Rodrigo L. Pascoal.</p>
+      <p>Na disputa do 3º lugar, o ATL Destroyes venceu o Raphael FC.</p>
+    </div>
+
+    <div class="destaques-grid">
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260612/5b529779a63f2919787bc6f884262087_high.webp" alt="Rodrigo Luís Pascoal">
+        <div class="info">
+          <h4>Rodrigo Luís Pascoal</h4>
+          <p>Melhor Jogador & Artilheiro</p>
+          <span class="tag">12 GOLOS</span>
+        </div>
+      </div>
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/2026-06-12/d8m3kbde878c73dc7rjg/ee58f3fb-294a-40fa-99c6-e5783b8449ba.png" alt="Bernardo Sacumissa">
+        <div class="info">
+          <h4>Bernardo Sacumissa</h4>
+          <p>Melhor Jogador Revelação</p>
+          <span class="tag">Golden Player</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artilharia">
+      <div class="artilharia-topo">
+        <div>
+          <div class="golos-num">12</div>
+          <div class="golos-label">GOLOS</div>
+        </div>
+        <div class="jogador-info">
+          <img src="https://image.cdn2.seaart.me/2026-06-12/d8m1pp5e878c7381hd90/e698cd5f-3e9b-4089-9c13-838753b1cee6.png" alt="Rodrigo">
+          <h4>Rodrigo Luís Páscoal</h4>
+          <div class="time-mini">
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt="Dream Team">
+            Dream Team
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>POS</th>
+            <th>Jogador</th>
+            <th style="text-align:right">Golos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="pos">01</td><td>Rodrigo</td><td class="gols">12</td></tr>
+          <tr><td class="pos">02</td><td>Jons Carlos</td><td class="gols">8</td></tr>
+          <tr><td class="pos">03</td><td>Katendi Inácio</td><td class="gols">6</td></tr>
+          <tr><td class="pos">04</td><td>Raphael</td><td class="gols">4</td></tr>
+          <tr><td class="pos">05</td><td>Killer</td><td class="gols">4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="edicao-footer">Assim ficou a primeira edição do Evento SVS Team League</div>
+  </section>
+
+  <!-- ========== 2ª EDIÇÃO ========== -->
+  <section id="champ2" class="edicao">
+    <div class="edicao-titulo">
+      <h2>2ª Edição da Team League</h2>
+      <span class="badge">CAMPEÃO: The Kingsman</span>
+    </div>
+
+    <img class="hero-img" src="https://image.cdn2.seaart.me/upload/static/20260612/32048697841ad3fc2908a5940565ed68_high.webp" alt="Kingsman campeão">
+
+    <div class="card">
+      <h3>🏆 Campeão</h3>
+      <p>O <strong>The Kingsman</strong> conquistou o seu primeiro título da Team League numa temporada histórica, onde também venceu a Liga Élite, Supercup e Copa Ibérica.</p>
+      <p>Na final derrotou o Dream Team. O Black Team ficou em 3º ao vencer o Cosmic.</p>
+    </div>
+
+    <div class="destaques-grid">
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260612/3d0e93740aa8f4e742dd9ffd93875dde_high.webp" alt="Aguinaldo">
+        <div class="info">
+          <h4>AGUI (Aguinaldo)</h4>
+          <p>MVP do Torneio & Artilheiro</p>
+          <span class="tag">10 GOLOS</span>
+        </div>
+      </div>
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260612/d1ae022abefbbd0f5463148599773350_high.webp" alt="Graciano">
+        <div class="info">
+          <h4>Graciano</h4>
+          <p>Melhor Jogador Revelação</p>
+          <span class="tag">8 GOLOS • Bronze</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artilharia">
+      <div class="artilharia-topo">
+        <div>
+          <div class="golos-num">10</div>
+          <div class="golos-label">GOLOS</div>
+        </div>
+        <div class="jogador-info">
+          <img src="https://image.cdn2.seaart.me/2026-06-12/d8m3go5e878c73e3mot0/a9f896d6-ea02-4178-974a-83db2573b300.png" alt="AGUI">
+          <h4>AGUI</h4>
+          <div class="time-mini">
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Kingsman">
+            The Kingsman
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>POS</th>
+            <th>Jogador</th>
+            <th style="text-align:right">Golos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="pos">01</td><td>AGUI</td><td class="gols">10</td></tr>
+          <tr><td class="pos">02</td><td>Nathan Fuanzolo</td><td class="gols">8</td></tr>
+          <tr><td class="pos">03</td><td>Graciano</td><td class="gols">8</td></tr>
+          <tr><td class="pos">04</td><td>Zeizi Polo</td><td class="gols">7</td></tr>
+          <tr><td class="pos">05</td><td>Katendi Inácio</td><td class="gols">5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="edicao-footer">Assim ficou a segunda edição da SVS Team League</div>
+  </section>
+
+  <!-- ========== 3ª EDIÇÃO ========== -->
+  <section id="champ3" class="edicao">
+    <div class="edicao-titulo">
+      <h2>3ª Edição da Team League</h2>
+      <span class="badge">CAMPEÃO: Tubarões CGV</span>
+    </div>
+
+    <img class="hero-img" src="https://image.cdn2.seaart.me/upload/static/20260612/ddc7313d3ce0ec65f799f25e8a57c5b8_high.webp" alt="Tubarões campeões">
+
+    <div class="card">
+      <h3>🏆 Campeão</h3>
+      <p>Os <strong>Tubarões CGV</strong> foram os grandes vencedores da 3ª edição, batendo os Craques da Bola na final.</p>
+      <p>Na disputa do 3º lugar, o Ouver Leste triunfou sobre o Dream Team FC.</p>
+      <p style="margin-top:8px;font-size:0.82rem;opacity:0.8">⚠️ Esta edição ficou marcada por problemas com patrocinadores, que resultaram numa paragem de 7-8 meses da organização.</p>
+    </div>
+
+    <div class="destaques-grid">
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260612/7ff9ce554f3a09085d381dbec016bc19_high.webp" alt="Zeizi Polo">
+        <div class="info">
+          <h4>Zeizi Polo</h4>
+          <p>Melhor Jogador do Torneio</p>
+          <span class="tag">2 GOLOS NA FINAL</span>
+        </div>
+      </div>
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/2026-06-12/d8m4l75e878c738t2k5g/e96f7bfa-6d31-4793-b0dc-e6cb153f68f5.png" alt="Pires Jr">
+        <div class="info">
+          <h4>Pires Jr</h4>
+          <p>Melhor Jogador Revelação</p>
+          <span class="tag">9 GOLOS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artilharia">
+      <div class="artilharia-topo">
+        <div>
+          <div class="golos-num">11</div>
+          <div class="golos-label">GOLOS</div>
+        </div>
+        <div class="jogador-info">
+          <img src="https://image.cdn2.seaart.me/2026-06-12/d8m3p35e878c73dch9h0/f79a0625-3f40-4d9b-802d-69e392ae83e1.png" alt="Zeizi">
+          <h4>Zeizi Polo</h4>
+          <div class="time-mini">
+            <img src="https://image.cdn2.seaart.me/2026-06-13/d8mpk35e878c73a18cog/8b188e84-9ae3-4d67-ab90-ebd694baedcb.png" alt="Tubarões">
+            Tubarões
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>POS</th>
+            <th>Jogador</th>
+            <th style="text-align:right">Golos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="pos">01</td><td>Zeizi Polo</td><td class="gols">11</td></tr>
+          <tr><td class="pos">02</td><td>Pires Jr</td><td class="gols">9</td></tr>
+          <tr><td class="pos">03</td><td>Laurindo</td><td class="gols">8</td></tr>
+          <tr><td class="pos">04</td><td>A.F.C.N.</td><td class="gols">8</td></tr>
+          <tr><td class="pos">05</td><td>Janilson</td><td class="gols">8</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="edicao-footer">Assim terminou a 3ª Edição da Team League</div>
+  </section>
+
+  <!-- ========== 4ª EDIÇÃO ========== -->
+  <section id="champ4" class="edicao">
+    <div class="edicao-titulo">
+      <h2>4ª Edição da Team League</h2>
+      <span class="badge">CAMPEÃO: Cosmic Team CF</span>
+    </div>
+
+    <img class="hero-img" src="https://image.cdn2.seaart.me/upload/static/20260613/476de1db2fdf8d01c6af6eddf0d5f432_high.webp" alt="Cosmic campeão">
+
+    <div class="card">
+      <h3>🏆 Campeão</h3>
+      <p>O <strong>Cosmic Team</strong> foi o campeão da 4ª edição (já após a longa paragem), com protagonismo de Anderson. Venceu o FC Zeico na final.</p>
+    </div>
+
+    <div class="placar-box">
+      <div class="local">SVS Grand Stadium • Luanda</div>
+      <div class="placar-linha">
+        <div class="time-lado">
+          <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt="Zeico">
+          <span>Zeico</span>
+        </div>
+        <div class="resultado">1 - 5</div>
+        <div class="time-lado">
+          <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Cosmic">
+          <span>Cosmic</span>
+        </div>
+      </div>
+      <div class="gols-lista">
+        <div>Fadario 75' ⚽</div>
+        <div>
+          Ery 08' ⚽<br>
+          Afonso AC 22' ⚽<br>
+          Anderson 44' 63' ⚽(2x)<br>
+          Laurindo 86' ⚽
+        </div>
+      </div>
+    </div>
+
+    <div class="destaques-grid">
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260613/1217a0ab98bec890f4f228ebdc84ddd3_high.webp" alt="Anderson">
+        <div class="info">
+          <h4>Anderson</h4>
+          <p>Melhor Jogador & MVP da Final</p>
+          <span class="tag">The Best da Temporada</span>
+        </div>
+      </div>
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260613/2414769c3adff586a51ed9f5f637afd4_high.webp" alt="Érik dos Santos">
+        <div class="info">
+          <h4>Érik dos Santos</h4>
+          <p>Artilheiro & Golden Player</p>
+          <span class="tag">12 GOLOS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artilharia">
+      <div class="artilharia-topo">
+        <div>
+          <div class="golos-num">12</div>
+          <div class="golos-label">GOLOS</div>
+        </div>
+        <div class="jogador-info">
+          <img src="https://image.cdn2.seaart.me/upload/static/20260613/cfacdeb1e3c886fc2202ea04941310e8_high.webp" alt="Érik">
+          <h4>Érik dos Santos</h4>
+          <div class="time-mini">
+            <img src="https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png" alt="Puli">
+            _Puli_Utd
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>POS</th>
+            <th>Jogador</th>
+            <th style="text-align:right">Golos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="pos">01</td><td>Érik Dos Santos</td><td class="gols">12</td></tr>
+          <tr><td class="pos">02</td><td>Fadario</td><td class="gols">10</td></tr>
+          <tr><td class="pos">03</td><td>Anderson</td><td class="gols">8</td></tr>
+          <tr><td class="pos">04</td><td>Afonso AC</td><td class="gols">7</td></tr>
+          <tr><td class="pos">05</td><td>Ery</td><td class="gols">5</td></tr>
+          <tr><td class="pos">06</td><td>Laurindo</td><td class="gols">5</td></tr>
+          <tr><td class="pos">07</td><td>Katendi Inácio</td><td class="gols">5</td></tr>
+          <tr><td class="pos">08</td><td>André Miguel</td><td class="gols">5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="edicao-footer">4ª edição da Team League — retorno após a paragem</div>
+  </section>
+
+  <!-- ========== 5ª EDIÇÃO ========== -->
+  <section id="champ5" class="edicao">
+    <div class="edicao-titulo">
+      <h2>5ª Edição da Team League</h2>
+      <span class="badge">CAMPEÃO: FC Zeico</span>
+    </div>
+
+    <img class="hero-img" src="https://image.cdn2.seaart.me/upload/static/20260614/85cabc5ef1ee84dfdb74f72253592256_high.webp" alt="Zeico campeão">
+
+    <div class="card">
+      <h3>🏆 Campeão</h3>
+      <p>O <strong>FC Zeico</strong> foi o campeão desta edição com uma fantástica união de equipa. Conquistou as 2 competições mais importantes da temporada: Liga Élite e Team League.</p>
+      <p>Na final venceu por <strong>3-2</strong>, com Fadario (capitão) como MVP do jogo. Na disputa do 3º lugar, o Puli United derrotou o Kingsman.</p>
+    </div>
+
+    <img class="hero-img" src="https://image.cdn2.seaart.me/upload/static/20260614/94e0b8fbf4345e08f10439bd4daf6e3d_high.webp" alt="Final Zeico" style="max-height:260px">
+
+    <div class="destaques-grid">
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260614/0615671bd56f3fc30bcb3fe4ddce664b_high.webp" alt="Fadario">
+        <div class="info">
+          <h4>Fadario</h4>
+          <p>Capitão & Destaque da equipa</p>
+          <span class="tag">16 GOLOS • 2º Artilheiro</span>
+        </div>
+      </div>
+      <div class="destaque-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20260614/6f44a9409d0b3357b730691d008242f7_high.webp" alt="AGUI">
+        <div class="info">
+          <h4>AGUI (Aguinaldo)</h4>
+          <p>Artilheiro da Edição</p>
+          <span class="tag">17 GOLOS • Recorde Histórico</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artilharia">
+      <div class="artilharia-topo">
+        <div>
+          <div class="golos-num">17</div>
+          <div class="golos-label">GOLOS</div>
+        </div>
+        <div class="jogador-info">
+          <img src="https://image.cdn2.seaart.me/2026-06-14/d8ncdbte878c73acqpr0/66b10b6f-2031-4deb-985e-99cf2d191c0d.png" alt="AGUI">
+          <h4>AGUI</h4>
+          <div class="time-mini">
+            <img src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt="Dream Team">
+            Dream Team
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>POS</th>
+            <th>Jogador</th>
+            <th style="text-align:right">Golos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="pos">01</td><td>AGUI</td><td class="gols">17</td></tr>
+          <tr><td class="pos">02</td><td>Fadario</td><td class="gols">16</td></tr>
+          <tr><td class="pos">03</td><td>Gabriela Sousa</td><td class="gols">12</td></tr>
+          <tr><td class="pos">04</td><td>Zeizi Polo</td><td class="gols">12</td></tr>
+          <tr><td class="pos">05</td><td>Katendi Inácio</td><td class="gols">10</td></tr>
+          <tr><td class="pos">06</td><td>Edward</td><td class="gols">7</td></tr>
+          <tr><td class="pos">07</td><td>Laurindo</td><td class="gols">7</td></tr>
+          <tr><td class="pos">08</td><td>Érik Dos Santos</td><td class="gols">7</td></tr>
+          <tr><td class="pos">09</td><td>Epifânio Manuel</td><td class="gols">6</td></tr>
+          <tr><td class="pos">10</td><td>Ulices Scott</td><td class="gols">5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PRÉMIOS -->
+    <h3 class="section-title">🏅 Prémios da 5ª Edição</h3>
+    <div class="premios-grid">
+      <div class="premio-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20261003/1bda365000eb691e9fdaa94d2dfd3937_high.webp" alt="Fadario">
+        <h4>Fadario</h4>
+        <p>Melhor Jogador</p>
+        <span class="tag">MVP</span>
+      </div>
+      <div class="premio-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20261003/b2007fbd2c3ad9b8921b9fc0670f2237_high.webp" alt="Gabriela Sousa">
+        <h4>Gabriela Sousa</h4>
+        <p>Melhor Jogador Revelação</p>
+        <span class="tag">REVELAÇÃO</span>
+      </div>
+      <div class="premio-card">
+        <img src="https://image.cdn2.seaart.me/upload/static/20261003/1bda365000eb691e9fdaa94d2dfd3937_high.webp" alt="Fadario Capitão">
+        <h4>Fadario</h4>
+        <p>Melhor Capitão</p>
+        <span class="tag">CAPITÃO</span>
+      </div>
+    </div>
+
+    <!-- 5 IDEAL -->
+    <div class="ideal5">
+      <h3>⭐ 5 IDEAL</h3>
+      <p class="sub">Equipa da 5ª Edição • Team League</p>
+      <div class="ideal5-grid">
+        <img src="https://image.cdn2.seaart.me/upload/static/20261003/b2007fbd2c3ad9b8921b9fc0670f2237_high.webp" alt="Jogador 1">
+        <img src="https://image.cdn2.seaart.me/upload/static/20261003/1bda365000eb691e9fdaa94d2dfd3937_high.webp" alt="Jogador 2">
+        <img src="https://image.cdn2.seaart.me/upload/static/20261003/2e5e858542c5305e7190618928c08ca0_high.webp" alt="Jogador 3">
+        <img src="https://image.cdn2.seaart.me/upload/static/20261003/4108aabfb38b3cc31a31fe97e7f400fb_high.webp" alt="Jogador 4">
+        <img src="https://image.cdn2.seaart.me/upload/static/20261003/6dea2803e2d5a527adb7018b0d221032_high.webp" alt="Jogador 5">
+      </div>
+    </div>
+
+    <div class="edicao-footer">
+      5 campeões diferentes até agora • Nomeações no final de julho<br>
+      A Team League deve retornar em julho
+    </div>
+  </section>
+
+  <!-- ========== 6ª EDIÇÃO (A DECORRER) ========== -->
+  <section id="champ6" class="edicao ativa">
+    <div class="edicao-titulo">
+      <h2>6ª Edição da Team League</h2>
+      <span class="badge live">● A DECORRER</span>
+    </div>
+
+    <div class="card">
+      <h3>⚽ Apresentação da Liga</h3>
+      <p>A <strong>Super Virtual Soccer – Team League</strong> é a principal competição de futebol virtual da UFV. Nesta 6ª edição, 8 equipas disputam o título num formato de liga a duas voltas.</p>
+      <p>A temporada está <strong>em andamento</strong>. Acompanhe a classificação, artilharia e assistências atualizadas abaixo.</p>
+    </div>
+
+    <div class="card">
+      <h3>📋 6ª Edição – Formato</h3>
+      <p>• 8 equipas participantes<br>
+         • Pontos corridos (Jornada completa)<br>
+         • Critérios: PTS → DG → GM → Confronto direto</p>
+    </div>
+
+    <!-- CARROSSEL: Classificação | Artilharia | Assistências -->
+    <p class="h-panel-label">← Desliza para ver <strong>Classificação · Artilharia · Assistências</strong> →</p>
+    <div class="h-dots" id="dots6">
+      <span class="active"></span><span></span><span></span>
+    </div>
+    <div class="h-carousel" id="carousel6">
+
+      <!-- PAINEL 1: CLASSIFICAÇÃO -->
+      <div class="h-panel">
+        <h3 class="section-title">📊 Classificação</h3>
+        <div class="scroll-wrap dark">
+          <table class="classificacao-table">
+            <thead>
+              <tr>
+                <th>Equipa</th>
+                <th>J</th>
+                <th>V</th>
+                <th>E</th>
+                <th>D</th>
+                <th>GM</th>
+                <th>GS</th>
+                <th>DG</th>
+                <th>PTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">1</span>
+                    <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="">
+                    <span class="nome-eq">Cosmic Team</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">2</span>
+                    <img src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt="">
+                    <span class="nome-eq">Puli United</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">3</span>
+                    <img src="https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp" alt="">
+                    <span class="nome-eq">The Black Team</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">4</span>
+                    <img src="https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp" alt="">
+                    <span class="nome-eq">Marvel FC</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">5</span>
+                    <img src="https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp" alt="">
+                    <span class="nome-eq">Galáticos</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">6</span>
+                    <img src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt="">
+                    <span class="nome-eq">Dream Team</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">7</span>
+                    <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt="">
+                    <span class="nome-eq">FC Zeico</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">8</span>
+                    <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="">
+                    <span class="nome-eq">The Kingsman</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PAINEL 2: ARTILHARIA -->
+      <div class="h-panel">
+        <h3 class="section-title">⚽ Artilharia</h3>
+        <div class="artilharia6">
+          <div class="topo">
+            <div>
+              <div class="golos-num">0</div>
+              <div class="golos-label">GOLOS</div>
+            </div>
+            <div class="jogador-info">
+              <img src="https://image.cdn2.seaart.me/upload/static/20261003/6dea2803e2d5a527adb7018b0d221032_high.webp" alt="Zeizi Polo">
+              <h4>Zeizi Polo</h4>
+              <p style="display:flex;align-items:center;justify-content:center;gap:5px;margin-top:4px;">
+                <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Kingsman" style="width:40px;height:40px;object-fit:contain;border:none;background:transparent;">
+                The Kingsman
+              </p>
+            </div>
+          </div>
+          <div class="scroll-wrap" style="border:none; border-radius:0; margin:0; box-shadow:none;">
+            <table class="stats-table6" id="tabelaArtilharia">
+              <thead>
+                <tr>
+                  <th>POS</th>
+                  <th>Clube</th>
+                  <th>Jogador</th>
+                  <th class="center">J</th>
+                  <th>Golos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="pos">01</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt=""></td>
+                  <td>Zeizi Polo</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">02</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt=""></td>
+                  <td>Jogador 2</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">03</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp" alt=""></td>
+                  <td>Jogador 3</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">04</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp" alt=""></td>
+                  <td>Jogador 4</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">05</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp" alt=""></td>
+                  <td>Jogador 5</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">06</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt=""></td>
+                  <td>Jogador 6</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">07</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt=""></td>
+                  <td>Jogador 7</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">08</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt=""></td>
+                  <td>Jogador 8</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">09</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt=""></td>
+                  <td>Jogador 9</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">10</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt=""></td>
+                  <td>Jogador 10</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="ver-mais-btn" id="btnVerMaisGolos" onclick="toggleRows('tabelaArtilharia','btnVerMaisGolos')">Ver mais ▼</button>
+        </div>
+      </div>
+
+      <!-- PAINEL 3: ASSISTÊNCIAS -->
+      <div class="h-panel">
+        <h3 class="section-title">🎯 Assistências</h3>
+        <div class="artilharia6">
+          <div class="topo">
+            <div>
+              <div class="golos-num">0</div>
+              <div class="golos-label">ASSISTS</div>
+            </div>
+            <div class="jogador-info">
+              <img src="https://image.cdn2.seaart.me/upload/static/20261003/4108aabfb38b3cc31a31fe97e7f400fb_high.webp" alt="Katendi Inácio">
+              <h4>Katendi Inácio</h4>
+              <p style="display:flex;align-items:center;justify-content:center;gap:5px;margin-top:4px;">
+                <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Kingsman" style="width:40px;height:40px;object-fit:contain;border:none;background:transparent;">
+                The Kingsman
+              </p>
+            </div>
+          </div>
+          <div class="scroll-wrap" style="border:none; border-radius:0; margin:0; box-shadow:none;">
+            <table class="stats-table6" id="tabelaAssistencias">
+              <thead>
+                <tr>
+                  <th>POS</th>
+                  <th>Clube</th>
+                  <th>Jogador</th>
+                  <th class="center">J</th>
+                  <th>Ast</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="pos">01</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt=""></td>
+                  <td>Katendi Inácio</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">02</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt=""></td>
+                  <td>Jogador B</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">03</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp" alt=""></td>
+                  <td>Jogador C</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">04</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp" alt=""></td>
+                  <td>Jogador D</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">05</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp" alt=""></td>
+                  <td>Jogador E</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">06</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt=""></td>
+                  <td>Jogador F</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">07</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt=""></td>
+                  <td>Jogador G</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">08</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt=""></td>
+                  <td>Jogador H</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">09</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt=""></td>
+                  <td>Jogador I</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">10</td>
+                  <td><img class="club-logo" src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt=""></td>
+                  <td>Jogador J</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="ver-mais-btn" id="btnVerMaisAst" onclick="toggleRows('tabelaAssistencias','btnVerMaisAst')">Ver mais ▼</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Jogador da Jornada -->
+    <div class="jornada-card">
+      <h3>⭐ Jogador da Jornada</h3>
+      <p>O prémio de melhor jogador da jornada será anunciado após cada rodada.</p>
+      <span class="jornada-badge">Jornada 1 • A definir</span>
+    </div>
+
+    <div class="edicao-footer">
+      6ª Edição da Team League • Em andamento<br>
+      Atualize os dados à medida que os jogos forem disputados
+    </div>
+  </section>
+
+  <!-- ========== SVS DREAM LEAGUE ========== -->
+  <section id="dream" class="edicao">
+    <div class="edicao-titulo">
+      <h2>SVS Dream League</h2>
+      <span class="badge live">● TORNEIO ESPECIAL</span>
+    </div>
+
+    <div class="card">
+      <h3>🌙 Sobre a Dream League</h3>
+      <p>A <strong>SVS Dream League</strong> é um torneio especial paralelo à Team League. Conta com 8 clubes a disputar o título em formato de pontos corridos.</p>
+    </div>
+
+    <p class="h-panel-label">← Desliza para ver <strong>Classificação · Artilharia · Assistências</strong> →</p>
+    <div class="h-dots" id="dotsDream">
+      <span class="active"></span><span></span><span></span>
+    </div>
+    <div class="h-carousel" id="carouselDream">
+
+      <!-- Classificação Dream -->
+      <div class="h-panel">
+        <h3 class="section-title">📊 Classificação</h3>
+        <div class="scroll-wrap dark">
+          <table class="classificacao-table">
+            <thead>
+              <tr>
+                <th>Equipa</th>
+                <th>J</th><th>V</th><th>E</th><th>D</th>
+                <th>GM</th><th>GS</th><th>DG</th><th>PTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">1</span>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="">
+                    <span class="nome-eq">Clube 1</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">2</span>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="">
+                    <span class="nome-eq">Clube 2</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">3</span>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="">
+                    <span class="nome-eq">Clube 3</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">4</span>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="">
+                    <span class="nome-eq">Clube 4</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">5</span>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="">
+                    <span class="nome-eq">Clube 5</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">6</span>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="">
+                    <span class="nome-eq">Clube 6</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">7</span>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="">
+                    <span class="nome-eq">Clube 7</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="equipa-cell">
+                    <span class="pos-num">8</span>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="">
+                    <span class="nome-eq">Clube 8</span>
+                  </div>
+                </td>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Artilharia Dream -->
+      <div class="h-panel">
+        <h3 class="section-title">⚽ Artilharia</h3>
+        <div class="artilharia6">
+          <div class="topo">
+            <div>
+              <div class="golos-num">0</div>
+              <div class="golos-label">GOLOS</div>
+            </div>
+            <div class="jogador-info">
+              <div class="placeholder-card">?</div>
+              <h4>—</h4>
+              <p>A definir</p>
+            </div>
+          </div>
+          <div class="scroll-wrap" style="border:none;border-radius:0;margin:0;box-shadow:none;">
+            <table class="stats-table6" id="tabelaDreamGolos">
+              <thead>
+                <tr>
+                  <th>POS</th><th>Clube</th><th>Jogador</th><th class="center">J</th><th>Golos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="pos">01</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 1</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">02</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 2</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">03</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 3</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">04</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 4</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">05</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 5</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">06</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 6</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">07</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 7</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">08</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 8</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">09</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 9</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">10</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 10</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="ver-mais-btn" id="btnDreamGolos" onclick="toggleRows('tabelaDreamGolos','btnDreamGolos')">Ver mais ▼</button>
+        </div>
+      </div>
+
+      <!-- Assistências Dream -->
+      <div class="h-panel">
+        <h3 class="section-title">🎯 Assistências</h3>
+        <div class="artilharia6">
+          <div class="topo">
+            <div>
+              <div class="golos-num">0</div>
+              <div class="golos-label">ASSISTS</div>
+            </div>
+            <div class="jogador-info">
+              <div class="placeholder-card">?</div>
+              <h4>—</h4>
+              <p>A definir</p>
+            </div>
+          </div>
+          <div class="scroll-wrap" style="border:none;border-radius:0;margin:0;box-shadow:none;">
+            <table class="stats-table6" id="tabelaDreamAst">
+              <thead>
+                <tr>
+                  <th>POS</th><th>Clube</th><th>Jogador</th><th class="center">J</th><th>Ast</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="pos">01</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 1</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">02</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 2</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">03</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 3</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">04</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 4</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr>
+                  <td class="pos">05</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 5</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">06</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 6</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">07</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 7</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">08</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 8</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">09</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 9</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+                <tr class="hidden-row">
+                  <td class="pos">10</td>
+                  <td><img class="club-logo" src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt=""></td>
+                  <td>Jogador 10</td>
+                  <td class="center">0</td>
+                  <td class="gols-val">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="ver-mais-btn" id="btnDreamAst" onclick="toggleRows('tabelaDreamAst','btnDreamAst')">Ver mais ▼</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="jornada-card">
+      <h3>⭐ Jogador da Jornada</h3>
+      <p>O prémio de melhor jogador da jornada será anunciado após cada rodada da Dream League.</p>
+      <span class="jornada-badge">Jornada 1 • A definir</span>
+    </div>
+
+    <div class="edicao-footer">
+      SVS Dream League • Torneio especial<br>
+      Dados a atualizar conforme os jogos
+    </div>
+  </section>
+
+  <!-- ========== NAV FIXA DAS EDIÇÕES ========== -->
+  <nav class="edicoes-nav" id="edicoesNav">
+    <button class="edicao-btn" onclick="mostrarEdicao('champ1', this)">
+      <img src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt="Dream Team">
+      <span class="num">1ª EDIÇÃO</span>
+      <span>Dream Team FC</span>
+    </button>
+    <button class="edicao-btn" onclick="mostrarEdicao('champ2', this)">
+      <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="Kingsman">
+      <span class="num">2ª EDIÇÃO</span>
+      <span>The Kingsman</span>
+    </button>
+    <button class="edicao-btn" onclick="mostrarEdicao('champ3', this)">
+      <img src="https://image.cdn2.seaart.me/2026-06-11/d8lijjte878c73fg4ee0/4be01aeb-78fc-4151-8b85-10e4bf5737ce.png" alt="Tubarões">
+      <span class="num">3ª EDIÇÃO</span>
+      <span>Tubarões CGV</span>
+    </button>
+    <button class="edicao-btn" onclick="mostrarEdicao('champ4', this)">
+      <img src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png" alt="Cosmic">
+      <span class="num">4ª EDIÇÃO</span>
+      <span>Cosmic Team</span>
+    </button>
+    <button class="edicao-btn" onclick="mostrarEdicao('champ5', this)">
+      <img src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png" alt="Zeico">
+      <span class="num">5ª EDIÇÃO</span>
+      <span>FC Zeico</span>
+    </button>
+    <button class="edicao-btn ativo" onclick="mostrarEdicao('champ6', this)">
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="6ª edição">
+      <span class="num">6ª EDIÇÃO</span>
+      <span>A decorrer</span>
+    </button>
+    <button class="edicao-btn dream" onclick="mostrarEdicao('dream', this)">
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png" alt="Dream League">
+      <span class="num">DREAM</span>
+      <span>Dream League</span>
+    </button>
+  </nav>
+
+  <script>
+    /* ========== DADOS – edita só estes valores ========== */
+    // Classificação 6ª edição (J, V, E, D, GM, GS, DG, PTS calculados)
+    const classif6 = [
+      { nome: "Cosmic Team", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png", j:0, v:0, e:0, d:0, gm:0, gs:0 },
+      { nome: "Puli United", logo: "https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp", j:0, v:0, e:0, d:0, gm:0, gs:0 },
+      { nome: "The Black Team", logo: "https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp", j:0, v:0, e:0, d:0, gm:0, gs:0 },
+      { nome: "Marvel FC", logo: "https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp", j:0, v:0, e:0, d:0, gm:0, gs:0 },
+      { nome: "Galáticos", logo: "https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp", j:0, v:0, e:0, d:0, gm:0, gs:0 },
+      { nome: "Dream Team", logo: "https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png", j:0, v:0, e:0, d:0, gm:0, gs:0 },
+      { nome: "FC Zeico", logo: "https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png", j:0, v:0, e:0, d:0, gm:0, gs:0 },
+      { nome: "The Kingsman", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png", j:0, v:0, e:0, d:0, gm:0, gs:0 }
+    ];
+
+    // Artilharia 6ª (golos, jogos)
+    const artilharia6 = [
+      { nome: "Zeizi Polo", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png", j:0, golos:0, card: "https://image.cdn2.seaart.me/upload/static/20261003/6dea2803e2d5a527adb7018b0d221032_high.webp", equipa: "The Kingsman" },
+      { nome: "Jogador 2", logo: "https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp", j:0, golos:0 },
+      { nome: "Jogador 3", logo: "https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp", j:0, golos:0 },
+      { nome: "Jogador 4", logo: "https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp", j:0, golos:0 },
+      { nome: "Jogador 5", logo: "https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp", j:0, golos:0 },
+      { nome: "Jogador 6", logo: "https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png", j:0, golos:0 },
+      { nome: "Jogador 7", logo: "https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png", j:0, golos:0 },
+      { nome: "Jogador 8", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png", j:0, golos:0 },
+      { nome: "Jogador 9", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png", j:0, golos:0 },
+      { nome: "Jogador 10", logo: "https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp", j:0, golos:0 }
+    ];
+
+    // Assistências 6ª
+    const assists6 = [
+      { nome: "Katendi Inácio", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png", j:0, ast:0, card: "https://image.cdn2.seaart.me/upload/static/20261003/4108aabfb38b3cc31a31fe97e7f400fb_high.webp", equipa: "The Kingsman" },
+      { nome: "Jogador B", logo: "https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp", j:0, ast:0 },
+      { nome: "Jogador C", logo: "https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp", j:0, ast:0 },
+      { nome: "Jogador D", logo: "https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp", j:0, ast:0 },
+      { nome: "Jogador E", logo: "https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp", j:0, ast:0 },
+      { nome: "Jogador F", logo: "https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png", j:0, ast:0 },
+      { nome: "Jogador G", logo: "https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png", j:0, ast:0 },
+      { nome: "Jogador H", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png", j:0, ast:0 },
+      { nome: "Jogador I", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png", j:0, ast:0 },
+      { nome: "Jogador J", logo: "https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp", j:0, ast:0 }
+    ];
+
+    const GRAY = "https://static.vecteezy.com/system/resources/thumbnails/071/184/913/small/shield-gray-icon-border-layer-shape-protection-security-defense-emblem-symbol-bold-outline-minimalism-png.png";
+
+    const classifDream = Array.from({length:8}, (_,i) => ({
+      nome: "Clube " + (i+1), logo: GRAY, j:0, v:0, e:0, d:0, gm:0, gs:0
+    }));
+    const artilhariaDream = Array.from({length:10}, (_,i) => ({
+      nome: "Jogador " + (i+1), logo: GRAY, j:0, golos:0
+    }));
+    const assistsDream = Array.from({length:10}, (_,i) => ({
+      nome: "Jogador " + (i+1), logo: GRAY, j:0, ast:0
+    }));
+
+    /* ========== ORDENAÇÃO ========== */
+    function calcClassif(list) {
+      return list.map(t => {
+        const pts = t.v * 3 + t.e;
+        const dg = t.gm - t.gs;
+        return { ...t, pts, dg };
+      }).sort((a, b) => {
+        if (b.pts !== a.pts) return b.pts - a.pts;
+        if (b.dg !== a.dg) return b.dg - a.dg;
+        if (b.gm !== a.gm) return b.gm - a.gm;
+        return a.nome.localeCompare(b.nome);
+      });
+    }
+
+    // Artilharia: mais golos primeiro; se empatar, menos jogos (melhor média)
+    function sortArtilharia(list) {
+      return [...list].sort((a, b) => {
+        if (b.golos !== a.golos) return b.golos - a.golos;
+        if (a.j !== b.j) return a.j - b.j;
+        return a.nome.localeCompare(b.nome);
+      });
+    }
+
+    function sortAssists(list) {
+      return [...list].sort((a, b) => {
+        if (b.ast !== a.ast) return b.ast - a.ast;
+        if (a.j !== b.j) return a.j - b.j;
+        return a.nome.localeCompare(b.nome);
+      });
+    }
+
+    /* ========== RENDER ========== */
+    function renderClassif(tbodyId, list) {
+      const tb = document.querySelector('#' + tbodyId);
+      if (!tb) return;
+      const sorted = calcClassif(list);
+      tb.innerHTML = sorted.map((t, i) => `
+        <tr>
+          <td>
+            <div class="equipa-cell">
+              <span class="pos-num">${i+1}</span>
+              <img src="${t.logo}" alt="">
+              <span class="nome-eq">${t.nome}</span>
+            </div>
+          </td>
+          <td>${t.j}</td><td>${t.v}</td><td>${t.e}</td><td>${t.d}</td>
+          <td>${t.gm}</td><td>${t.gs}</td><td>${t.dg}</td><td>${t.pts}</td>
+        </tr>`).join('');
+    }
+
+    function renderStats(tableId, list, tipo, topoNumSel, topoNomeSel) {
+      const table = document.getElementById(tableId);
+      if (!table) return;
+      const sorted = tipo === 'golos' ? sortArtilharia(list) : sortAssists(list);
+      const key = tipo === 'golos' ? 'golos' : 'ast';
+      const tbody = table.querySelector('tbody');
+      tbody.innerHTML = sorted.map((p, i) => {
+        const hidden = i >= 5 ? ' class="hidden-row"' : '';
+        return `<tr${hidden}>
+          <td class="pos">${String(i+1).padStart(2,'0')}</td>
+          <td><img class="club-logo" src="${p.logo}" alt=""></td>
+          <td>${p.nome}</td>
+          <td class="center">${p.j}</td>
+          <td class="gols-val">${p[key]}</td>
+        </tr>`;
+      }).join('');
+
+      // Atualiza card do topo com o 1º
+      const top = sorted[0];
+      if (top && topoNumSel) {
+        const numEl = document.querySelector(topoNumSel);
+        if (numEl) numEl.textContent = top[key];
+      }
+      // nome / card image if present in DOM structure - optional update via data attributes
+    }
+
+    function atualizarTudo() {
+      renderClassif('tbodyClassif6', classif6);
+      renderStats('tabelaArtilharia', artilharia6, 'golos', '#carousel6 .h-panel:nth-child(2) .golos-num');
+      renderStats('tabelaAssistencias', assists6, 'ast', '#carousel6 .h-panel:nth-child(3) .golos-num');
+
+      renderClassif('tbodyClassifDream', classifDream);
+      renderStats('tabelaDreamGolos', artilhariaDream, 'golos', '#carouselDream .h-panel:nth-child(2) .golos-num');
+      renderStats('tabelaDreamAst', assistsDream, 'ast', '#carouselDream .h-panel:nth-child(3) .golos-num');
+    }
+
+    function mostrarEdicao(id, btn) {
+      document.querySelectorAll('.edicao').forEach(sec => sec.classList.remove('ativa'));
+      document.getElementById(id).classList.add('ativa');
+      document.querySelectorAll('.edicao-btn').forEach(b => b.classList.remove('ativo'));
+      btn.classList.add('ativo');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleRows(tableId, btnId) {
+      const table = document.getElementById(tableId);
+      const btn = document.getElementById(btnId);
+      if (!table || !btn) return;
+      const hidden = table.querySelectorAll('.hidden-row');
+      const isOpen = hidden[0] && hidden[0].classList.contains('show');
+      hidden.forEach(row => {
+        if (isOpen) row.classList.remove('show');
+        else row.classList.add('show');
+      });
+      btn.textContent = isOpen ? 'Ver mais ▼' : 'Ver menos ▲';
+    }
+
+    function setupCarousel(carouselId, dotsId) {
+      const carousel = document.getElementById(carouselId);
+      const dotsWrap = document.getElementById(dotsId);
+      if (!carousel || !dotsWrap) return;
+      const dots = dotsWrap.querySelectorAll('span');
+      carousel.addEventListener('scroll', () => {
+        const idx = Math.round(carousel.scrollLeft / carousel.clientWidth);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      });
+      dots.forEach((d, i) => {
+        d.style.cursor = 'pointer';
+        d.addEventListener('click', () => {
+          carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
+        });
+      });
+    }
+
+    // Dá ids aos tbody da classificação para o JS preencher
+    document.addEventListener('DOMContentLoaded', () => {
+      // 6ª edição classificação tbody
+      const tables6 = document.querySelectorAll('#carousel6 .classificacao-table tbody');
+      if (tables6[0]) tables6[0].id = 'tbodyClassif6';
+      const tablesD = document.querySelectorAll('#carouselDream .classificacao-table tbody');
+      if (tablesD[0]) tablesD[0].id = 'tbodyClassifDream';
+
+      setupCarousel('carousel6', 'dots6');
+      setupCarousel('carouselDream', 'dotsDream');
+      atualizarTudo();
+    });
+
+    // Expor para consola: podes fazer classif6[0].pts=... não – edita j,v,e,d,gm,gs e chama atualizarTudo()
+    window.atualizarTudo = atualizarTudo;
+    window.classif6 = classif6;
+    window.artilharia6 = artilharia6;
+    window.assists6 = assists6;
+    window.classifDream = classifDream;
+    window.artilhariaDream = artilhariaDream;
+    window.assistsDream = assistsDream;
+  </script>
+</body>
+</html>

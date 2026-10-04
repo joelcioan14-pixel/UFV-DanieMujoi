@@ -2259,6 +2259,30 @@
         width: 90px;
       }
     }
+
+  .liga-awards {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+         overflow-y: hidden;
+        width: 100%;
+        gap: 12px;
+        padding: 10px 8px 16px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+  }
+
+  .liga-awards::-webkit-scrollbar {
+      height: 5px;
+  }
+
+.liga-awards::-webkit-scrollbar-thumb {
+                background: #F9C94A;
+                border-radius: 10px;
+  }
+                                  
   </style>
 </head>
 
@@ -3861,7 +3885,7 @@
             <div class="laliga-scorers">
               <div class="laliga-header">
                 <div>
-                  <div class="laliga-goals-big">3</div>
+                  <div class="laliga-goals-big">4</div>
                   <div class="laliga-label">Golos</div>
                   <div class="laliga-rank">1º</div>
                   <div class="laliga-name">Zeizi Polo</div>
@@ -3879,19 +3903,24 @@
               <ul class="laliga-list" id="scorers-iberica5">
                 <li><span class="pos">01</span><img class="logo"
                     src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png"
-                    alt="The Kingsman"><span class="name">Zeizi Polo</span><span class="goals">3</span></li>
+                    alt="The Kingsman"><span class="name">Zeizi Polo</span><span class="goals">4</span></li>
                 <li><span class="pos">02</span><img class="logo"
                     src="https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png"
                     alt="Cosmic Team"><span class="name">Laurindo</span><span class="goals">3</span></li>
                 <li><span class="pos">03</span><img class="logo"
-                    src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp"
-                    alt="Puli United"><span class="name">Kenny Paiva</span><span class="goals">2</span></li>
-                <li><span class="pos">04</span><img class="logo"
                     src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png"
-                    alt=""><span class="name">André Miguel</span><span class="goals">2</span></li>
+                    alt="Zeico"><span class="name">André Miguel</span><span class="goals">3</span></li>
+                <li><span class="pos">04</span><img class="logo"
+                    src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp"
+                    alt="Puli United logo"><span class="name">Kenny Paiva</span><span class="goals">2</span></li>
                 <li><span class="pos">05</span><img class="logo"
                     src="https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp"
-                    alt="Galáticos"><span class="name">Jeovani Cosme</span><span class="goals">1</span></li>
+                    alt="Galáticos"><span class="name">Jeovani Cosme</span><span class="goals">2</span></li>
+                <li class="hidden-scorer"><span class="pos">06</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="The Kingsman"><span class="name">Manuel Matondo</span><span class="goals">2</span></li>
+                <li class="hidden-scorer"><span class="pos">07</span><img class="logo" src="https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp" alt="Galáticos Fc" class="name">Jack G</span><span class="goals">2</span></li>
+                <li class="hidden-scorer"><span class="pos">08</span><img class="logo" src="https://image.cdn2.seaart.me/2026-09-27/dasok6le878c73bbsekg/7dfb1613-0ed2-4f46-9dc1-26d8c0deaa23_high.webp" alt="Puli United"><span class="name">Érik Dos Santos</span><span class="goals">1</span></li>
+                <li class="hidden-scorer"><span class="pos">09</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt="Dream Team"><span class="name">Gabriela Sousa</span><span class="goals">1</span></li>
+                        <li class="hidden-scorer"><span class="pos">10</span><img class="logo" src="https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png" alt="Dream Team"><span class="name">Sam Wilson</span><span class="goals">1</span></li>
               </ul>
               <div class="laliga-footer">
                 <button type="button" class="btn-todos" id="btn-scorers-iberica5"
@@ -3923,8 +3952,8 @@
                     src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png"
                     alt=""><span class="name">Katendi KatendiInácio</span><span class="goals">1</span></li>
                 <li><span class="pos">02</span><img class="logo"
-                    src="https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png"
-                    alt=""><span class="name">Epifânio Manuel</span><span class="goals">0</span></li>
+                    src="https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp"
+                    alt="União Galáticos"><span class="name">Emanuel C</span><span class="goals">1</span></li>
                 <li><span class="pos">03</span><img class="logo"
                     src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png"
                     alt=""><span class="name">Katendi Inácio</span><span class="goals">0</span></li>
@@ -3944,23 +3973,34 @@
 
         </div>
 
+        <div class="liga-awards">
+          <div class="melhor-jornada">
+          <h3>⭐ Prémio da Jornada</h3>
+          <div class="mj-card">
+          <img src="https://futcardsfifa.com/app/uploads/2024/01/FUT-Versus-Ice-FC24style2023.png" alt="Card sem pessoa">
+          <div class="mj-info">
+          <div class="mj-name">Manuel Matondo</div>
+          <div class="mj-team">The Kingsman</div>
+          <div class="mj-stats">2 Golos · 0 Assistências<br>Prémio Estrela da Copa Ibérica</div>
+           <span class="mj-badge">JORNADA 2</span>
+                </div>
+                </div>
+                </div>
         <div class="melhor-jornada">
           <h3>⭐ Melhor Jogador da Jornada</h3>
           <div class="mj-card">
             <img
               src="https://image.cdn2.seaart.me/2026-09-30/dauggdde878c73emjs70/174d8176-e027-4800-a655-30d6c6c51bcf_high.webp"
-              alt="Zeizi - The Kingsman" 
+              alt="Zeizi - The Kingsman"> 
             <div class="mj-info">
               <div class="mj-name">Zeizi Polo</div>
               <div class="mj-team">The Kingsman</div>
-              <div class="mj-stats">
-                3 Golos · 0 Assistências<br>
-                Prémio da Jornada · Copa Ibérica
-              </div>
-              <span class="mj-badge">5ª EDIÇÃO</span>
+              <div class="mj-stats">  3 Golos · 0 Assistências<br> Prémio da Jornada · Copa Ibérica</div>
+              <span class="mj-badge">JORNADA 1</span>
             </div>
           </div>
         </div>
+      </div>
 
       </div>
     </aside>
@@ -5123,16 +5163,16 @@
 
     /* Copa Ibérica – Grupo A e Grupo B (4 equipas cada) */
     const ibericaGrupoA = [
-      {equipa: "FC Zeico", logo: "https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png", j: 1, v: 0, e: 1, d: 0, gm: 2, gs: 2},
-      {equipa: "Puli United", logo: "https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png", j: 1, v: 1, e: 0, d: 0, gm: 2, gs: 0},
-      {equipa: "Marvel FC", logo: "https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp", j: 1, v: 0, e: 0, d: 1, gm: 0, gs: 2},
-      {equipa: "Galáticos", logo: "https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp", j: 1, v: 0, e: 1, d: 0, gm: 2, gs: 2}
+      {equipa: "FC Zeico", logo: "https://image.cdn2.seaart.me/2026-06-06/d8i7fjte878c73dm37og/34ee0a83-5278-4acc-be27-18c5b2ea8959.png", j: 2, v: 0, e: 2, d: 0, gm: 3, gs: 3},
+      {equipa: "Puli United", logo: "https://image.cdn2.seaart.me/2026-06-09/d8k9kile878c73ej50p0/f9c1359c-511a-4aff-949f-4a935618c33d.png", j: 2, v: 1, e: 1, d: 0, gm: 3, gs: 1},
+      {equipa: "Marvel FC", logo: "https://image.cdn2.seaart.me/upload/static/20260926/89fabb2779bd86fb197445c67e206083_high.webp", j: 2, v: 0, e: 0, d: 2, gm: 0, gs: 4},
+      {equipa: "Galáticos", logo: "https://image.cdn2.seaart.me/2026-09-26/darmgsde878c73fp02m0/6f48206e-8e21-454e-97fb-ceb5182a0f09_high.webp", j: 2, v: 1, e: 1, d: 0, gm: 4, gs: 2}
     ];
     const ibericaGrupoB = [
-      {equipa: "TheKingsman", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png", j: 1, v: 1, e: 0, d: 0, gm: 3, gs: 0},
-      {equipa: "Cosmic Team", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png", j: 1, v: 1, e: 0, d: 0, gm: 3, gs: 1},
-      {equipa: "DreamTeam", logo: "https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png", j: 1, v: 0, e: 0, d: 1, gm: 1, gs: 3},
-      {equipa: "Black Team", logo: "https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp", j: 1, v: 0, e: 0, d: 1, gm: 0, gs: 3}
+      {equipa: "TheKingsman", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png", j: 2, v: 2, e: 0, d: 0, gm: 6, gs: 0},
+      {equipa: "Cosmic Team", logo: "https://image.cdn2.seaart.me/2026-06-11/d8lij5de878c73fg37f0/d891b05a-3ee7-4d64-b5d7-dce260fd5d72.png", j: 2, v: 1, e: 0, d: 1, gm: 3, gs: 4},
+      {equipa: "DreamTeam", logo: "https://image.cdn2.seaart.me/2026-06-11/d8liskte878c73fgrmmg/38ba98d0-6c44-4d87-abd9-fd5a74ca8580.png", j: 2, v: 1, e: 0, d: 1, gm: 2, gs: 3},
+      {equipa: "Black Team", logo: "https://image.cdn2.seaart.me/2026-09-24/daqci45e878c73fb9ihg/8b1dc86d-71ae-44df-91dc-8bc508b7e297_high.webp", j: 2, v: 0, e: 0, d: 2, gm: 0, gs: 4}
     ];
 
     function renderIbericaGroup(tbodyId, teams) {

@@ -1639,6 +1639,22 @@
     </div>
 
     <!-- Jogador da Jornada -->
+    <div class="liga-awards">
+    <div class="jornada-card">
+    <h3>⭐ Jogador da Jornada</h3>
+    <div class="jornada-player">
+    <img src="https://image.cdn2.seaart.me/2026-09-30/dauggdde878c73emjs70/174d8176-e027-4800-a655-30d6c6c51bcf_high.webp" alt="Zeizi Polo card">
+    <h4>Zeizi Polo</h4>
+    <div class="team-row">
+    <img src="https://image.cdn2.seaart.me/2026-06-11/d8lc8kde878c73bgm650/bb46c5dc-ae88-4aa7-8dcf-6971cd0fff1b.png" alt="The Kingsman">The Kingsman</div>
+    <div class="stats-row">
+    <span class="stat-pill">⚽ 3 Golos</span>
+    <span class="stat-pill">⭐ Nota 8.9</span>
+    </div>
+    </div>
+      <span class="jornada-badge">Jornada 2 • Team League</span>
+    </div>
+    </div>
     <div class="jornada-card">
       <h3>⭐ Jogador da Jornada</h3>
       <div class="jornada-player">
@@ -1655,7 +1671,8 @@
       </div>
       <span class="jornada-badge">Jornada 1 • Team League</span>
     </div>
-
+    </div>
+  </div>
     <div class="edicao-footer">
       6ª Edição da Team League • Em andamento<br>
       Atualize os dados à medida que os jogos forem disputados
@@ -1838,26 +1855,31 @@
     // Classificação 6ª edição – Jornada 1
     // Critérios: PTS → DG → GM
     const classif6 = [
-      { nome: "Cosmic Team", logo: LOGO.cosmic, j:1, v:1, e:0, d:0, gm:5, gs:2 },
-      { nome: "Marvel FC", logo: LOGO.marvel, j:1, v:1, e:0, d:0, gm:3, gs:1 },
-      { nome: "Puli United", logo: LOGO.puli, j:1, v:1, e:0, d:0, gm:3, gs:1 },
-      { nome: "The Black Team", logo: LOGO.black, j:1, v:0, e:1, d:0, gm:1, gs:1 },
-      { nome: "Galáticos", logo: LOGO.galaticos, j:1, v:0, e:1, d:0, gm:1, gs:1 },
-      { nome: "Dream Team", logo: LOGO.dream, j:1, v:0, e:0, d:1, gm:1, gs:3 },
-      { nome: "FC Zeico", logo: LOGO.zeico, j:1, v:0, e:0, d:1, gm:1, gs:3 },
-      { nome: "The Kingsman", logo: LOGO.kingsman, j:1, v:0, e:0, d:1, gm:2, gs:5 }
+      { nome: "Cosmic Team", logo: LOGO.cosmic, j:2, v:2, e:0, d:0, gm:7, gs:3 },
+      { nome: "Marvel FC", logo: LOGO.marvel, j:2, v:1, e:1, d:0, gm:3, gs:1 },
+      { nome: "Puli United", logo: LOGO.puli, j:2, v:1, e:0, d:1, gm:4, gs:3 },
+      { nome: "The Black Team", logo: LOGO.black, j:2, v:0, e:2, d:0, gm:1, gs:1 },
+      { nome: "Galáticos", logo: LOGO.galaticos, j:2, v:0, e:1, d:1, gm:1, gs:4 },
+      { nome: "Dream Team", logo: LOGO.dream, j:2, v:1, e:0, d:1, gm:4, gs:3 },
+      { nome: "FC Zeico", logo: LOGO.zeico, j:2, v:1, e:0, d:1, gm:5, gs:6 },
+      { nome: "The Kingsman", logo: LOGO.kingsman, j:2, v:0, e:0, d:2, gm:5, gs:9 }
     ];
 
     // Artilharia 6ª
     const artilharia6 = [
-      { nome: "Ery de Carvalho", logo: LOGO.cosmic, j:1, golos:4, card: "https://image.cdn2.seaart.me/2026-10-05/db21t5te878c73dhqosg/c90a7211-3c45-4f1c-8729-6e0f4acd9b76_high.webp", equipa: "Cosmic Team" },
-      { nome: "Márcio Samuel", logo: LOGO.marvel, j:1, golos:3, equipa: "Marvel FC" },
-      { nome: "Kenny", logo: LOGO.puli, j:1, golos:2, equipa: "Puli United" },
-      { nome: "Zeizi Polo", logo: LOGO.kingsman, j:1, golos:2, equipa: "The Kingsman" },
+      { nome: "Ery de Carvalho", logo: LOGO.cosmic, j:2, golos:5, card: "https://image.cdn2.seaart.me/2026-10-05/db21t5te878c73dhqosg/c90a7211-3c45-4f1c-8729-6e0f4acd9b76_high.webp", equipa: "Cosmic Team" },
+      { nome: "Márcio Samuel", logo: LOGO.marvel, j:2, golos:3, equipa: "Marvel FC" },
+      { nome: "Kenny", logo: LOGO.puli, j:2, golos:3, equipa: "Puli United" },
+      { nome: "Zeizi Polo", logo: LOGO.kingsman, j:2, golos:5, equipa: "The Kingsman" },
       { nome: "Anderson", logo: LOGO.zeico, j:1, golos:1, equipa: "FC Zeico" },
-      { nome: "Érik Dos Santos", logo: LOGO.puli, j:1, golos:1, equipa: "Puli United" },
+      { nome: "Érik Dos Santos", logo: LOGO.puli, j:2, golos:1, equipa: "Puli United" },
       { nome: "Gabriela Sousa", logo: LOGO.dream, j:1, golos:1, equipa: "Dream Team" },
       { nome: "Jairo Augusto", logo: LOGO.black, j:1, golos:1, equipa: "The Black Team" },
+      { nome: "Laurindo", logo: LOGO.cosmic, j:2, golos:1, equipa: "Cosmic Team" },
+      { nome: "Epifânio", logo: LOGO.zeico, j:1, golos:1, equipa: "FC Zeico" },
+      { nome: "Fadario", logo: LOGO.zeico, j:1, golos:1, equipa: "FC Zeico" },
+      { nome: "Azael", logo: LOGO.zeico, j:1, golos:1, equipa: "FC Zeico" },
+      { nome: "André Miguel", logo: LOGO.zeico, j:1, golos:1, equipa: "FC Zeico" },
       { nome: "Jeovani Cosme", logo: LOGO.galaticos, j:1, golos:1, equipa: "Galáticos" },
       { nome: "Afonso AC", logo: LOGO.cosmic, j:1, golos:1, equipa: "Cosmic Team" }
     ];
